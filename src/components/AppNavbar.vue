@@ -20,7 +20,7 @@ const navLinks = [
       <div class="flex justify-between items-center h-[72px]">
         <!-- Logo -->
         <router-link to="/" class="flex-shrink-0 flex items-center">
-          <span class="text-2xl font-bold text-gray-900 tracking-tight">Cebu Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span>
+          <span class="text-2xl font-bold text-gray-900 tracking-tight">Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span>
         </router-link>
 
         <!-- Desktop Navigation -->
