@@ -33,7 +33,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <!-- Brand Info -->
         <div>
-          <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Cebu Tackle<span class="text-coral-500">Shop</span></h3>
+          <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Kenny's Tackle<span class="text-coral-500">Shop</span></h3>
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
             Your premier destination for high-quality fishing gear, setups, and accessories in Cebu. We gear you up for your best catch.
           </p>
@@ -90,7 +90,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
             </li>
             <li class="flex items-center text-blue-100 text-sm group">
               <Mail class="w-5 h-5 text-coral-500 mr-3 shrink-0 group-hover:text-coral-400 transition-colors" />
-              <a href="mailto:support@cebutackleshop.com" class="hover:text-white transition-colors">support@cebutackleshop.com</a>
+              <a href="mailto:support@kennystackleshop.com" class="hover:text-white transition-colors">support@kennystackleshop.com</a>
             </li>
           </ul>
           
