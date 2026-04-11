@@ -24,9 +24,9 @@ const toggleWishlist = (id) => {
 }
 
 const categories = [
-  { id: 1, name: 'Fishing Reels', image: '/images/cat-reels.png' },
-  { id: 2, name: 'Fishing Rods', image: '/images/cat-rods.png' },
-  { id: 3, name: 'Lures', image: '/images/cat-lures-jigs.png' },
+  { id: 1, name: 'Fishing Reels', image: '/images/category-reels.jpg' },
+  { id: 2, name: 'Fishing Rods', image: '/images/category-rod-2.jpg' },
+  { id: 3, name: 'Lures', image: '/images/category-lure.jpg' },
   { id: 4, name: 'Full Setups', image: '/images/cat-fishing-setup.png' }
 ]
 
@@ -58,31 +58,31 @@ const partners = [
 const heroSlides = [
   {
     id: 1,
-    image: '/images/hero.png',
+    image: '/images/calm-lake.jpg',
     animationClass: 'hero-bg-zoom',
-    titleMain: 'Gear Up For Your',
-    titleHighlight: 'Next Big Catch',
-    subtitle: 'Premium fishing tackle, rods, and reels engineered for the demanding angler.',
+    titleMain: 'Precision Tackle for',
+    titleHighlight: 'Serious Anglers',
+    subtitle: 'High-performance rods, reels, and gear crafted to deliver power, control, and reliability in every condition.',
     buttonText: 'Explore Reels',
     buttonLink: 'Fishing Reels'
   },
   {
     id: 2,
-    image: '/images/reel.png',
+    image: '/images/fish-on-tuna.jpg',
     animationClass: 'hero-bg-pan-right',
-    titleMain: 'Conquer The',
-    titleHighlight: 'Deep Sea',
-    subtitle: 'Unmatched power and precision for heavy ocean game and offshore adventures.',
+    titleMain: 'Catch Bigger.',
+    titleHighlight: 'Fish Smarter.',
+    subtitle: "Top-tier fishing tackle, rods, and reels built to outperform—whether you're offshore or casting at sunrise.",
     buttonText: 'Explore Rods',
     buttonLink: 'Fishing Rods'
   },
   {
     id: 3,
-    image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp',
+    image: '/images/closeupgear.jpg',
     animationClass: 'hero-bg-pan-up',
-    titleMain: 'Master Your',
-    titleHighlight: 'Technique',
-    subtitle: 'Discover premium lures, jigs, and expert accessories tailored for professionals.',
+    titleMain: 'Ready for Your ',
+    titleHighlight: 'Next Big Catch?',
+    subtitle: 'Upgrade your gear with high-quality rods, reels, and tackle.',
     buttonText: 'Fishing Gear',
     buttonLink: 'Fishing Gear'
   }
