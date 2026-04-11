@@ -90,7 +90,7 @@ const submitForm = () => {
                 </div>
                 <div>
                   <h4 class="font-bold text-blue-100 mb-1">Email</h4>
-                  <p class="text-white font-medium leading-relaxed max-w-full break-all">support@cebutackleshop.com</p>
+                  <p class="text-white font-medium leading-relaxed max-w-full break-all">support@kennystackleshop.com</p>
                 </div>
               </div>
               <div class="flex items-start">
