@@ -25,8 +25,8 @@ const toggleWishlist = (id) => {
 
 const categories = [
   { id: 1, name: 'Fishing Reels', image: '/images/category-reels.jpg' },
-  { id: 2, name: 'Fishing Rods', image: '/images/category-rod-2.jpg' },
-  { id: 3, name: 'Lures', image: '/images/category-lure.jpg' },
+  { id: 2, name: 'Fishing Rods', image: '/images/cat-rods.png' },
+  { id: 3, name: 'Lures', image: '/images/cat-lures-jigs.png' },
   { id: 4, name: 'Full Setups', image: '/images/cat-fishing-setup.png' }
 ]
 
