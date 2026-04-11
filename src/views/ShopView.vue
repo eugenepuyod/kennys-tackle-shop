@@ -52,7 +52,7 @@ const allBrands = [...new Set(products.map(p => p.name.split(' ')[0].toUpperCase
 const totalPages = computed(() => Math.ceil(filteredProducts.value.length / itemsPerPage))
 
 const paginatedProducts = computed(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' })
+  // window.scrollTo({ top: 0, behavior: 'smooth' })
   const start = (currentPage.value - 1) * itemsPerPage
   const end = start + itemsPerPage
   return filteredProducts.value.slice(start, end)
@@ -107,6 +107,8 @@ const addToCart = () => {
           <button @click="isSidebarOpen = !isSidebarOpen" class="md:hidden flex items-center bg-gray-100 px-4 py-2 rounded-lg font-medium text-gray-700 hover:bg-gray-200">
             <SlidersHorizontal class="w-5 h-5 mr-2" /> Filters
           </button>
+
+          
           
           <div class="hidden md:flex bg-gray-100 rounded-lg p-1">
             <button 
@@ -123,6 +125,13 @@ const addToCart = () => {
             </button>
           </div>
         </div>
+        <div class="block md:hidden mb-8 pl-1">
+          <h3 class="font-bold text-gray-900 mb-4 tracking-wide uppercase text-sm">Search</h3>
+          <div class="relative">
+            <input v-model="searchQuery" type="text" placeholder="Search gear..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 focus:border-coral-500 outline-none transition-all text-sm group">
+            <Search class="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -132,7 +141,7 @@ const addToCart = () => {
         class="w-full md:w-64 shrink-0 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 md:block transition-all"
         :class="isSidebarOpen ? 'block' : 'hidden'"
       >
-        <div class="mb-8 pl-1">
+        <div class="hidden md:block mb-8 pl-1">
           <h3 class="font-bold text-gray-900 mb-4 tracking-wide uppercase text-sm">Search</h3>
           <div class="relative">
             <input v-model="searchQuery" type="text" placeholder="Search gear..." class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 focus:border-coral-500 outline-none transition-all text-sm group">
