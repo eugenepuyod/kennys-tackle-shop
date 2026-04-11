@@ -29,7 +29,7 @@ const submitForm = () => {
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[-60px] relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-[40px] relative z-20">
       <div class="flex flex-col lg:flex-row gap-8">
         <!-- Contact Form -->
         <div class="w-full lg:w-2/3 bg-white p-8 md:p-12 rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-gray-100">
