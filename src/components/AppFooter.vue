@@ -113,7 +113,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
 
       <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
         <p class="text-blue-200 text-sm mb-4 md:mb-0">
-          &copy; {{ new Date().getFullYear() }} Cebu Tackle Shop. All rights reserved.
+          &copy; {{ new Date().getFullYear() }} Kenny's Tackle Shop. All rights reserved.
         </p>
         <div class="flex space-x-6 text-sm text-blue-200">
           <a href="#" class="hover:text-coral-400 transition-colors">Privacy Policy</a>
