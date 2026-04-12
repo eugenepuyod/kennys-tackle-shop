@@ -248,7 +248,7 @@ const placeOrder = () => {
                 <span class="text-sm font-bold text-gray-900">Promo Code</span>
               </div>
               <div id="flexwrapcoupon" class="eugenerp flex flex-col sm:flex-row gap-2">
-                <input v-model="promoInput" type="text" class="flex-1 min-w-0 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none font-mono uppercase text-gray-900 tracking-wider" placeholder="Ex: CEBU10">
+                <input v-model="promoInput" type="text" class="flex-1 min-w-0 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none font-mono uppercase text-gray-900 tracking-wider" placeholder="Ex: KENNY10">
                 <button @click="applyPromo" class="bg-slate-900 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-brand-600 transition-colors shadow-sm text-sm">Apply</button>
               </div>
               <p v-if="promoMessage" class="text-xs font-bold mt-3" :class="promoType === 'success' ? 'text-green-600' : 'text-red-500'">

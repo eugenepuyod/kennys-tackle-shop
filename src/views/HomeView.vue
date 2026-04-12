@@ -195,7 +195,7 @@ onUnmounted(() => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row items-center justify-center gap-6">
         <h2 class="text-2xl font-bold">Hot Deal! Get 10% Off Your First Order</h2>
         <div class="flex items-center gap-4 bg-white/10 rounded-full p-2 pr-6 border border-white/20 shadow-lg">
-          <span class="bg-coral-500 text-white font-mono font-bold px-4 py-2 rounded-full cursor-all-scroll select-all shadow-inner">CEBU10</span>
+          <span class="bg-coral-500 text-white font-mono font-bold px-4 py-2 rounded-full cursor-all-scroll select-all shadow-inner">KENNY10</span>
           <span class="text-sm font-medium">Use code at checkout</span>
         </div>
       </div>
