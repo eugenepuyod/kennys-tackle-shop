@@ -102,7 +102,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
           <ul class="space-y-4 mb-8">
             <li class="flex items-start text-blue-100 text-sm group">
               <MapPin class="w-5 h-5 text-coral-500 mr-3 shrink-0 group-hover:text-coral-400 transition-colors" />
-              <span>123 Ocean Drive, Cebu City,<br/>Philippines 6000</span>
+              <span>General Luna street corner Arellano<br/>street, Dipolog City, Philippines, 7100</span>
             </li>
             <li class="flex items-center text-blue-100 text-sm group">
               <Phone class="w-5 h-5 text-coral-500 mr-3 shrink-0 group-hover:text-coral-400 transition-colors" />
