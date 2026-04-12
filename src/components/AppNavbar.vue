@@ -30,6 +30,10 @@ const navLinks = [
             <span class="font-semibold text-gray-800 tracking-wide hidden sm:block">
               Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span>
             </span>
+
+            <span class="text-sm font-semibold text-gray-800 tracking-wide block sm:hidden">
+              Kenny's Tackle<span class="pr-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span>
+            </span>
           </div>
         </router-link>
 
