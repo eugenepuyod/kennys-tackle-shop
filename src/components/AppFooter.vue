@@ -37,12 +37,12 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
 
           <div class="flex items-center gap-4 mb-6">
             <div class="relative">
-              <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
+              <div class="w-17 h-17 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
                 
                 
                 <div class="absolute bottom-0 w-full h-6 bg-cyan-400/20 blur-sm"></div>
 
-                <img src="/images/kennys-logo.png" class="w-9 h-9 object-contain relative z-10" />
+                <img src="/images/kennys-logo.png" class="w-13 h-13 object-contain relative z-10" />
               </div>
             </div>
 
