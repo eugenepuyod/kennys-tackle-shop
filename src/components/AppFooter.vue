@@ -33,7 +33,27 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <!-- Brand Info -->
         <div>
-          <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Kenny's Tackle<span class="text-coral-500">Shop</span></h3>
+          <!-- <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Kenny's Tackle<span class="text-coral-500">Shop</span></h3> -->
+
+          <div class="flex items-center gap-4 mb-6">
+            <div class="relative">
+              <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
+                
+                
+                <div class="absolute bottom-0 w-full h-6 bg-cyan-400/20 blur-sm"></div>
+
+                <img src="/images/kennys-logo.png" class="w-9 h-9 object-contain relative z-10" />
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-xl font-semibold text-white">
+                Kenny’s Tackle<span class="text-coral-500">Shop</span>
+              </h3>
+              <p class="text-xs text-gray-400">Gear up for the deep sea</p>
+            </div>
+          </div>
+
           <p class="text-gray-400 text-sm leading-relaxed mb-6">
             Your premier destination for high-quality fishing gear, setups, and accessories in Cebu. We gear you up for your best catch.
           </p>
@@ -100,12 +120,49 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
               <span class="text-sm font-medium">100% Secure Checkout</span>
             </div>
             <div class="flex gap-2.5">
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[10px] font-bold border border-slate-700 text-slate-300"><img src="/images/visa.png" width="50" height="50" /></div>
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[10px] font-bold border border-slate-700 text-slate-300"><img src="/images/mastercard.png" width="50" height="50" /></div>
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[10px] font-bold border border-slate-700 text-slate-300"><img src="/images/bdo.png" width="50" height="50" /></div>
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[10px] font-bold border border-slate-700 text-slate-300"><img src="/images/bpi.png" width="50" height="50" /></div>
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[9px] font-bold border border-slate-700 text-slate-300"><img src="/images/paypal.png" width="50" height="50" /></div>
-              <div class="w-11 h-7 bg-[white] rounded flex items-center justify-center text-[9px] font-bold border border-slate-700 text-slate-300"><img src="/images/gcash.png" width="50" height="50" /></div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/visa.png" 
+                  alt="Visa payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/mastercard.png" 
+                  alt="Master Card payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/bdo.png" 
+                  alt="BDO payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/bpi.png" 
+                  alt="BPI payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/paypal.png" 
+                  alt="Paypal payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+              <div class="w-11 h-7 bg-white rounded flex items-center justify-center border border-slate-700">
+                <img 
+                  src="/images/gcash.png" 
+                  alt="GCash payment method" 
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+
             </div>
           </div>
         </div>

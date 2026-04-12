@@ -20,7 +20,17 @@ const navLinks = [
       <div class="flex justify-between items-center h-[72px]">
         <!-- Logo -->
         <router-link to="/" class="flex-shrink-0 flex items-center">
-          <span class="text-2xl font-bold text-gray-900 tracking-tight">Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span>
+          <!-- <span class="text-2xl font-bold text-gray-900 tracking-tight">Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span> -->
+          <div class="flex items-center gap-3">
+            <div class="bg-white/80 backdrop-blur-md p-2 rounded-full shadow-sm border border-gray-200">
+              <img src="/images/kennys-logo.png" 
+                class="w-12 h-12 object-contain transition-transform duration-300 hover:scale-110 hover:rotate-3"
+              />
+            </div>
+            <span class="font-semibold text-gray-800 tracking-wide hidden sm:block">
+              Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span>
+            </span>
+          </div>
         </router-link>
 
         <!-- Desktop Navigation -->

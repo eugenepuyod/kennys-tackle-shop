@@ -72,7 +72,7 @@ const submitForm = () => {
                 </div>
                 <div>
                   <h4 class="font-bold text-blue-100 mb-1">Our Store</h4>
-                  <p class="text-white font-medium leading-relaxed">123 Ocean Drive, Coastal Mall<br/>Cebu City, Philippines 6000</p>
+                  <p class="text-white font-medium leading-relaxed">General Luna street corner Arellano <br />street, Dipolog City, Philippines, 7100</p>
                 </div>
               </div>
               <div class="flex items-start">
@@ -110,7 +110,7 @@ const submitForm = () => {
       <!-- Google Map -->
       <div class="mt-12 bg-white rounded-3xl p-3 shadow-xl border border-gray-100 h-[450px] overflow-hidden">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.5701348460893!2d123.97450567354606!3d10.376214266451257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a9bd4cf481250b%3A0x871b5901b0beac61!2sAnami%20Homes%20North!5e0!3m2!1sen!2sph!4v1775173242885!5m2!1sen!2sph" 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4469.342768432025!2d123.33634784798237!3d8.586168675420925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3254960e1536b3e1%3A0x32809028e04125dc!2sGen.%20Luna%20St%20%26%20Arellano%20St%2C%20Central%2C%20Dipolog%20City%2C%20Zamboanga%20del%20Norte!5e0!3m2!1sen!2sph!4v1775970140544!5m2!1sen!2sph" 
           width="100%" 
           height="100%" 
           style="border:0;" 
@@ -122,3 +122,5 @@ const submitForm = () => {
     </div>
   </div>
 </template>
+
+

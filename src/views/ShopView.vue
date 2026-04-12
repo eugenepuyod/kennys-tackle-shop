@@ -26,7 +26,8 @@ const quickViewProduct = ref(null)
 const quickViewQty = ref(1)
 
 // Options
-const categories = ['All', 'Fishing Gear', 'Fishing Setup', 'Fishing Reels', 'Fishing Rods', 'Jigging Setup', 'Lines', 'Lures', 'Jigs']
+// const categories = ['All', 'Reels', 'Rods', 'Combo Setup', 'Jigging', 'Jigs', 'Lines', 'Mono', 'Lures', 'Hooks', 'Accessories']
+const categories = ['All', ...new Set(products.map(p => p.category))]
 const allTags = [...new Set(products.flatMap(p => p.tags))]
 
 // Filter logic
@@ -58,11 +59,21 @@ const paginatedProducts = computed(() => {
   return filteredProducts.value.slice(start, end)
 })
 
-watch(route, () => {
-  if (route.query.category) {
-    selectedCategory.value = route.query.category
-  }
-})
+watch(
+  () => route.query,
+  (query) => {
+    selectedCategory.value = query.category || 'All'
+    searchQuery.value = query.search || ''
+
+    // 👇 handle multiple tags
+    if (query.tag) {
+      selectedTags.value = query.tag.split(',') // convert string → array
+    } else {
+      selectedTags.value = []
+    }
+  },
+  { immediate: true }
+)
 
 // Reset pagination when filters change
 watch([selectedCategory, maxPrice, selectedTags, searchQuery, selectedBrand], () => {

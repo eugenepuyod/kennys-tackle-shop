@@ -24,9 +24,9 @@ const toggleWishlist = (id) => {
 }
 
 const categories = [
-  { id: 1, name: 'Fishing Reels', image: '/images/category-reels.jpg' },
-  { id: 2, name: 'Fishing Rods', image: '/images/cat-rods.png' },
-  { id: 3, name: 'Lures', image: '/images/cat-lures-jigs.png' },
+  { id: 1, name: 'Reels', image: '/images/category-reels.jpg' },
+  { id: 2, name: 'Rods', image: '/images/cat-rods.png' },
+  { id: 3, name: 'Jigs', image: '/images/cat-lures-jigs.png' },
   { id: 4, name: 'Full Setups', image: '/images/cat-fishing-setup.png' }
 ]
 
@@ -217,7 +217,7 @@ onUnmounted(() => {
             :style="{ transitionDelay: `${idx * 150}ms` }"
           >
             <router-link 
-              :to="'/shop?category=' + encodeURIComponent(cat.name)"
+              :to="'/shop?tag=' + encodeURIComponent(cat.name)"
               class="group relative h-80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 block"
             >
               <img :src="cat.image" :alt="cat.name" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
@@ -258,7 +258,7 @@ onUnmounted(() => {
               :to="`/product/${product.id}`"
               class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col min-h-[500px]"
             >
-              <div class="relative h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
+              <div class="relative h-[300px] md:h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
                 <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
                 <div class="absolute top-4 left-4 bg-coral-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                   Best Seller
