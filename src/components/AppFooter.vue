@@ -35,7 +35,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
         <div>
           <!-- <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Kenny's Tackle<span class="text-coral-500">Shop</span></h3> -->
 
-          <div class="flex items-center gap-4 mb-6">
+          <div class="flex items-center gap-3 mb-6">
             <div class="relative">
               <div class="w-22 h-22 md:w-17 md:h-17 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
                 
