@@ -107,10 +107,10 @@ const toggleWishlist = (id) => {
 }
 
 const categories = [
-  { id: 1, name: 'Reels', image: '/images/category-dark-reels.jpg' },
-  { id: 2, name: 'Rods', image: '/images/category-dark-rods.jpg' },
-  { id: 3, name: 'Jigs', image: '/images/category-dark-jigs.jpg' },
-  { id: 4, name: 'Braided fishing line', image: '/images/braided-dark-line.jpg' }
+  { id: 1, name: 'Reels', image: '/images/cat-creels.png' },
+  { id: 2, name: 'Rods', image: '/images/cat-crods.png' },
+  { id: 3, name: 'Jigs', image: '/images/cat-cjigs.png' },
+  { id: 4, name: 'Braided fishing line', image: '/images/cat-cbraid-lines.png' }
 ]
 
 const features = [
