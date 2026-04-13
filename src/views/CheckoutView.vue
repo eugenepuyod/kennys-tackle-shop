@@ -54,7 +54,8 @@ const placeOrder = () => {
   setTimeout(() => {
     isProcessing.value = false
     orderComplete.value = true
-    cartStore.clearCart()
+    // cartStore.clearCart()
+    cartStore.resetCart()
   }, 2000)
 }
 </script>
@@ -231,9 +232,32 @@ const placeOrder = () => {
                     <span class="absolute -top-2 -right-2 bg-gray-800 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border border-white">{{ item.quantity }}</span>
                   </div>
                   <div>
-                    <h4 class="text-sm font-bold text-gray-900 leading-tight mb-1">{{ item.name }}</h4>
-                    <p class="text-xs text-coral-500 font-bold uppercase">{{ item.category }}</p>
+                  <div class="flex items-center gap-2 mb-1">
+                    <h4 class="text-sm font-bold text-gray-900 leading-tight">
+                      {{ item.name }}
+                    </h4>
+
+                    <!-- Bundle Tag -->
+                    <span
+                      v-if="item.isBundleItem"
+                      class="text-[10px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-600 font-bold uppercase tracking-wide"
+                    >
+                      Bundle
+                    </span>
                   </div>
+
+                  <p class="text-xs text-coral-500 font-bold uppercase">
+                    {{ item.category }}
+                  </p>
+
+                  <!-- Optional: show bundle group name -->
+                  <p
+                    v-if="item.bundleId"
+                    class="text-[10px] text-gray-400 mt-1 uppercase"
+                  >
+                    Starter Kit Bundle
+                  </p>
+                </div>
                 </div>
                 <div class="font-extrabold text-gray-900 text-sm whitespace-nowrap">
                   ₱{{ (item.price * item.quantity).toFixed(2) }}
@@ -265,6 +289,11 @@ const placeOrder = () => {
               <div class="flex justify-between text-gray-600">
                 <span>Shipping</span>
                 <span class="text-green-600 font-bold">Free</span>
+              </div>
+              <div v-if="cartStore.bundleDiscount > 0"
+                  class="flex justify-between text-blue-600 bg-blue-50 -mx-4 px-4 py-3 rounded-lg border border-blue-100">
+                <span class="font-bold">Bundle Discount</span>
+                <span class="font-bold">-₱{{ cartStore.bundleDiscount.toFixed(2) }}</span>
               </div>
               <div v-if="cartStore.discountAmount > 0" class="flex justify-between text-green-600 bg-green-50 -mx-4 px-4 py-3 rounded-lg border border-green-100">
                 <span class="font-bold">Discount ({{ cartStore.discountRate * 100 }}%)</span>

@@ -3,18 +3,40 @@
 // export const tagsList = ['Saltwater', 'Premium', 'Heavy Duty', 'Durable', 'Jigging', 'Carbon', 'Boat', 'Combo', 'Braid', 'PE', 'Trolling', 'Lure', 'Beginner', 'Accessories']
 
 export const products = [
-  { id: 101, name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano', price: 1115.99, category: 'Spinning Reels', tags: ['Saltwater', 'Premium', 'Jigging', 'Reels'], image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',] },
-  { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Spinning Reels', tags: ['Saltwater', 'Heavy Duty', 'Jigging', 'Reels'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',] },
-  { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Saltwater', 'Trolling', 'Heavy', 'Reels'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',] },
-  { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Spinning Reels', tags: ['Saltwater', 'Durable', 'Jigging', 'Reels'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true },
-  { id: 105, name: 'Shimano 21 GRAPPLER Type J', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 269.00, category: 'Overhead Rods', tags: ['Rods', 'Saltwater', 'Jigging', 'Carbon'], image: '/images/shimano-grappler-j.webp', shortDesc: 'High-end jigging rod.', inStock: true },
+  { id: 101, name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano', price: 1115.99, category: 'Spinning Reels', tags: ['Saltwater', 'Premium', 'Jigging', 'Reels'], image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',],
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit" 
+  },
+  { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Spinning Reels', tags: ['Saltwater', 'Heavy Duty', 'Jigging', 'Reels'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',],
+    
+  },
+  { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Saltwater', 'Trolling', 'Heavy', 'Reels'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',], 
+    
+  },
+  { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Spinning Reels', tags: ['Saltwater', 'Durable', 'Jigging', 'Reels'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true,
+    
+  },
+  { id: 105, name: 'Shimano 21 GRAPPLER Type J', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 269.00, category: 'Overhead Rods', tags: ['Rods', 'Saltwater', 'Jigging', 'Carbon'], image: '/images/shimano-grappler-j.webp', shortDesc: 'High-end jigging rod.', inStock: true, 
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  },
   { id: 106, name: 'Daiwa Proteus', rating: 1, totalRating: 52, stock: 10, brand: 'Daiwa', price: 180.00, category: 'Spinning Rods', tags: ['Rods', 'Boat', 'Heavy Duty'], image: '/images/daiwa-proteus.webp', shortDesc: 'Perfect for heavy boat fishing.', inStock: false },
   { id: 107, name: 'SHIMANO F Custom 1500HG', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 1450.00, category: 'Overhead Reels', tags: ['Saltwater', 'Jigging', 'Reels'], image: '/images/shimano-fcustom-1500.webp', shortDesc: 'Ready to fish jigging.', inStock: true },
-  { id: 108, name: 'Shimano Ocea Jigger MX4 PE Saltwater Slow Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 65.00, category: 'Braided fishing line', tags: ['Saltwater', 'Braided fishing line', 'PE', 'Lines'], image: '/images/shimano-pe4.webp', shortDesc: 'Smooth and strong PE line.', inStock: true },
+  { id: 108, name: 'Shimano Ocea Jigger MX4 PE Saltwater Slow Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 65.00, category: 'Braided fishing line', tags: ['Saltwater', 'Braided fishing line', 'PE', 'Lines'], image: '/images/shimano-pe4.webp', shortDesc: 'Smooth and strong PE line.', inStock: true,
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  },
   { id: 109, name: 'NOMAD DESIGN Saltwater Trolling Sinking Lure', rating: 5, totalRating: 128, stock: 10, brand: 'NOMAD', price: 28.00, category: 'Lures', tags: ['Saltwater', 'Trolling', 'Lures'], image: '/images/nomad-lure.webp', shortDesc: 'Deep diving trolling lure.', inStock: true },
-  { id: 110, name: 'SHIMANO BUTTERFLY FLAT FALL JIG', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 14.00, category: 'Jigs', tags: ['Jigging', 'Saltwater', 'Jigs'], image: '/images/shimano-flat-fall-jig.webp', shortDesc: 'Classic flat fall jig.', inStock: true },
+  { id: 110, name: 'SHIMANO BUTTERFLY FLAT FALL JIG', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 14.00, category: 'Jigs', tags: ['Jigging', 'Saltwater', 'Jigs'], image: '/images/shimano-flat-fall-jig.webp', shortDesc: 'Classic flat fall jig.', inStock: true,
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  },
   { id: 111, name: 'Rapala X-Rap Magnum 15 Fishing Lure', rating: 5, totalRating: 128, stock: 10, brand: 'Rapala', price: 26.00, category: 'Lures', tags: ['Saltwater', 'Trolling', 'Lures'], image: '/images/rapala-lure-minnow.webp', shortDesc: 'World famous magnum lure.', inStock: true },
   { id: 112, name: 'Fishing Tackle Box Kit Beginners Equipment', rating: 5, totalRating: 128, stock: 10, brand: 'Tackle', price: 23.00, category: 'Accessories', tags: ['Saltwater', 'Combo', 'Beginner', 'Accessories'], image: '/images/fishingkits.webp', shortDesc: 'Perfect kit for beginners.', inStock: true },
   { id: 113, name: 'Shimano 14 Ocea Jigger 1500HG Limited Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 339.00, category: 'Overhead Reels', tags: ['Saltwater', 'Jigging', 'Heavy Duty', 'Durable', 'Reels'], image: '/images/shimano-14-limited.webp', shortDesc: 'Ready for big catch fish', inStock: true },
+  { id: 114, name: 'Shimano Ocea EX Fluoro Leader', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 26.00, category: 'Mono', tags: ['Saltwater', 'Jigging'], image: '/images/shimano-flat-fall-jig.webp', shortDesc: 'Ready for big catch fish', inStock: true, moreImage:['/images/shimano-flat-fall-jig.webp'],
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  },
   
 ]

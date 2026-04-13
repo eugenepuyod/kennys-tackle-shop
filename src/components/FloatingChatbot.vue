@@ -5,7 +5,7 @@ import { ref, nextTick } from 'vue'
 const isOpen = ref(false)
 const inputMessage = ref('')
 const messages = ref([
-  { id: 1, text: "Hello! Welcome to Cebu Tackle Shop 🎣. How can I help you catch your next big fish today?", sender: 'bot' }
+  { id: 1, text: "Hello! Welcome to Kenny's Tackle Shop 🎣. How can I help you catch your next big fish today?", sender: 'bot' }
 ])
 const messageContainer = ref(null)
 

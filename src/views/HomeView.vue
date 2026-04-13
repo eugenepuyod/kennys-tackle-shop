@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { ArrowRight, Star, StarHalf, Quote, ChevronRight, ChevronLeft, Heart, ShoppingBag, Users, Award } from 'lucide-vue-next'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
@@ -8,6 +8,89 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
+
+// Tilt section
+import VanillaTilt from "vanilla-tilt";
+const tiltCards = ref([]);
+
+const tiltBanner = ref(null);
+
+const bundle = computed(() => {
+
+  // pick actual products from your features
+  // const reel = features.find(p => p.category.includes('Reels'))
+  const reel = { 
+    id: 101, 
+    name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano',
+    price: 1115.99, 
+    category: 'Fishing Reels', tags: ['Saltwater', 'Premium'], 
+    image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',],
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+    }
+
+  const rod = {
+    id: 105,
+    name: 'Shimano 21 GRAPPLER Type J',
+    price: 800,
+    image: '/images/shimano-grappler-j.webp',
+    category: 'Fishing Rods',
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  }
+
+  const braided = {
+    id: 108,
+    name: 'Shimano Ocea Jigger MX4 PE',
+    price: 300,
+    image: '/images/shimano-pe4.webp',
+    category: 'Fishing Line',
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  }
+
+  const mono = {
+    id: 114,
+    name: 'Shimano Ocea EX Fluoro Leader',
+    price: 200,
+    image: '/images/shimano-mono.webp',
+    category: 'Fishing Line',
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  }
+
+  const jigs = {
+    id: 110,
+    name: 'SHIMANO BUTTERFLY FLAT FALL JIG',
+    price: 250,
+    image: '/images/shimano-flat-fall-jig.webp',
+    category: 'Jigs',
+    bundleId: "starter-kit",
+    bundleName: "Fishing Starter Kit"
+  }
+
+  const items = [reel, rod, braided, mono, jigs].filter(Boolean)
+
+  const original = items.reduce((sum, item) => sum + item.price, 0)
+  const discount = 0.15 // 15% bundle discount
+
+  return {
+    items,
+    original,
+    price: Math.round(original * (1 - discount))
+  }
+})
+
+const addBundleToCart = () => {
+  bundle.value.items.forEach(item => {
+    cartStore.addItem({
+      ...item,
+      isBundleItem: true,
+      bundleId: 'starter-kit'
+    }, 1)
+  })
+}
+
 
 const cartStore = useCartStore()
 const swiperModules = [Autoplay, EffectFade, Navigation, Pagination]
@@ -139,6 +222,26 @@ onMounted(() => {
   })
   
   window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  // Tilt section
+  tiltCards.value.forEach(el => {
+    VanillaTilt.init(el, {
+      max: 10,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.2,
+      scale: 1.03
+    });
+  });
+
+  // Promo banner
+  VanillaTilt.init(tiltBanner.value, {
+    max: 6,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.15,
+    scale: 1.02
+  });
 })
 
 onUnmounted(() => {
@@ -202,46 +305,111 @@ onUnmounted(() => {
     </section>
 
     <!-- Categories -->
-    <section class="pt-10 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal reveal-fade-up">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Shop by Category</h2>
-          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <div 
-            v-for="(cat, idx) in categories" 
-            :key="cat.id" 
-            class="reveal reveal-slide-left"
-            :style="{ transitionDelay: `${idx * 150}ms` }"
-          >
-            <router-link 
-              :to="'/shop?tag=' + encodeURIComponent(cat.name)"
-              class="group relative h-80 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 block"
-            >
-              <img :src="cat.image" :alt="cat.name" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-              <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
-              <div class="absolute bottom-0 left-0 p-8 w-full">
-                <h3 class="text-2xl font-bold text-white mb-4">{{ cat.name }}</h3>
-                <span class="inline-flex items-center bg-coral-500 text-white font-bold px-6 py-2 rounded-full transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
-                  Shop {{ cat.name }} <ArrowRight class="ml-2 w-4 h-4" />
-                </span>
-              </div>
-            </router-link>
-          </div>
-        </div>
+    <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Header -->
+      <div class="text-center mb-14 reveal reveal-fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+          Shop by Category
+        </h2>
+        <p class="text-gray-500 mt-3">
+          Premium gear for every angler
+        </p>
+        <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
       </div>
-    </section>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div 
+          v-for="(cat, idx) in categories" 
+          :key="cat.id"
+          ref="tiltCards"
+          class="tilt-card reveal reveal-slide-left"
+          :style="{ transitionDelay: `${idx * 150}ms` }"
+        >
+
+          <router-link 
+            :to="'/shop?tag=' + encodeURIComponent(cat.name)"
+            class="group relative h-80 rounded-2xl overflow-hidden block 
+                   shadow-md hover:shadow-2xl transition-all duration-500 
+                   transform hover:-translate-y-2 active:scale-95"
+          >
+
+            <!-- Image -->
+            <img 
+              :src="cat.image" 
+              :alt="cat.name"
+              class="absolute inset-0 w-full h-full object-cover 
+                     transition-transform duration-700 ease-out 
+                     group-hover:scale-110 group-hover:rotate-1"
+            >
+
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 
+                        bg-gradient-to-t from-black/70 via-black/20 to-transparent">
+            </div>
+
+            <!-- Glass Blur -->
+            <div class="absolute inset-0 backdrop-blur-[2px] opacity-0 
+                        group-hover:opacity-100 transition duration-500">
+            </div>
+
+            <!-- Glow Border -->
+            <div class="absolute inset-0 rounded-2xl border border-white/10 
+                        group-hover:border-white/30 transition duration-300">
+            </div>
+
+            <!-- Shine Sweep -->
+            <div class="absolute inset-0 overflow-hidden">
+              <div class="absolute -left-1/2 top-0 w-1/2 h-full 
+                          bg-white/10 skew-x-12 
+                          group-hover:left-full transition-all duration-700">
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="absolute bottom-0 left-0 p-6 w-full">
+
+              <h3 class="text-2xl font-semibold text-white mb-2 
+                         transform translate-y-2 group-hover:translate-y-0 
+                         transition duration-500">
+                {{ cat.name }}
+              </h3>
+
+              <span class="inline-flex items-center gap-2 
+                           text-sm font-medium text-white/90
+                           opacity-0 translate-y-4 
+                           group-hover:opacity-100 group-hover:translate-y-0
+                           transition-all duration-500 delay-100">
+                Explore Collection
+                <ArrowRight class="w-4 h-4 transform group-hover:translate-x-1 transition" />
+              </span>
+
+            </div>
+
+          </router-link>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
     <!-- Featured Products -->
     <section class="py-10 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-12 reveal reveal-fade-up">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">Featured Gear</h2>
-            <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 rounded-full"></div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+              Featured Gear
+            </h2>
+            <p class="text-gray-500 mt-3">
+              Handpicked high-performance fishing equipment trusted by serious anglers.
+            </p>
+            <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mt-4 rounded-full"></div>
           </div>
+          
           <router-link to="/shop" class="hidden sm:flex text-coral-500 hover:text-coral-600 font-medium items-center group">
             View All Products <ArrowRight class="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </router-link>
@@ -256,7 +424,7 @@ onUnmounted(() => {
           >
             <router-link 
               :to="`/product/${product.id}`"
-              class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col min-h-[500px]"
+              class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col min-h-[500px] hover:-translate-y-2"
             >
               <div class="relative h-[300px] md:h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
                 <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
@@ -333,6 +501,138 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
+
+    <section class="py-10 sm:py-12 bg-gray-50">
+      <!-- HEADER -->
+      <div class="text-center mb-10 sm:mb-14 reveal reveal-fade-up px-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+          Ultimate Fishing Bundle
+        </h2>
+
+        <p class="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
+          Get the full setup and save more when you buy everything together in one exclusive deal.
+        </p>
+
+        <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- TILT CONTAINER (IMPORTANT FIX) -->
+      <div class="max-w-5xl mx-auto px-4">
+
+        <div ref="tiltBanner"
+          class="relative w-full mx-auto max-w-4xl lg:max-w-5xl
+                rounded-2xl sm:rounded-3xl overflow-hidden
+                bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 
+                text-white shadow-xl
+                will-change-transform transform-gpu">
+
+          <!-- Glow -->
+          <div class="absolute inset-0 bg-gradient-to-r 
+                      from-coral-500/20 via-transparent to-blue-500/20"></div>
+
+          <!-- CONTENT -->
+          <div class="relative flex flex-col lg:flex-row 
+                      items-start lg:items-center 
+                      justify-between gap-6 sm:gap-8 lg:gap-10 
+                      p-5 sm:p-8 md:p-10">
+
+            <!-- LEFT -->
+            <div class="w-full lg:max-w-xl">
+
+              <span class="inline-block mb-3 sm:mb-4 
+                          bg-gradient-to-r from-orange-500 to-orange-600 
+                          text-[11px] sm:text-xs px-3 sm:px-4 py-1 rounded-full font-semibold">
+                🎣 Bundle Deal
+              </span>
+
+              <h3 class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight">
+                Complete Fishing Setup
+              </h3>
+
+              <p class="text-gray-300 mt-2 sm:mt-3 text-sm sm:text-base">
+                Reel + Rod + Braided Line + Mono Line + Jigs — everything you need in one kit.
+              </p>
+
+              <!-- PRICE -->
+              <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+
+                <span class="text-gray-400 line-through text-sm sm:text-lg">
+                  ₱{{ bundle.original }}
+                </span>
+
+                <span class="text-2xl sm:text-3xl font-bold text-white">
+                  ₱{{ bundle.price }}
+                </span>
+
+                <span class="text-green-400 text-sm sm:text-base font-semibold">
+                  Save ₱{{ bundle.original - bundle.price }}
+                </span>
+
+              </div>
+
+              <!-- CTA -->
+              <button
+                @click="addBundleToCart"
+                class="mt-5 sm:mt-6 w-full sm:w-auto 
+                      px-6 sm:px-8 py-3 rounded-xl 
+                      bg-gradient-to-r from-coral-500 to-orange-500 
+                      hover:from-orange-600 hover:to-coral-600
+                      text-white font-semibold shadow-lg 
+                      active:scale-95 transition-all duration-300">
+                🛒 Add Bundle to Cart
+              </button>
+
+            </div>
+
+            <!-- RIGHT (PRODUCTS - NO OVERFLOW) -->
+            <div class="w-full lg:w-auto flex justify-center lg:justify-end shrink-0">
+
+              <div class="grid grid-cols-3 sm:grid-cols-5 lg:flex gap-3 sm:gap-4">
+
+                <div v-for="(item, i) in bundle.items" :key="i"
+                    class="relative group flex flex-col items-center">
+
+                  <!-- ICON -->
+                  <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 
+                              bg-white rounded-lg sm:rounded-xl shadow-md 
+                              flex items-center justify-center p-2
+                              transition-transform duration-300 
+                              active:scale-95 group-hover:scale-105">
+
+                    <img :src="item.image" class="max-h-full object-contain" />
+
+                  </div>
+
+                  <!-- LABEL (desktop only) -->
+                  <span class="hidden lg:block absolute bottom-full mb-2 left-1/2 
+                              -translate-x-1/2 whitespace-nowrap text-xs 
+                              text-white bg-black/80 px-2 py-1 rounded 
+                              opacity-0 group-hover:opacity-100 transition">
+                    {{ item.name }}
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SHINE -->
+          <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -left-1/2 top-0 w-1/2 h-full 
+                        bg-white/10 skew-x-12 animate-shine"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+
+
+    
 
     <!-- Animated Counters -->
     <section ref="counterSection" class="mb-10 py-20 bg-gray-900 relative reveal reveal-fade-up">
@@ -536,5 +836,18 @@ onUnmounted(() => {
 :deep(.swiper-pagination-bullet-active) {
   opacity: 1 !important;
   background-color: #FF7F50 !important; /* coral-500 */
+}
+
+.tilt-card {
+  transform-style: preserve-3d;
+}
+
+@keyframes shine {
+  0% { left: -50%; }
+  100% { left: 120%; }
+}
+
+.animate-shine {
+  animation: shine 3s infinite;
 }
 </style>
