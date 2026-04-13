@@ -8,9 +8,9 @@
       <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
       <div class="absolute inset-0 bg-blue-600/10 mix-blend-overlay"></div>
       <div class="relative z-10">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">About Cebu Tackle Shop</h1>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight">About Kenny's Tackle Shop</h1>
         <p class="text-lg md:text-xl font-light max-w-2xl mx-auto text-gray-300 px-4">
-          Your premier destination for high-quality fishing gear, connecting generation of anglers in Cebu.
+          Your premier destination for high-quality fishing gear, connecting generation of anglers in Dipolog.
         </p>
       </div>
     </div>
@@ -30,11 +30,11 @@
         <div class="w-full lg:w-1/2">
           <h3 class="text-3xl font-bold text-gray-900 mb-6 tracking-tight">Our Story</h3>
           <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-            Founded in 2018 in the heart of Cebu, we started as a small, passionate group of local anglers who struggled to find premium saltwater gear locally. 
+            Founded in 2018 in the heart of Dipolog, we started as a small, passionate group of local anglers who struggled to find premium saltwater gear locally. 
             We decided to turn our passion into a business, bringing world-class brands like Shimano, Daiwa, and Penn closer to home.
           </p>
           <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-            Today, Cebu Tackle Shop is the leading provider of advanced jigging, casting, and trolling equipment in the region. 
+            Today, Kenny's Tackle Shop is the leading provider of advanced jigging, casting, and trolling equipment in the region. 
             From outfitting tournament pros to helping beginners tie their first knot, our expert staff is here to ensure you are geared up for absolute success.
           </p>
           <div>
