@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, nextTick  } from 'vue'
 import { ArrowRight, Star, StarHalf, Quote, ChevronRight, ChevronLeft, Heart, ShoppingBag, Users, Award } from 'lucide-vue-next'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
@@ -13,73 +13,47 @@ import 'swiper/css/pagination'
 import VanillaTilt from "vanilla-tilt";
 const tiltCards = ref([]);
 
-const tiltBanner = ref(null);
+const tiltBanner = ref([]);
 
-const bundle = computed(() => {
+const bundles = computed(() => {
+  const discount = 0.15
 
-  // pick actual products from your features
-  // const reel = features.find(p => p.category.includes('Reels'))
-  const reel = { 
-    id: 101, 
-    name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano',
-    price: 1115.99, 
-    category: 'Fishing Reels', tags: ['Saltwater', 'Premium'], 
-    image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',],
-    bundleId: "starter-kit",
-    bundleName: "Fishing Starter Kit"
+  const bundleList = [
+    {
+      id: "starter-kit",
+      title: "Complete Fishing Setup",
+      subtitle: "Reel + Rod + Braided Line + Mono Line + Jigs",
+      items: [
+        { id: 101, name: 'Shimano Stella SW', price: 1115.99, image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp' },
+        { id: 105, name: 'Shimano Grappler Rod', price: 800, image: '/images/shimano-grappler-j.webp' },
+        { id: 108, name: 'Ocea PE Line', price: 300, image: '/images/shimano-pe4.webp' },
+        { id: 114, name: 'Fluoro Leader', price: 200, image: '/images/shimano-mono.webp' },
+        { id: 110, name: 'Flat Fall Jig', price: 250, image: '/images/shimano-flat-fall-jig.webp' }
+      ]
+    },
+    {
+      id: "jigging-kit",
+      title: "Pro Jigging Bundle",
+      subtitle: "Heavy-duty offshore jigging setup",
+      items: [
+        { id: 102, name: 'Daiwa Saltiga', price: 1100, image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp' },
+        { id: 115, name: 'Shimano SALTY ADVANCE SHORE JIGGING', price: 179.00, image: '/images/shimano-salty-advance-jigging-rod.webp' },
+      ]
     }
+  ]
 
-  const rod = {
-    id: 105,
-    name: 'Shimano 21 GRAPPLER Type J',
-    price: 800,
-    image: '/images/shimano-grappler-j.webp',
-    category: 'Fishing Rods',
-    bundleId: "starter-kit",
-    bundleName: "Fishing Starter Kit"
-  }
-
-  const braided = {
-    id: 108,
-    name: 'Shimano Ocea Jigger MX4 PE',
-    price: 300,
-    image: '/images/shimano-pe4.webp',
-    category: 'Fishing Line',
-    bundleId: "starter-kit",
-    bundleName: "Fishing Starter Kit"
-  }
-
-  const mono = {
-    id: 114,
-    name: 'Shimano Ocea EX Fluoro Leader',
-    price: 200,
-    image: '/images/shimano-mono.webp',
-    category: 'Fishing Line',
-    bundleId: "starter-kit",
-    bundleName: "Fishing Starter Kit"
-  }
-
-  const jigs = {
-    id: 110,
-    name: 'SHIMANO BUTTERFLY FLAT FALL JIG',
-    price: 250,
-    image: '/images/shimano-flat-fall-jig.webp',
-    category: 'Jigs',
-    bundleId: "starter-kit",
-    bundleName: "Fishing Starter Kit"
-  }
-
-  const items = [reel, rod, braided, mono, jigs].filter(Boolean)
-
-  const original = items.reduce((sum, item) => sum + item.price, 0)
-  const discount = 0.15 // 15% bundle discount
-
-  return {
-    items,
-    original,
-    price: Math.round(original * (1 - discount))
-  }
+  return bundleList.map(bundle => {
+    const original = bundle.items.reduce((sum, i) => sum + i.price, 0)
+    return {
+      ...bundle,
+      original,
+      price: Math.round(original * (1 - discount))
+    }
+  })
 })
+
+
+
 
 const addBundleToCart = () => {
   bundle.value.items.forEach(item => {
@@ -110,7 +84,8 @@ const categories = [
   { id: 1, name: 'Reels', image: '/images/cat-creels.png' },
   { id: 2, name: 'Rods', image: '/images/cat-crods.png' },
   { id: 3, name: 'Jigs', image: '/images/cat-cjigs.png' },
-  { id: 4, name: 'Braided fishing line', image: '/images/cat-cbraid-lines.png' }
+  { id: 4, name: 'Braided fishing line', image: '/images/cat-cbraid-lines.png' },
+  { id: 5, name: 'Lures', image: '/images/lures.png' },
 ]
 
 const features = [
@@ -200,7 +175,8 @@ const startCounting = (entries) => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
   // Counters Observer
   observer = new IntersectionObserver(startCounting, { threshold: 0.5 })
   if (counterSection.value) observer.observe(counterSection.value)
@@ -235,13 +211,15 @@ onMounted(() => {
   });
 
   // Promo banner
-  VanillaTilt.init(tiltBanner.value, {
-    max: 6,
-    speed: 400,
-    glare: true,
-    "max-glare": 0.15,
-    scale: 1.02
-  });
+  tiltBanner.value.forEach(el => {
+    VanillaTilt.init(el, {
+      max: 6,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.15,
+      scale: 1.02
+    })
+  })
 })
 
 onUnmounted(() => {
@@ -320,79 +298,99 @@ onUnmounted(() => {
       </div>
 
       <!-- Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-        <div 
-          v-for="(cat, idx) in categories" 
+      <swiper
+        :modules="swiperModules"
+        :slidesPerView="1"
+        :spaceBetween="20"
+        :breakpoints="{
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          1024: { slidesPerView: 3, spaceBetween: 30 },
+          1280: { slidesPerView: 4, spaceBetween: 30 }
+        }"
+        :autoplay="false"
+        :loop="true"
+        :navigation="true"
+        class="pb-10"
+      >
+        <!-- For loop -->
+        <swiper-slide
+          v-for="(cat, idx) in categories"
           :key="cat.id"
-          ref="tiltCards"
-          class="tilt-card reveal reveal-slide-left"
-          :style="{ transitionDelay: `${idx * 150}ms` }"
+          class="pt-[20px]"
         >
-
-          <router-link 
-            :to="'/shop?tag=' + encodeURIComponent(cat.name)"
-            class="group relative h-80 rounded-2xl overflow-hidden block 
-                   shadow-md hover:shadow-2xl transition-all duration-500 
-                   transform hover:-translate-y-2 active:scale-95"
+          <div
+            ref="tiltCards"
+            class="tilt-card"
           >
 
-            <!-- Image -->
-            <img 
-              :src="cat.image" 
-              :alt="cat.name"
-              class="absolute inset-0 w-full h-full object-cover 
-                     transition-transform duration-700 ease-out 
-                     group-hover:scale-110 group-hover:rotate-1"
+            <router-link 
+              :to="'/shop?tag=' + encodeURIComponent(cat.name)"
+              class="group relative h-80 rounded-2xl overflow-hidden block 
+                    shadow-md hover:shadow-2xl transition-all duration-500 
+                    transform hover:-translate-y-2 active:scale-95"
             >
 
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 
-                        bg-gradient-to-t from-black/70 via-black/20 to-transparent">
-            </div>
+              <!-- Image -->
+              <img 
+                :src="cat.image" 
+                :alt="cat.name"
+                class="absolute inset-0 w-full h-full object-cover 
+                      transition-transform duration-700 ease-out 
+                      group-hover:scale-110 group-hover:rotate-1"
+              >
 
-            <!-- Glass Blur -->
-            <div class="absolute inset-0 backdrop-blur-[2px] opacity-0 
-                        group-hover:opacity-100 transition duration-500">
-            </div>
-
-            <!-- Glow Border -->
-            <div class="absolute inset-0 rounded-2xl border border-white/10 
-                        group-hover:border-white/30 transition duration-300">
-            </div>
-
-            <!-- Shine Sweep -->
-            <div class="absolute inset-0 overflow-hidden">
-              <div class="absolute -left-1/2 top-0 w-1/2 h-full 
-                          bg-white/10 skew-x-12 
-                          group-hover:left-full transition-all duration-700">
+              <!-- Gradient Overlay -->
+              <div class="absolute inset-0 
+                          bg-gradient-to-t from-black/70 via-black/20 to-transparent">
               </div>
-            </div>
 
-            <!-- Content -->
-            <div class="absolute bottom-0 left-0 p-6 w-full">
+              <!-- Glass Blur -->
+              <div class="absolute inset-0 backdrop-blur-[2px] opacity-0 
+                          group-hover:opacity-100 transition duration-500">
+              </div>
 
-              <h3 class="text-2xl font-semibold text-white mb-2 
-                         transform translate-y-2 group-hover:translate-y-0 
-                         transition duration-500">
-                {{ cat.name }}
-              </h3>
+              <!-- Glow Border -->
+              <div class="absolute inset-0 rounded-2xl border border-white/10 
+                          group-hover:border-white/30 transition duration-300">
+              </div>
 
-              <span class="inline-flex items-center gap-2 
-                           text-sm font-medium text-white/90
-                           opacity-0 translate-y-4 
-                           group-hover:opacity-100 group-hover:translate-y-0
-                           transition-all duration-500 delay-100">
-                Explore Collection
-                <ArrowRight class="w-4 h-4 transform group-hover:translate-x-1 transition" />
-              </span>
+              <!-- Shine Sweep -->
+              <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute -left-1/2 top-0 w-1/2 h-full 
+                            bg-white/10 skew-x-12 
+                            group-hover:left-full transition-all duration-700">
+                </div>
+              </div>
 
-            </div>
+              <!-- Content -->
+              <div class="absolute bottom-0 left-0 p-6 w-full">
 
-          </router-link>
-        </div>
+                <h3 class="text-2xl font-semibold text-white mb-2 
+                          transform translate-y-2 group-hover:translate-y-0 
+                          transition duration-500">
+                  {{ cat.name }}
+                </h3>
 
-      </div>
+                <span class="inline-flex items-center gap-2 
+                            text-sm font-medium text-white/90
+                            opacity-0 translate-y-4 
+                            group-hover:opacity-100 group-hover:translate-y-0
+                            transition-all duration-500 delay-100">
+                  Explore Collection
+                  <ArrowRight class="w-4 h-4 transform group-hover:translate-x-1 transition" />
+                </span>
+
+              </div>
+
+            </router-link>
+          </div>
+        </swiper-slide>
+        <!-- for loop -->
+
+      </swiper> 
+      <!-- grid -->
+
+
     </div>
   </section>
 
@@ -502,7 +500,9 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <section class="py-10 sm:py-12 bg-gray-50">
+
+    <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- HEADER -->
       <div class="text-center mb-10 sm:mb-14 reveal reveal-fade-up px-4">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
@@ -517,99 +517,114 @@ onUnmounted(() => {
       </div>
 
       <!-- TILT CONTAINER (IMPORTANT FIX) -->
-      <div class="max-w-5xl mx-auto px-4">
+      <swiper
+        :modules="swiperModules"
+        :slidesPerView="1"
+        :autoplay="false"
+        :loop="true"
+        :navigation="true"
+        class="pb-10"
+      >
+        <swiper-slide 
+          v-for="bundle in bundles" 
+          :key="bundle.id"
+          class="py-10"
+        >
+          <div ref="tiltBanner"
+            class="relative w-full mx-auto max-w-4xl lg:max-w-5xl
+                  rounded-2xl sm:rounded-3xl overflow-hidden
+                  bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 
+                  text-white shadow-xl
+                  will-change-transform transform-gpu">
 
-        <div ref="tiltBanner"
-          class="relative w-full mx-auto max-w-4xl lg:max-w-5xl
-                rounded-2xl sm:rounded-3xl overflow-hidden
-                bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 
-                text-white shadow-xl
-                will-change-transform transform-gpu">
+            <!-- Glow -->
+            <div class="absolute inset-0 bg-gradient-to-r 
+                        from-coral-500/20 via-transparent to-blue-500/20"></div>
 
-          <!-- Glow -->
-          <div class="absolute inset-0 bg-gradient-to-r 
-                      from-coral-500/20 via-transparent to-blue-500/20"></div>
+            <!-- CONTENT -->
+            <div class="relative flex flex-col lg:flex-row 
+                        items-start lg:items-center 
+                        justify-between gap-6 sm:gap-8 lg:gap-10 
+                        p-5 sm:p-8 md:p-10">
 
-          <!-- CONTENT -->
-          <div class="relative flex flex-col lg:flex-row 
-                      items-start lg:items-center 
-                      justify-between gap-6 sm:gap-8 lg:gap-10 
-                      p-5 sm:p-8 md:p-10">
+              <!-- LEFT -->
+              <div class="w-full lg:max-w-xl">
 
-            <!-- LEFT -->
-            <div class="w-full lg:max-w-xl">
-
-              <span class="inline-block mb-3 sm:mb-4 
-                          bg-gradient-to-r from-orange-500 to-orange-600 
-                          text-[11px] sm:text-xs px-3 sm:px-4 py-1 rounded-full font-semibold">
-                🎣 Bundle Deal
-              </span>
-
-              <h3 class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight">
-                Complete Fishing Setup
-              </h3>
-
-              <p class="text-gray-300 mt-2 sm:mt-3 text-sm sm:text-base">
-                Reel + Rod + Braided Line + Mono Line + Jigs — everything you need in one kit.
-              </p>
-
-              <!-- PRICE -->
-              <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
-
-                <span class="text-gray-400 line-through text-sm sm:text-lg">
-                  ₱{{ bundle.original }}
+                <span class="inline-block mb-3 sm:mb-4 
+                            bg-gradient-to-r from-orange-500 to-orange-600 
+                            text-[11px] sm:text-xs px-3 sm:px-4 py-1 rounded-full font-semibold">
+                  🎣 Bundle Deal
                 </span>
 
-                <span class="text-2xl sm:text-3xl font-bold text-white">
-                  ₱{{ bundle.price }}
-                </span>
+                <h3 class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight">
+                  <!-- Complete Fishing Setup -->
+                  {{ bundle.title }}
+                </h3>
 
-                <span class="text-green-400 text-sm sm:text-base font-semibold">
-                  Save ₱{{ bundle.original - bundle.price }}
-                </span>
+                <p class="text-gray-300 mt-2 sm:mt-3 text-sm sm:text-base">
+                  <!-- Reel + Rod + Braided Line + Mono Line + Jigs — everything you need in one kit. -->
+                  {{ bundle.subtitle }}
+                </p>
+
+                <!-- PRICE -->
+                <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+
+                  <span class="text-gray-400 line-through text-sm sm:text-lg">
+                    ₱{{ bundle.original }}
+                  </span>
+
+                  <span class="text-2xl sm:text-3xl font-bold text-white">
+                    ₱{{ bundle.price }}
+                  </span>
+
+                  <span class="text-green-400 text-sm sm:text-base font-semibold">
+                    Save ₱{{ bundle.original - bundle.price }}
+                  </span>
+
+                </div>
+
+                <!-- CTA -->
+                <button
+                  @click="bundle.items.forEach(item => cartStore.addItem(item, 1))"
+                  class="mt-5 sm:mt-6 w-full sm:w-auto 
+                        px-6 sm:px-8 py-3 rounded-xl 
+                        bg-gradient-to-r from-coral-500 to-orange-500 
+                        hover:from-orange-600 hover:to-coral-600
+                        text-white font-semibold shadow-lg 
+                        active:scale-95 transition-all duration-300">
+                  🛒 Add Bundle to Cart
+                </button>
 
               </div>
 
-              <!-- CTA -->
-              <button
-                @click="addBundleToCart"
-                class="mt-5 sm:mt-6 w-full sm:w-auto 
-                      px-6 sm:px-8 py-3 rounded-xl 
-                      bg-gradient-to-r from-coral-500 to-orange-500 
-                      hover:from-orange-600 hover:to-coral-600
-                      text-white font-semibold shadow-lg 
-                      active:scale-95 transition-all duration-300">
-                🛒 Add Bundle to Cart
-              </button>
+              <!-- RIGHT (PRODUCTS - NO OVERFLOW) -->
+              <div class="w-full lg:w-auto flex justify-center lg:justify-end shrink-0">
 
-            </div>
+                <div class="grid grid-cols-3 sm:grid-cols-5 lg:flex gap-3 sm:gap-4">
 
-            <!-- RIGHT (PRODUCTS - NO OVERFLOW) -->
-            <div class="w-full lg:w-auto flex justify-center lg:justify-end shrink-0">
+                  <div v-for="(item, i) in bundle.items" :key="i"
+                      class="relative group flex flex-col items-center">
 
-              <div class="grid grid-cols-3 sm:grid-cols-5 lg:flex gap-3 sm:gap-4">
+                    <!-- ICON -->
+                    <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 
+                                bg-white rounded-lg sm:rounded-xl shadow-md 
+                                flex items-center justify-center p-2
+                                transition-transform duration-300 
+                                active:scale-95 group-hover:scale-105">
 
-                <div v-for="(item, i) in bundle.items" :key="i"
-                    class="relative group flex flex-col items-center">
+                      <img :src="item.image" class="max-h-full object-contain" />
 
-                  <!-- ICON -->
-                  <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 
-                              bg-white rounded-lg sm:rounded-xl shadow-md 
-                              flex items-center justify-center p-2
-                              transition-transform duration-300 
-                              active:scale-95 group-hover:scale-105">
+                    </div>
 
-                    <img :src="item.image" class="max-h-full object-contain" />
+                    <!-- LABEL (desktop only) -->
+                    <span class="hidden lg:block absolute bottom-full mb-2 left-1/2 
+                                -translate-x-1/2 whitespace-nowrap text-xs 
+                                text-white bg-black/80 px-2 py-1 rounded 
+                                opacity-0 group-hover:opacity-100 transition">
+                      {{ item.name }}
+                    </span>
 
                   </div>
-
-                  <!-- LABEL (desktop only) -->
-                  <span class="hidden lg:block absolute bottom-full mb-2 left-1/2 
-                              -translate-x-1/2 whitespace-nowrap text-xs 
-                              text-white bg-black/80 px-2 py-1 rounded 
-                              opacity-0 group-hover:opacity-100 transition">
-                    {{ item.name }}
-                  </span>
 
                 </div>
 
@@ -617,15 +632,17 @@ onUnmounted(() => {
 
             </div>
 
-          </div>
+            <!-- SHINE -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+              <div class="absolute -left-1/2 top-0 w-1/2 h-full 
+                          bg-white/10 skew-x-12 animate-shine"></div>
+            </div>
 
-          <!-- SHINE -->
-          <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute -left-1/2 top-0 w-1/2 h-full 
-                        bg-white/10 skew-x-12 animate-shine"></div>
           </div>
-
-        </div>
+          <!-- tilt banner subcontainer -->
+        </swiper-slide>
+      </swiper>
+      <!-- tilt container -->
       </div>
     </section>
 

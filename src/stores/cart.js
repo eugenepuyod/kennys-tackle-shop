@@ -32,11 +32,18 @@
        name: 'Fishing Starter Kit',
        items: [101, 105, 108, 114, 110],
        discount: 0.15
-     }
+     },
+     'jigging-kit': {
+      name: 'Pro Jigging Bundle',
+      items: [102, 115], // match your product IDs
+      discount: 0.20 // 20% discount
+    }
    }
  
    const bundleRules = {
-     'starter-kit': 5
+     'starter-kit': 5,
+     'jigging-kit': 2,
+
    }
  
  
@@ -73,30 +80,28 @@
  
    // Bundle discount
    const bundleDiscount = computed(() => {
-     let totalDiscount = 0
- 
-     Object.entries(groupedBundles.value).forEach(([bundleId, bundle]) => {
-       const requiredCount = bundleRules[bundleId] || 0
- 
-       // Must include all unique bundle items
-       if (bundle.items.length < requiredCount) return
- 
-       // Number of complete bundles
-       const quantities = bundle.items.map(i => i.quantity)
-       const bundleCount = Math.min(...quantities)
- 
-       if (bundleCount <= 0) return
- 
-       // Price of one bundle set
-       const bundleSetTotal = bundle.items.reduce((sum, item) => {
-         return sum + item.price
-       }, 0)
- 
-       totalDiscount += bundleSetTotal * bundleCount * 0.15
-     })
- 
-     return totalDiscount
-   })
+    let totalDiscount = 0
+  
+    Object.entries(groupedBundles.value).forEach(([bundleId, bundle]) => {
+      const requiredCount = bundleRules[bundleId] || 0
+      const discountRate = bundleDefinitions[bundleId]?.discount || 0
+  
+      if (bundle.items.length < requiredCount) return
+  
+      const quantities = bundle.items.map(i => i.quantity)
+      const bundleCount = Math.min(...quantities)
+  
+      if (bundleCount <= 0) return
+  
+      const bundleSetTotal = bundle.items.reduce((sum, item) => {
+        return sum + item.price
+      }, 0)
+  
+      totalDiscount += bundleSetTotal * bundleCount * discountRate
+    })
+  
+    return totalDiscount
+  })
  
    // Promo discount
    const discountAmount = computed(() =>

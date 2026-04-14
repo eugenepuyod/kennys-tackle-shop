@@ -8,6 +8,8 @@ export const products = [
     bundleName: "Fishing Starter Kit" 
   },
   { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Spinning Reels', tags: ['Saltwater', 'Heavy Duty', 'Jigging', 'Reels'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',],
+    bundleId: "jigging-kit",
+    bundleName: "Pro Jigging Bundle" 
     
   },
   { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Saltwater', 'Trolling', 'Heavy', 'Reels'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',], 
@@ -38,5 +40,11 @@ export const products = [
     bundleId: "starter-kit",
     bundleName: "Fishing Starter Kit"
   },
+  { id: 115, name: 'Shimano SALTY ADVANCE SHORE JIGGING', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 179.00, category: 'Spinning Rods', tags: ['Rods', 'Saltwater', 'Jigging', 'Carbon'], image: '/images/shimano-salty-advance-jigging-rod.webp', shortDesc: 'High-end jigging rod.', inStock: true, 
+    bundleId: "jigging-kit",
+    bundleName: "Pro Jigging Bundle"
+  },
+
+
   
 ]
