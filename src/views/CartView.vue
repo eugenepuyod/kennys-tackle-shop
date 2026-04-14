@@ -93,7 +93,7 @@ const isEmpty = computed(() => cartStore.items.length === 0)
 
               <div class="flex justify-between text-gray-600">
                 <span>Shipping</span>
-                <span class="text-green-600 font-bold">Free</span>
+                <span class="text-green-600 font-sm">Enter shipping address</span>
               </div>
 
               <!-- Bundle Discount -->
