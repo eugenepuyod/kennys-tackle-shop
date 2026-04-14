@@ -316,7 +316,7 @@ onUnmounted(() => {
         <swiper-slide
           v-for="(cat, idx) in categories"
           :key="cat.id"
-          class="pt-[20px]"
+          class="p-2 pt-[20px]"
         >
           <div
             ref="tiltCards"
@@ -528,7 +528,7 @@ onUnmounted(() => {
         <swiper-slide 
           v-for="bundle in bundles" 
           :key="bundle.id"
-          class="py-10"
+          class="p-2"
         >
           <div ref="tiltBanner"
             class="relative w-full mx-auto max-w-4xl lg:max-w-5xl
@@ -578,7 +578,10 @@ onUnmounted(() => {
                   </span>
 
                   <span class="text-green-400 text-sm sm:text-base font-semibold">
-                    Save ₱{{ bundle.original - bundle.price }}
+                    Save ₱{{ (bundle.original - bundle.price).toLocaleString('en-PH', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    }) }}
                   </span>
 
                 </div>

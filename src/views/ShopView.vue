@@ -107,7 +107,7 @@ const addToCart = () => {
 <template>
   <div class="shop-page bg-gray-50 min-h-screen pb-20 relative">
     <!-- Header -->
-    <div class="block lg:hidden bg-white border-b border-gray-200 py-8 px-4 sm:px-6 lg:px-8">
+    <div class="block lg:hidden bg-white border-b border-gray-200 pb-0 py-8 px-4 sm:pb-8 sm:px-6 lg:px-8 ">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h1 class="text-3xl font-bold text-gray-900 tracking-tight">Shop Gear</h1>
