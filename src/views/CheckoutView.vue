@@ -112,7 +112,7 @@ const placeOrder = () => {
                 </div>
                 <div>
                   <label class="block text-sm font-bold text-gray-700 mb-2">City</label>
-                  <input v-model="user.city" type="text" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none transition-all text-gray-900" placeholder="Cebu City">
+                  <input v-model="user.city" type="text" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none transition-all text-gray-900" placeholder="Dipolog City">
                 </div>
               </div>
               <div>
