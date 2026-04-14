@@ -40,7 +40,7 @@ const paymentMethods = [
 const selectedPayment = ref('Visa Card')
 
 const user = ref({
-  contact: '',
+  email: '',
   fullName: '',
   address: '',
   city: '',
@@ -95,8 +95,8 @@ const placeOrder = () => {
             </h2>
             <form class="space-y-6">
               <div>
-                <label class="block text-sm font-bold text-gray-700 mb-2">Contact</label>
-                <input v-model="user.contact" type="text" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none transition-all text-gray-900" placeholder="Email or mobile phone number">
+                <label class="block text-sm font-bold text-gray-700 mb-2">Email</label>
+                <input v-model="user.email" type="text" class="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-coral-500 outline-none transition-all text-gray-900" placeholder="Email">
               </div>
 
               <div>
