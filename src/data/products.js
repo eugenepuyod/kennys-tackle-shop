@@ -34,7 +34,7 @@ export const products = [
   { id: 111, name: 'Rapala X-Rap Magnum 15 Fishing Lure', rating: 5, totalRating: 128, stock: 10, brand: 'Rapala', price: 26.00, category: 'Lures', tags: ['Saltwater', 'Trolling', 'Lures'], image: '/images/rapala-lure-minnow.webp', shortDesc: 'World famous magnum lure.', inStock: true },
   { id: 112, name: 'Fishing Tackle Box Kit Beginners Equipment', rating: 5, totalRating: 128, stock: 10, brand: 'Tackle', price: 23.00, category: 'Accessories', tags: ['Saltwater', 'Combo', 'Beginner', 'Accessories'], image: '/images/fishingkits.webp', shortDesc: 'Perfect kit for beginners.', inStock: true },
   { id: 113, name: 'Shimano 14 Ocea Jigger 1500HG Limited Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 339.00, category: 'Overhead Reels', tags: ['Saltwater', 'Jigging', 'Heavy Duty', 'Durable', 'Reels'], image: '/images/shimano-14-limited.webp', shortDesc: 'Ready for big catch fish', inStock: true },
-  { id: 114, name: 'Shimano Ocea EX Fluoro Leader', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 26.00, category: 'Mono', tags: ['Saltwater', 'Jigging'], image: '/images/shimano-mono.webp', shortDesc: 'Ready for big catch fish', inStock: true, moreImage:['/images/shimano-mono.webp'],
+  { id: 114, name: 'Shimano Ocea EX Fluoro Leader', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 26.00, category: 'Mono', tags: ['Saltwater', 'Jigging', 'Lines', 'Mono'], image: '/images/shimano-mono.webp', shortDesc: 'Ready for big catch fish', inStock: true, moreImage:['/images/shimano-mono.webp'],
     bundleId: "starter-kit",
     bundleName: "Fishing Starter Kit"
   },
