@@ -316,7 +316,7 @@ onUnmounted(() => {
         <swiper-slide
           v-for="(cat, idx) in categories"
           :key="cat.id"
-          class="p-2 pt-[20px]"
+          class="p-2 sm:p-0 pt-[20px]"
         >
           <div
             ref="tiltCards"
