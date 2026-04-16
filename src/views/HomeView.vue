@@ -53,7 +53,12 @@ const bundles = computed(() => {
 })
 
 
-
+const tagColors = {
+  Sale: 'bg-red-500',
+  New: 'bg-green-500',
+  BestSeller: 'bg-coral-500',
+  New: 'bg-green-500'
+}
 
 const addBundleToCart = () => {
   bundle.value.items.forEach(item => {
@@ -89,10 +94,10 @@ const categories = [
 ]
 
 const features = [
-  { id: 101, name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano', price: 1115.99, category: 'Fishing Reels', tags: ['Saltwater', 'Premium'], image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',] },
-  { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Fishing Reels', tags: ['Saltwater', 'Heavy Duty'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',] },
-  { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Trolling', 'Heavy'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',] },
-  { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Fishing Reels', tags: ['Saltwater', 'Durable'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true },
+  { id: 101, name: 'Shimano Stella SW', rating: 3.5, totalRating: 200, stock: 3, brand: 'Shimano', price: 1115.99, category: 'Fishing Reels', tags: ['Saltwater', 'Premium'], image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', shortDesc: 'The ultimate spinning reel for big game fishing.', inStock: true, moreImage: ['/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp', '/images/shimano-stella-2.webp','/images/shimano-stella-3.webp','/images/shimano-stella-4.webp','/images/shimano-stella-5.webp','/images/shimano-stella-6.webp',], tagName: "Sale" },
+  { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Fishing Reels', tags: ['Saltwater', 'Heavy Duty'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',], tagName: "New" },
+  { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Trolling', 'Heavy'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',], tagName: "BestSeller" },
+  { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Fishing Reels', tags: ['Saltwater', 'Durable'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true, tagName: "New" },
 ]
 
 const reviews = [
@@ -116,7 +121,7 @@ const partners = [
 const heroSlides = [
   {
     id: 1,
-    image: '/images/calm-lake.jpg',
+    image: '/images/me.jpg',
     animationClass: 'hero-bg-zoom',
     titleMain: 'Precision Tackle for',
     titleHighlight: 'Serious Anglers',
@@ -231,14 +236,13 @@ onUnmounted(() => {
 <template>
   <div class="home-page overflow-hidden">
     <!-- Hero Banner -->
-    <section class="h-[680px] sm:h-[680px] md:h-[600px] relative mt-[-72px] overflow-hidden">
+    <section class="h-[770px] sm:h-[680px] md:h-[650px] relative overflow-hidden">
       <swiper 
         :modules="swiperModules"
         :effect="'fade'"
         :fadeEffect="{ crossFade: true }"
         :speed="1500"
         :autoplay="{ delay: 6000, disableOnInteraction: false }"
-        :pagination="{ clickable: true }"
         :loop="true"
         class="h-full w-full"
       >
@@ -272,7 +276,7 @@ onUnmounted(() => {
     </section>
 
     <!-- Promo Catalog -->
-    <section class="py-12 bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white reveal reveal-fade-up">
+    <section class="py-12 bg-blue-500 text-white reveal reveal-fade-up">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row items-center justify-center gap-6">
         <h2 class="text-2xl font-bold">Hot Deal! Get 10% Off Your First Order</h2>
         <div class="flex items-center gap-4 bg-white/10 rounded-full p-2 pr-6 border border-white/20 shadow-lg">
@@ -289,7 +293,7 @@ onUnmounted(() => {
       <!-- Header -->
       <div class="text-center mb-14 reveal reveal-fade-up">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-          Shop by Category
+          Top Categories
         </h2>
         <p class="text-gray-500 mt-3">
           Premium gear for every angler
@@ -316,7 +320,7 @@ onUnmounted(() => {
         <swiper-slide
           v-for="(cat, idx) in categories"
           :key="cat.id"
-          class="p-2 sm:p-0 pt-[20px]"
+          class="p-2 lg:p-0 lg:pt-[20px]"
         >
           <div
             ref="tiltCards"
@@ -426,8 +430,11 @@ onUnmounted(() => {
             >
               <div class="relative h-[300px] md:h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
                 <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
-                <div class="absolute top-4 left-4 bg-coral-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
-                  Best Seller
+                <div 
+                class="absolute top-4 left-4 bg-coral-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm"
+                :class="tagColors[product.tagName]"
+                >
+                  {{ product.tagName }}
                 </div>
                 <button @click.prevent="toggleWishlist(product.id)" class="absolute top-4 right-4 text-gray-400 hover:text-coral-500 bg-white rounded-full p-2.5 shadow-sm z-10 transition-colors">
                   <Heart class="w-5 h-5" :class="{'fill-coral-500 text-coral-500': wishlist.has(product.id)}" />
@@ -698,7 +705,6 @@ onUnmounted(() => {
             :slidesPerView="1"
             :breakpoints="{ 768: { slidesPerView: 2, spaceBetween: 24 }, 1024: { slidesPerView: 3, spaceBetween: 32 } }"
             :navigation="{ prevEl: '.swiper-button-prev-custom', nextEl: '.swiper-button-next-custom' }"
-            :pagination="{ clickable: true }"
             :autoplay="{ delay: 6000, disableOnInteraction: false }"
             :loop="true"
             class="pb-16"
@@ -729,7 +735,7 @@ onUnmounted(() => {
     </section>
 
     <!-- Partners Carousel -->
-    <section class="py-5 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
+    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
         

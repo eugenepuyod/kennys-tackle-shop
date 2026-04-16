@@ -9,7 +9,7 @@ const isEmpty = computed(() => cartStore.items.length === 0)
 </script>
 
 <template>
-  <div class="cart-page min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="cart-page pt-35 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
       <h1 class="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">Shopping Cart</h1>
 

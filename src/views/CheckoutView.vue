@@ -62,7 +62,7 @@ const placeOrder = () => {
 </script>
 
 <template>
-  <div class="checkout-page min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="checkout-page pt-35 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
       
       <div v-if="orderComplete" class="bg-white rounded-3xl p-16 text-center border border-gray-100 shadow-lg max-w-2xl mx-auto flex flex-col items-center transform transition-all">
@@ -70,7 +70,7 @@ const placeOrder = () => {
           <CheckCircle2 class="w-16 h-16" />
         </div>
         <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Order Successful!</h1>
-        <p class="text-xl text-gray-500 mb-8 leading-relaxed">Thank you for shopping with Cebu Tackle Shop. Your premium gear is getting ready to ship.</p>
+        <p class="text-xl text-gray-500 mb-8 leading-relaxed">Thank you for shopping with Kenny's Tackle Shop. Your premium gear is getting ready to ship.</p>
         <p class="text-sm text-gray-400 mb-8 bg-gray-50 py-3 px-6 rounded-lg inline-block border border-gray-100">Order Reference: #{{ Math.floor(Math.random() * 1000000) }}</p>
         <div class="w-full">
           <router-link to="/" class="inline-flex bg-coral-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-coral-500/30 hover:bg-coral-600 transition-all hover:scale-[1.02] active:scale-95 text-lg">

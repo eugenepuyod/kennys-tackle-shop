@@ -16,7 +16,7 @@ const submitForm = () => {
 </script>
 
 <template>
-  <div class="contact-page min-h-screen bg-gray-50 pb-24">
+  <div class="contact-page pt-35 min-h-screen bg-gray-50 pb-24">
     <!-- Header -->
     <div class="bg-gray-900 text-white py-24 text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>

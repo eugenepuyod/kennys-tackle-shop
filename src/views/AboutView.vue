@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div class="about-page min-h-screen bg-white">
+  <div class="about-page pt-35 min-h-screen bg-white">
     <!-- Header -->
     <div class="bg-gray-900 text-white py-24 text-center relative overflow-hidden">
       <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>

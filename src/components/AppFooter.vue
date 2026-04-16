@@ -1,8 +1,53 @@
 <script setup>
-import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from 'lucide-vue-next'
+import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, Award, RotateCcw, BadgePercent, Tag, } from 'lucide-vue-next'
 </script>
 
 <template>
+  <div class="max-w-7xl px-7 pb-20 pt-10 bg-gray-100">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+      <div class="col-span-1 flex items-first p-1">
+        <Truck class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
+        <div class="border-r border-gray-200 px-1">
+          <h3 class="text-gray-900 text-lg font-medium">Free Shipping</h3>
+          <p class="text-sm text-gray-500 font-light py-3">Free ground shipping on orders over P2,000.00. Restrictions Apply.</p>
+          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
+              Learn More
+          </button>
+        </div>
+      </div>
+      <div class="col-span-1 flex items-first p-1">
+        <Award class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
+        <div class="border-r border-gray-200 px-1">
+          <h3 class="text-gray-900 text-lg font-medium">Unbeatable Service</h3>
+          <p class="text-sm text-gray-500 font-light py-3">We're here to help you! Call, email or live chat.</p>
+          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
+              Learn More
+          </button>
+        </div>
+      </div>
+      <div class="col-span-1 flex items-first p-1">
+        <RotateCcw class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
+        <div class="border-r border-gray-200 px-1">
+          <h3 class="text-gray-900 text-lg font-medium">Free Returns</h3>
+          <p class="text-sm text-gray-500 font-light py-3">Order with confidence. If you don't like it, return it for free!</p>
+          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
+              Learn More
+          </button>
+        </div>
+      </div>
+      <div class="col-span-1 flex items-first p-1">
+        <Tag class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
+        <div class="px-1">
+          <h3 class="text-gray-900 text-lg font-medium">Lowest Prices</h3>
+          <p class="text-sm text-gray-500 font-light py-3">Give us the opportunity to match or beat any posted price.</p>
+          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
+              Learn More
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <footer class="relative text-white pt-16 pb-8 border-t-[8px] border-coral-500 bg-gray-900 overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src="/images/deep_ocean_footer.png" alt="Ocean Background" class="w-full h-full object-cover opacity-80" />
@@ -40,7 +85,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck } from '
               <div class="w-22 h-22 md:w-17 md:h-17 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
                 
                 
-                <div class="absolute bottom-0 w-full h-6 bg-cyan-400/20 blur-sm"></div>
+                <div class="absolute bottom-0 w-full h-6"></div>
 
                 <img src="/images/kennys-logo.png" class="w-18 h-18 md:w-13 md:h-13 object-contain relative z-10" />
               </div>
