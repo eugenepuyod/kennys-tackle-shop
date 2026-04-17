@@ -9,7 +9,7 @@ import FloatingChatbot from './components/FloatingChatbot.vue'
   <div class="min-h-screen flex flex-col font-sans text-gray-900 selection:bg-blue-600 selection:text-white bg-white">
     <AppNavbar />
     
-    <main class="flex-grow pt-[80px] md:pt-[36px] lg:pt-[36px]">
+    <main class="flex-grow pt-[70px] md:pt-[44px]">
       <router-view v-slot="{ Component }">
         <transition name="fade" mode="out-in">
           <component :is="Component" />

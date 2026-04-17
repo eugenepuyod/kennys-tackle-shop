@@ -1,51 +1,59 @@
 <script setup>
 import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, Award, RotateCcw, BadgePercent, Tag, } from 'lucide-vue-next'
+
+import { onMounted } from 'vue'
+
+const services = [
+  {id: 1, icon : Truck, title: 'Free Shipping', description: 'Free ground shipping on orders over P3,000.00. Restrictions Apply.', links: ''},
+  {id: 2, icon : Award, title: 'Unbeatable Service', description: "We're here to help you! Call, email or live chat.", links: ''},
+  {id: 3, icon : RotateCcw, title: 'Free Returns', description: "Order with confidence. If you don't like it, return it for free!", links: ''},
+  {id: 4, icon : Tag, title: 'Lowest Prices', description: 'Give us the opportunity to match or beat any posted price.', links: ''},
+]
+
+
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible')
+      }
+    })
+  }, { threshold: 0.15 })
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+})
 </script>
 
 <template>
-  <div class="max-w-7xl px-7 pb-20 pt-10 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-7 pb-20 pt-10 bg-gray-100">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-      <div class="col-span-1 flex items-first p-1">
-        <Truck class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
-        <div class="border-r border-gray-200 px-1">
-          <h3 class="text-gray-900 text-lg font-medium">Free Shipping</h3>
-          <p class="text-sm text-gray-500 font-light py-3">Free ground shipping on orders over P2,000.00. Restrictions Apply.</p>
-          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
-              Learn More
-          </button>
+      <div 
+        v-for="(service, idx) in services" 
+        :key="service.id"
+        class="col-span-1 flex items-first p-1 reveal reveal-slide-left"
+        :style="{ transitionDelay: `${idx * 150}ms` }"
+        >
+        <component 
+          :is="service.icon" 
+          class="w-8 h-8 text-coral-500 mr-3 shrink-0" 
+        />
+        <div 
+          :class="[
+            'px-1',
+            idx !== services.length - 1 ? 'border-r border-gray-200' : ''
+          ]"
+        >
+          <h3 class="text-gray-900 text-lg font-medium">{{ service.title}}</h3>
+          <p class="text-sm text-gray-500 font-light py-3">{{ service.description }}</p>
+          <router-link 
+            :to="service.links"
+            class="inline-block bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap"
+          >
+            Learn More
+          </router-link>
         </div>
       </div>
-      <div class="col-span-1 flex items-first p-1">
-        <Award class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
-        <div class="border-r border-gray-200 px-1">
-          <h3 class="text-gray-900 text-lg font-medium">Unbeatable Service</h3>
-          <p class="text-sm text-gray-500 font-light py-3">We're here to help you! Call, email or live chat.</p>
-          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
-              Learn More
-          </button>
-        </div>
-      </div>
-      <div class="col-span-1 flex items-first p-1">
-        <RotateCcw class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
-        <div class="border-r border-gray-200 px-1">
-          <h3 class="text-gray-900 text-lg font-medium">Free Returns</h3>
-          <p class="text-sm text-gray-500 font-light py-3">Order with confidence. If you don't like it, return it for free!</p>
-          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
-              Learn More
-          </button>
-        </div>
-      </div>
-      <div class="col-span-1 flex items-first p-1">
-        <Tag class="w-8 h-8 text-coral-500 mr-3 shrink-0" />
-        <div class="px-1">
-          <h3 class="text-gray-900 text-lg font-medium">Lowest Prices</h3>
-          <p class="text-sm text-gray-500 font-light py-3">Give us the opportunity to match or beat any posted price.</p>
-          <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
-              Learn More
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
   <footer class="relative text-white pt-16 pb-8 border-t-[8px] border-coral-500 bg-gray-900 overflow-hidden">
@@ -57,7 +65,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Newsletter Section -->
-      <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
+      <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 reveal reveal-slide-right">
         <div class="md:w-1/2">
           <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">Join the Inner Circle</h3>
           <p class="text-gray-300 text-lg font-light">Subscribe to get exclusive deals, new arrivals, and pro fishing tips delivered straight to your inbox.</p>
@@ -77,7 +85,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
         <!-- Brand Info -->
-        <div>
+        <div class="reveal reveal-slide-left">
           <!-- <h3 class="text-2xl font-bold text-white mb-6 tracking-tight">Kenny's Tackle<span class="text-coral-500">Shop</span></h3> -->
 
           <div class="flex items-center gap-3 mb-6">
@@ -116,7 +124,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
         </div>
 
         <!-- Quick Links -->
-        <div>
+        <div class="reveal reveal-slide-left">
           <h4 class="text-lg font-semibold text-gray-100 mb-6">Quick Links</h4>
           <ul class="space-y-3">
             <li v-for="link in ['Home', 'Shop', 'About', 'Contact', 'Cart', 'Checkout']" :key="link">
@@ -129,7 +137,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
         </div>
 
         <!-- Popular Products -->
-        <div>
+        <div class="reveal reveal-slide-left">
           <h4 class="text-lg font-semibold text-gray-100 mb-6">Popular Categories</h4>
           <ul class="space-y-3">
             <li v-for="category in ['Fishing Reels', 'Fishing Rods', 'Jigging Setup', 'Lures & Jigs', 'Fishing Lines']" :key="category">
@@ -142,7 +150,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
         </div>
 
         <!-- Contact Info & Secure Checkout -->
-        <div>
+        <div class="reveal reveal-slide-left">
           <h4 class="text-lg font-semibold text-gray-100 mb-6">Contact Us</h4>
           <ul class="space-y-4 mb-8">
             <li class="flex items-start text-blue-100 text-sm group">
@@ -213,7 +221,7 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
         </div>
       </div>
 
-      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center reveal reveal-slide-left">
         <p class="text-blue-200 text-sm mb-4 md:mb-0">
           &copy; {{ new Date().getFullYear() }} Kenny's Tackle Shop. All rights reserved.
         </p>
@@ -225,3 +233,29 @@ import { Facebook, Twitter, Instagram, MapPin, Phone, Mail, ShieldCheck, Truck, 
     </div>
   </footer>
 </template>
+
+<style scoped>
+/* Scroll Reveal Classes */
+.reveal {
+  opacity: 0;
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.reveal-fade-up {
+  transform: translateY(50px);
+}
+
+.reveal.reveal-slide-left {
+  transform: translateX(-50px);
+}
+
+.reveal.reveal-slide-right {
+  transform: translateX(500px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate(0);
+}
+</style>

@@ -89,7 +89,7 @@ const categories = [
   { id: 1, name: 'Reels', image: '/images/cat-creels.png' },
   { id: 2, name: 'Rods', image: '/images/cat-crods.png' },
   { id: 3, name: 'Jigs', image: '/images/cat-cjigs.png' },
-  { id: 4, name: 'Braided fishing line', image: '/images/cat-cbraid-lines.png' },
+  { id: 4, name: 'Braided lines', image: '/images/cat-cbraid-lines.png' },
   { id: 5, name: 'Lures', image: '/images/lures.png' },
 ]
 
@@ -421,7 +421,7 @@ onUnmounted(() => {
           <div 
             v-for="(product, idx) in features" 
             :key="product.id"
-            class="reveal reveal-fade-up"
+            class="reveal reveal reveal-slide-left"
             :style="{ transitionDelay: `${idx * 150}ms` }"
           >
             <router-link 
@@ -658,6 +658,80 @@ onUnmounted(() => {
 
 
 
+    <!-- FULL IMAGE SECTION (LEFT-BOTTOM CONTENT) -->
+    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden reveal reveal-fade-up">
+
+      <!-- Background Image -->
+      <img 
+        src="/images/all-products.jpg" 
+        alt="Fishing Banner"
+        class="absolute inset-0 w-full h-full object-cover object-[center_17%]"
+      >
+
+      <!-- Dark Overlay -->
+      <div class="absolute inset-0 bg-black/40"></div>
+
+      <!-- Content (LEFT-BOTTOM) -->
+      <div class="absolute bottom-0 left-0 w-full px-4 py-4 md:py-8 sm:px-6 lg:px-8 z-10 reveal reveal-fade-up">
+        
+        <div class="max-w-7xl mx-auto">
+
+          <p class="text-gray-200 text-sm sm:text-base md:text-lg mb-3 reveal reveal-slide-right">
+            Premium gear built to handle the ocean’s toughest battles.
+          </p>
+
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight reveal reveal-slide-right">
+            CAST HARDER. FIGHT STRONGER
+          </h2>
+
+          <router-link 
+            to="/shop"
+            class="inline-flex items-center px-6 sm:px-8 py-3 bg-coral-500 hover:bg-coral-600 text-white font-semibold rounded-full transition shadow-lg reveal reveal-slide-right"
+          >
+            Shop All
+          </router-link>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Partners Carousel -->
+    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
+        
+        <div class="mt-8 relative group">
+          <swiper 
+            :modules="swiperModules"
+            :slidesPerView="2"
+            :spaceBetween="30"
+            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 5 } }"
+            :autoplay="{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }"
+            :speed="2000"
+            :loop="true"
+            :freeMode="true"
+            :allowTouchMove="false"
+            class="brands-swiper pb-4"
+          >
+            <swiper-slide 
+              v-for="(partner, i) in partners" 
+              :key="i" 
+              class="flex items-center justify-center py-4"
+            >
+              <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
+                <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+    </section>
+
+
+
 
     
 
@@ -709,7 +783,11 @@ onUnmounted(() => {
             :loop="true"
             class="pb-16"
           >
-            <swiper-slide v-for="review in reviews" :key="review.id" class="pb-15 px-6 md:px-8 text-center pt-8 pb-4">
+            <swiper-slide 
+              v-for="review in reviews" 
+              :key="review.id" 
+              class="pb-15 px-6 md:px-8 text-center pt-8 pb-4"
+            >
               <div class="flex flex-col items-center justify-center mb-6">
                 <img :src="review.profile" :alt="review.author" class="w-40 h-40 rounded-full object-cover shadow-lg mb-4 border-4 border-white" />
                 <div class="flex gap-1 mb-3">
@@ -734,33 +812,7 @@ onUnmounted(() => {
       </div>
     </section>
 
-    <!-- Partners Carousel -->
-    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
-        
-        <div class="mt-8 relative group">
-          <swiper 
-            :modules="swiperModules"
-            :slidesPerView="2"
-            :spaceBetween="30"
-            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 5 } }"
-            :autoplay="{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }"
-            :speed="2000"
-            :loop="true"
-            :freeMode="true"
-            :allowTouchMove="false"
-            class="brands-swiper pb-4"
-          >
-            <swiper-slide v-for="(partner, i) in partners" :key="i" class="flex items-center justify-center py-4">
-              <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
-                <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </section>
+    
   </div>
 </template>
 
@@ -834,6 +886,10 @@ onUnmounted(() => {
 
 .reveal.reveal-slide-left {
   transform: translateX(-50px);
+}
+
+.reveal.reveal-slide-right {
+  transform: translateX(500px);
 }
 
 .reveal.is-visible {

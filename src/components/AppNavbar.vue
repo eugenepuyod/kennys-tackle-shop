@@ -37,8 +37,19 @@ const handleScroll = () => {
   lastScrollY = currentScrollY
 }
 
+
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible')
+      }
+    })
+  }, { threshold: 0.15 })
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 })
 
 onUnmounted(() => {
@@ -56,24 +67,27 @@ onUnmounted(() => {
         showTopBar ? 'max-h-20 opacity-100' : 'max-h-0 opacity-0'
       ]"
     >
+      
       <div class="pb-[1px] bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 sm:gap-1 py-1 px-4 sm:px-6 lg:px-8">
-          
-          <div class="flex items-center p-1">
-            <Truck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-            <span class="text-[12px] font-normal text-gray-400">Free Shipping over ₱2,000.00</span>
-          </div>
+        <div class="max-w-7xl mx-auto py-1">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-0 sm:gap-1 py-1 px-4 sm:px-6 lg:px-8">
 
-          <div class="flex items-center p-1 sm:justify-center">
-            <Tag class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-            <span class="text-[12px] font-normal text-gray-400">Lowest Prices</span>
-          </div>
+            <div class="flex items-center p-1">
+              <Tag class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
+              <span class="text-[12px] font-normal text-gray-400">Lowest Prices</span>
+            </div>
 
-          <div class="flex items-center p-1 sm:justify-end">
-            <ShieldCheck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-            <span class="text-[12px] font-normal text-gray-400">1 Year Warranty</span>
-          </div>
+            <div class="flex items-center p-1 sm:justify-center">
+              <ShieldCheck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
+              <span class="text-[12px] font-normal text-gray-400">1 Year Warranty</span>
+            </div>
 
+            <div class="flex items-center p-1 col-span-2 md:col-span-1 sm:justify-end">
+              <Truck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
+              <span class="text-[12px] font-normal text-gray-400">Free Shipping over ₱3,000.00</span>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -81,14 +95,14 @@ onUnmounted(() => {
     <div class="pb-[1px] bg-gradient-to-r from-slate-901 via-blue-900 to-indigo-800 opacity-90"></div>
     
     <div class="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-[72px]">
+      <div class="flex justify-between items-center h-[60px] lg:h-[72px]">
         <!-- Logo -->
         <div>
           <router-link to="/" class="flex-shrink-0 flex items-center">
             <!-- <span class="text-2xl font-bold text-gray-900 tracking-tight">Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span> -->
             <div class="flex items-center gap-2 sm:gap-3">
-             <div class="relative">
-                <div class="w-15 h-15 md:w-16 md:h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
+              <div class="relative">
+                <div class="w-13 h-13 md:w-13 md:h-13 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
                   
                   
                   <div class="absolute bottom-0 w-full h-6 bg-cyan-400/20 blur-sm"></div>
@@ -104,17 +118,17 @@ onUnmounted(() => {
                 Kenny's <br />Tackle<span class="pr-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span>
               </span> -->
               <nav class="hidden lg:flex space-x-3">
-          <router-link 
-            v-for="link in navLinks" 
-            :key="link.name" 
-            :to="link.path"
-            class="font-medium relative group px-2 py-1 transition-colors"
-            :class="$route.path === link.path ? 'text-coral-500' : 'text-white/80 hover:text-coral-500'"
-          >
-            {{ link.name }}
-            <span class="absolute bottom-0 left-0 h-0.5 bg-coral-500 transition-all duration-300" :class="$route.path === link.path ? 'w-full' : 'w-0 group-hover:w-full'"></span>
-          </router-link>
-        </nav>
+                <router-link 
+                  v-for="link in navLinks" 
+                  :key="link.name" 
+                  :to="link.path"
+                  class="font-medium relative group px-2 py-1 transition-colors"
+                  :class="$route.path === link.path ? 'text-coral-500' : 'text-white/80 hover:text-coral-500'"
+                >
+                  {{ link.name }}
+                  <span class="absolute bottom-0 left-0 h-0.5 bg-coral-500 transition-all duration-300" :class="$route.path === link.path ? 'w-full' : 'w-0 group-hover:w-full'"></span>
+                </router-link>
+              </nav>
             </div>
           </router-link>
         </div>
@@ -173,3 +187,4 @@ onUnmounted(() => {
     </transition>
   </header>
 </template>
+

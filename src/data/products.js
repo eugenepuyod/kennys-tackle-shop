@@ -24,7 +24,7 @@ export const products = [
   },
   { id: 106, name: 'Daiwa Proteus', rating: 1, totalRating: 52, stock: 10, brand: 'Daiwa', price: 180.00, category: 'Spinning Rods', tags: ['Rods', 'Boat', 'Heavy Duty'], image: '/images/daiwa-proteus.webp', shortDesc: 'Perfect for heavy boat fishing.', inStock: false },
   { id: 107, name: 'SHIMANO F Custom 1500HG', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 1450.00, category: 'Overhead Reels', tags: ['Saltwater', 'Jigging', 'Reels', 'New'], image: '/images/shimano-fcustom-1500.webp', shortDesc: 'Ready to fish jigging.', inStock: true },
-  { id: 108, name: 'Shimano Ocea Jigger MX4 PE Saltwater Slow Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 65.00, category: 'Braided fishing line', tags: ['Saltwater', 'Braided fishing line', 'PE', 'Lines', 'BestSeller'], image: '/images/shimano-pe4.webp', shortDesc: 'Smooth and strong PE line.', inStock: true,
+  { id: 108, name: 'Shimano Ocea Jigger MX4 PE Saltwater Slow Jigging', rating: 5, totalRating: 128, stock: 10, brand: 'Shimano', price: 65.00, category: 'Braided lines', tags: ['Saltwater', 'Braided lines', 'PE', 'Lines', 'BestSeller'], image: '/images/shimano-pe4.webp', shortDesc: 'Smooth and strong PE line.', inStock: true,
     bundleId: "starter-kit",
     bundleName: "Fishing Starter Kit"
   },
