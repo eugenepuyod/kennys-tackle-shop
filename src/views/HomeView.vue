@@ -676,17 +676,17 @@ onUnmounted(() => {
         
         <div class="max-w-7xl mx-auto">
 
-          <p class="text-gray-200 text-sm sm:text-base md:text-lg mb-3 reveal reveal-slide-right">
+          <p class="text-gray-200 text-sm sm:text-base md:text-lg mb-3">
             Premium gear built to handle the ocean’s toughest battles.
           </p>
 
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight reveal reveal-slide-right">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight">
             CAST HARDER. FIGHT STRONGER
           </h2>
 
           <router-link 
             to="/shop"
-            class="inline-flex items-center px-6 sm:px-8 py-3 bg-coral-500 hover:bg-coral-600 text-white font-semibold rounded-full transition shadow-lg reveal reveal-slide-right"
+            class="inline-flex items-center px-6 sm:px-8 py-3 bg-coral-500 hover:bg-coral-600 text-white font-semibold rounded-full transition shadow-lg"
           >
             Shop All
           </router-link>

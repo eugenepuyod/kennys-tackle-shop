@@ -65,15 +65,22 @@ onMounted(() => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Newsletter Section -->
-      <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 reveal reveal-slide-right">
+      <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 reveal reveal-slide-left">
         <div class="md:w-1/2">
           <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">Join the Inner Circle</h3>
           <p class="text-gray-300 text-lg font-light">Subscribe to get exclusive deals, new arrivals, and pro fishing tips delivered straight to your inbox.</p>
         </div>
         <div class="md:w-1/2 w-full">
-          <form @submit.prevent class="flex flex-col sm:flex-row gap-3">
-            <input type="email" placeholder="Your email address..." class="flex-1 px-6 py-4 bg-gray-900/50 border border-gray-600 rounded-xl focus:ring-2 focus:ring-coral-500 focus:border-coral-500 outline-none transition-all text-white placeholder-gray-400">
-            <button class="bg-coral-500 hover:bg-coral-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
+          <form @submit.prevent class="flex flex-col sm:flex-row flex-wrap gap-3 w-full">
+            <input
+              type="email"
+              placeholder="Your email address..."
+              class="flex-1 min-w-0 w-full sm:w-auto px-6 py-4 bg-gray-900/50 border border-gray-600 rounded-xl focus:ring-2 focus:ring-coral-500 focus:border-coral-500 outline-none transition-all text-white placeholder-gray-400"
+            >
+
+            <button
+              class="w-full sm:w-auto shrink-0 bg-coral-500 hover:bg-coral-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95"
+            >
               Subscribe Now
             </button>
           </form>
