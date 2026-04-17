@@ -681,7 +681,7 @@ onUnmounted(() => {
           </p>
 
           <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight">
-            CAST HARDER. FIGHT STRONGER
+            CAST HARDER. FIGHT STRONGER.
           </h2>
 
           <router-link 
