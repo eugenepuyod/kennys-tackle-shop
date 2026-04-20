@@ -154,7 +154,7 @@ export const useCartStore = defineStore('cart', () => {
 
   function applyPromo(code) {
     const validCodes = {
-      'CEBU10': 0.10,
+      'KENNYS10': 0.10,
       'FISH20': 0.20
     }
     const codeUpper = code.toUpperCase()
