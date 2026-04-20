@@ -58,12 +58,20 @@ onMounted(() => {
       </div>
     </div>
   </section>
+  <div class="relative z-10">
   <footer class="relative text-white pt-16 pb-8 border-t-[8px] border-coral-500 bg-gray-900 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img src="/images/deep_ocean_footer.png" alt="Ocean Background" class="w-full h-full object-cover opacity-80" />
-      <!-- <img src="/images/deep_ocean_footer.png" alt="Ocean Background" class="w-full h-full object-cover opacity-80" /> -->
-      <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/95 via-[#1e3a8a]/80 to-[#1e3a8a]/60"></div>
+    
+
+    <div ref="bg" class="absolute inset-0 z-0 will-change-transform">
+      <img src="/images/deep_ocean_footer.png"
+          class="w-full h-full object-cover opacity-80" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/80 via-[#1e3a8a]/60 to-[#1e3a8a]/40"></div>
     </div>
+
+    <div class="footer-bubbles pointer-events-none">
+      <span v-for="n in 15" :key="n"></span>
+    </div>
+    
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Newsletter Section -->
@@ -241,6 +249,7 @@ onMounted(() => {
       </div>
     </div>
   </footer>
+  </div>
 </template>
 
 <style scoped>
@@ -267,4 +276,103 @@ onMounted(() => {
   opacity: 1;
   transform: translate(0);
 }
+
+
+/* bubles animation */
+.footer-bubbles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.footer-bubbles span {
+  position: absolute;
+  bottom: -120px;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  /* Main bubble body (transparent glass look) */
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.25) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 70%,
+    transparent 100%
+  );
+
+  /* subtle outer edge */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  /* glow + softness */
+  box-shadow:
+    inset -2px -4px 6px rgba(255,255,255,0.15),
+    inset 2px 2px 4px rgba(255,255,255,0.25),
+    0 0 6px rgba(255,255,255,0.1);
+
+  backdrop-filter: blur(1px);
+
+  animation: bubbleFloat 12s linear infinite;
+}
+
+.footer-bubbles span::after {
+  content: "";
+  position: absolute;
+  top: 15%;
+  left: 20%;
+
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.9) 0%,
+    rgba(255,255,255,0.4) 40%,
+    transparent 70%
+  );
+
+  filter: blur(1px);
+}
+
+/* Random positions & sizes */
+.footer-bubbles span:nth-child(1) { left: 5%; width: 10px; height: 10px; animation-duration: 10s; }
+.footer-bubbles span:nth-child(2) { left: 15%; width: 18px; height: 18px; animation-duration: 14s; }
+.footer-bubbles span:nth-child(3) { left: 25%; width: 12px; height: 12px; animation-duration: 11s; }
+.footer-bubbles span:nth-child(4) { left: 35%; width: 25px; height: 25px; animation-duration: 16s; }
+.footer-bubbles span:nth-child(5) { left: 50%; width: 14px; height: 14px; animation-duration: 9s; }
+.footer-bubbles span:nth-child(6) { left: 65%; width: 20px; height: 20px; animation-duration: 13s; }
+.footer-bubbles span:nth-child(7) { left: 75%; width: 16px; height: 16px; animation-duration: 12s; }
+.footer-bubbles span:nth-child(8) { left: 85%; width: 22px; height: 22px; animation-duration: 15s; }
+.footer-bubbles span:nth-child(9) { left: 95%; width: 12px; height: 12px; animation-duration: 10s; }
+
+/* Add delay randomness */
+.footer-bubbles span:nth-child(odd) {
+  animation-delay: -5s;
+}
+.footer-bubbles span:nth-child(even) {
+  animation-delay: -2s;
+}
+
+/* Animation */
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.2);
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
 </style>
