@@ -3,73 +3,41 @@ import { ref, onMounted, onUnmounted, computed, nextTick  } from 'vue'
 import { ArrowRight, Star, StarHalf, Quote, ChevronRight, ChevronLeft, Heart, ShoppingBag, Users, Award } from 'lucide-vue-next'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules'
-import { useCartStore } from '../stores/cart'
+import { useCartStore, bundleCatalogs } from '../stores/cart'
+import { bundleMarketing, bundleProducts } from '../data/products'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 // Tilt section
-import VanillaTilt from "vanilla-tilt";
-const tiltCards = ref([]);
+// import VanillaTilt from "vanilla-tilt";
+// const tiltCards = ref([]);
 
-const tiltBanner = ref([]);
+// const tiltBanner = ref([]);
 
-const bundles = computed(() => {
-  const discount = 0.15
+const currentTime = ref(Date.now())
 
-  const bundleList = [
-    {
-      id: "starter-kit",
-      title: "Complete Fishing Setup",
-      subtitle: "Reel + Rod + Braided Line + Mono Line + Jigs",
-      items: [
-        { id: 101, name: 'Shimano Stella SW', price: 1115.99, image: '/images/shimano-fishing-stella-sw-xgc-spinning-reel.webp' },
-        { id: 105, name: 'Shimano Grappler Rod', price: 800, image: '/images/shimano-grappler-j.webp' },
-        { id: 108, name: 'Ocea PE Line', price: 300, image: '/images/shimano-pe4.webp' },
-        { id: 114, name: 'Fluoro Leader', price: 200, image: '/images/shimano-mono.webp' },
-        { id: 110, name: 'Flat Fall Jig', price: 250, image: '/images/shimano-flat-fall-jig.webp' }
-      ]
-    },
-    {
-      id: "jigging-kit",
-      title: "Pro Jigging Bundle",
-      subtitle: "Heavy-duty offshore jigging setup",
-      items: [
-        { id: 102, name: 'Daiwa Saltiga', price: 1100, image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp' },
-        { id: 115, name: 'Shimano SALTY ADVANCE SHORE JIGGING', price: 179.00, image: '/images/shimano-salty-advance-jigging-rod.webp' },
-      ]
-    }
-  ]
-
-  return bundleList.map(bundle => {
-    const original = bundle.items.reduce((sum, i) => sum + i.price, 0)
-    return {
-      ...bundle,
-      original,
-      price: Math.round(original * (1 - discount))
-    }
-  })
+const displayCatalogs = computed(() => {
+  return [...bundleCatalogs].filter(c => !c.expiresAt).reverse()
 })
 
+const timedCatalogs = computed(() => {
+  return bundleCatalogs.filter(c => c.expiresAt)
+})
 
-const tagColors = {
-  Sale: 'bg-red-500',
-  New: 'bg-green-500',
-  BestSeller: 'bg-coral-500',
-  New: 'bg-green-500'
+const formatTimer = (expiresAt) => {
+  const diff = Math.max(0, expiresAt - currentTime.value)
+  const h = Math.floor(diff / 3600000).toString().padStart(2, '0')
+  const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0')
+  const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0')
+  return `${h}:${m}:${s}`
 }
 
-const addBundleToCart = () => {
-  bundle.value.items.forEach(item => {
-    cartStore.addItem({
-      ...item,
-      isBundleItem: true,
-      bundleId: 'starter-kit'
-    }, 1)
-  })
+const addBundleToCart = (catalogId, itemIds) => {
+  const products = itemIds.map(id => bundleProducts[id])
+  cartStore.addBundle(catalogId, products)
 }
-
 
 const cartStore = useCartStore()
 const swiperModules = [Autoplay, EffectFade, Navigation, Pagination]
@@ -180,8 +148,79 @@ const startCounting = (entries) => {
   }
 }
 
-onMounted(async () => {
-  await nextTick()
+let timerUIInterval = null
+
+// Add Bundle Pricing each catalog
+const getBundlePricing = (catalog) => {
+  let oldPrice = 0;
+
+  catalog.items.forEach(id => {
+    if (bundleProducts[id]) {
+      oldPrice += bundleProducts[id].price;
+    }
+  });
+
+  const discountedPrice = oldPrice * (1 - catalog.discountRate);
+  const savedAmount = oldPrice - discountedPrice;
+
+  return {
+    oldPrice,
+    discountedPrice,
+    savedAmount
+  };
+};
+
+// onMounted(async () => {
+//   await nextTick()
+  
+//   observer = new IntersectionObserver(startCounting, { threshold: 0.5 })
+//   if (counterSection.value) observer.observe(counterSection.value)
+
+  
+//   scrollObserver = new IntersectionObserver((entries) => {
+//     entries.forEach(entry => {
+//       if (entry.isIntersecting) {
+//         entry.target.classList.add('is-visible')
+        
+//         scrollObserver.unobserve(entry.target)
+//       }
+//     })
+//   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' })
+
+  
+//   document.querySelectorAll('.reveal').forEach((el) => {
+//     scrollObserver.observe(el)
+//   })
+  
+//   window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  
+//   tiltCards.value.forEach(el => {
+//     VanillaTilt.init(el, {
+//       max: 10,
+//       speed: 400,
+//       glare: true,
+//       "max-glare": 0.2,
+//       scale: 1.03
+//     });
+//   });
+
+  
+//   tiltBanner.value.forEach(el => {
+//     VanillaTilt.init(el, {
+//       max: 6,
+//       speed: 400,
+//       glare: true,
+//       "max-glare": 0.15,
+//       scale: 1.02
+//     })
+//   })
+// })
+
+
+onMounted(() => {
+  timerUIInterval = setInterval(() => { currentTime.value = Date.now() }, 1000)
+  
   // Counters Observer
   observer = new IntersectionObserver(startCounting, { threshold: 0.5 })
   if (counterSection.value) observer.observe(counterSection.value)
@@ -201,33 +240,13 @@ onMounted(async () => {
   document.querySelectorAll('.reveal').forEach((el) => {
     scrollObserver.observe(el)
   })
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' })
-
-  // Tilt section
-  tiltCards.value.forEach(el => {
-    VanillaTilt.init(el, {
-      max: 10,
-      speed: 400,
-      glare: true,
-      "max-glare": 0.2,
-      scale: 1.03
-    });
-  });
-
-  // Promo banner
-  tiltBanner.value.forEach(el => {
-    VanillaTilt.init(el, {
-      max: 6,
-      speed: 400,
-      glare: true,
-      "max-glare": 0.15,
-      scale: 1.02
-    })
-  })
 })
 
+
+
+
 onUnmounted(() => {
+  if (timerUIInterval) clearInterval(timerUIInterval)
   if (observer) observer.disconnect()
   if (scrollObserver) scrollObserver.disconnect()
 })
@@ -286,9 +305,20 @@ onUnmounted(() => {
       </div>
     </section>
 
+
+
+    
+
+
+
+
+
+
+
+
     <!-- Categories -->
     <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
       <!-- Header -->
       <div class="text-center mb-14 reveal reveal-fade-up">
@@ -313,7 +343,7 @@ onUnmounted(() => {
         }"
         :autoplay="false"
         :loop="true"
-        :navigation="true"
+        :navigation="{ prevEl: '.swiper-button-prev-category', nextEl: '.swiper-button-next-category' }"
         class="pb-10"
       >
         <!-- For loop -->
@@ -389,14 +419,34 @@ onUnmounted(() => {
             </router-link>
           </div>
         </swiper-slide>
-        <!-- for loop -->
-
       </swiper> 
-      <!-- grid -->
-
-
+      <button class="swiper-button-prev-category absolute top-3/4 left-0 -translate-y-1/2 -mt-8 
+        bg-black/80 backdrop-blur-md border border-white/10 
+        shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+        w-16 h-16 rounded-full flex items-center justify-center 
+        text-white hover:text-red-400 
+        hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+        transition-all duration-300 z-10 focus:outline-none 
+        hover:scale-110 active:scale-95
+        ">
+        <ChevronLeft class="w-8 h-8" />
+      </button>
+      <button class="swiper-button-next-category absolute top-3/4 right-0 -translate-y-1/2 -mt-8 
+        bg-black/80 backdrop-blur-md border border-white/10 
+        shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+        w-16 h-16 rounded-full flex items-center justify-center 
+        text-white hover:text-red-400 
+        hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+        transition-all duration-300 z-10 focus:outline-none 
+        hover:scale-110 active:scale-95
+        ">
+        <ChevronRight class="w-8 h-8" />
+      </button>
     </div>
   </section>
+
+
+
 
     <!-- Featured Products -->
     <section class="py-10 bg-white">
@@ -432,7 +482,6 @@ onUnmounted(() => {
                 <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
                 <div 
                 class="absolute top-4 left-4 bg-coral-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm"
-                :class="tagColors[product.tagName]"
                 >
                   {{ product.tagName }}
                 </div>
@@ -508,9 +557,285 @@ onUnmounted(() => {
     </section>
 
 
-    <section class="py-16 bg-gray-50">
+
+
+    <!-- Bundle Discount Catalogs -->
+    <section class="py-20 bg-gray-900 text-white overflow-hidden relative">
+      <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-gray-900 to-black pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">Exclusive Bundles</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-lg">Save big with our carefully curated premium setups. Grab a bundle and hit the water.</p>
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center">
+          <swiper 
+            :modules="swiperModules"
+            :breakpoints="{
+              0: { slidesPerView: 1, spaceBetween: 8 },     // mobile
+              768: { slidesPerView: 2, spaceBetween: 20 },    // tablet
+              1024: { slidesPerView: 3, spaceBetween: 25 },    // up
+            }"
+            :navigation="{ prevEl: '.swiper-button-prev-bundledexclusive', nextEl: '.swiper-button-next-bundledexclusive' }"
+            :speed="1009"
+            :autoplay="false"
+            :loop="true"
+            class="w-full"
+          >
+            <swiper-slide v-for="catalog in displayCatalogs" 
+              :key="catalog.id"
+              class="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8 shadow-2xl transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full"
+              :class="bundleMarketing[catalog.id]?.shadowClass || ''"
+            >
+              <div 
+                class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -z-10 transition-colors"
+                :class="bundleMarketing[catalog.id]?.bgClass || 'bg-red-500/20 group-hover:bg-red-500/30'"
+              >
+              </div>
+              
+              
+              <div class="flex-1 flex flex-col justify-center min-w-[200px]">
+                <div class="flex justify-between items-start mb-4 group">
+                  <div class="text-coral-500 font-bold tracking-widest uppercase mb-2 text-sm flex items-center gap-2">
+                    <Star class="w-4 h-4 fill-current" /> {{ catalog.discountRate * 100 }}% Bundle Discount
+                  </div>
+                </div>
+
+                <h3 class="text-2xl sm:text-2xl text-gray-400 font-extrabold text-white mb-4 leading-tight">
+                {{ catalog.title }}
+                </h3>
+                <p 
+                  class="mb-2 text-gray-300 leading-relaxed line-clamp-2 min-h-[3.5rem]"
+
+                >
+                  {{ bundleMarketing[catalog.id]?.desc || 'A premium selection of top-quality tackle.' }}
+                </p>
+                <div class="mb-6">
+                  
+                    <div class="grid grid-cols-2 gap-1 items-center">
+                      
+                      <!-- Old Price -->
+                      <span class="text-gray-400 line-through text-sm">
+                        ₱{{ getBundlePricing(catalog).oldPrice.toFixed(2) }}
+                      </span>
+
+                      <!-- Discounted Price -->
+                      <span class="text-2xl font-extrabold text-white">
+                        ₱{{ getBundlePricing(catalog).discountedPrice.toFixed(2) }}
+                      </span>
+
+                      <!-- Saved Amount -->
+                      <span class="text-green-400 text-sm font-semibold">
+                        You save ₱{{ getBundlePricing(catalog).savedAmount.toFixed(2) }}
+                      </span>
+
+                    </div>
+                </div>
+                
+                <button @click="addBundleToCart(catalog.id, catalog.items)" 
+                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                        :class="bundleMarketing[catalog.id]?.btnClass || 'bg-red-500 hover:bg-red-400'">
+                  <ShoppingBag class="w-5 h-5 mr-2 shrink-0" /> Add Flash Bundle
+                </button>
+                
+              </div>
+            
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-3 w-full max-w-[320px] mx-auto mt-auto pt-5">
+                <div v-for="(id, idx) in catalog.items" :key="idx" class="w-full aspect-square bg-white/10 rounded-2xl p-2 border border-white/20 relative group/item hover:-translate-y-2 transition-transform duration-300 cursor-pointer shadow-lg backdrop-blur-sm flex items-center justify-center shrink-0">
+                  <template v-if="bundleProducts[id]">
+                    <img :src="bundleProducts[id].image" :alt="bundleProducts[id].name" class="w-full h-full object-contain filter brightness-110">
+                  </template>
+                  <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] font-bold py-1 px-3 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                    <template v-if="bundleProducts[id]">
+                    {{ bundleProducts[id].name }}
+                    </template>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+          <button class="swiper-button-prev-bundledexclusive absolute top-3/5 left-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronLeft class="w-8 h-8" />
+          </button>
+          <button class="swiper-button-next-bundledexclusive absolute top-3/5 right-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronRight class="w-8 h-8" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Flash Sale Timer Bundles -->
+    <section v-if="timedCatalogs.length > 0" class="py-20 bg-gray-900 text-white overflow-hidden relative border-t border-white/5 reveal reveal-fade-up hidden">
+      <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900 via-gray-900 to-black pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <div class="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-red-500/10 border border-red-500/30 text-red-500 font-bold mb-4 animate-[pulse_2s_ease-in-out_infinite] shadow-[0_0_15px_rgba(239,68,68,0.2)]">
+            <Clock class="w-5 h-5" /> FLASH SALE BUNDLES
+          </div>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">Ending Soon!</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-lg">Hurry and grab these bundles before their timer hits zero.</p>
+          <div class="w-24 h-1.5 bg-gradient-to-r from-red-500 to-orange-500 mx-auto rounded-full mt-6"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center">
+          <swiper 
+            :modules="swiperModules"
+            :breakpoints="{
+              0: { slidesPerView: 1, spaceBetween: 8 },     // mobile
+              768: { slidesPerView: 2, spaceBetween: 10 },    // tablet
+              1024: { slidesPerView: 3, spaceBetween: 25 },    // up
+            }"
+            :navigation="{ prevEl: '.swiper-button-prev-bundledend', nextEl: '.swiper-button-next-bundledend' }"
+            :speed="1500"
+            :autoplay="false"
+            :loop="true"
+            class="w-full"
+          >
+
+            <swiper-slide v-for="catalog in timedCatalogs" 
+              :key="catalog.id"
+              class="bg-white/5 backdrop-blur-md rounded-3xl border p-8 transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full relative"
+              :class="[
+                catalog.expiresAt > currentTime ? (bundleMarketing[catalog.id]?.shadowClass || 'hover:shadow-[0_0_50px_rgba(239,68,68,0.3)]') : 'opacity-60 grayscale border-gray-700 shadow-none',
+                catalog.expiresAt > currentTime ? 'border-red-500/20 shadow-2xl' : ''
+              ]"
+            >
+              <div 
+                v-if="catalog.expiresAt > currentTime"
+                class="pointer-events-none"
+              >
+                <div 
+                  class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -z-10 transition-colors"
+                  :class="bundleMarketing[catalog.id]?.bgClass || 'bg-red-500/20 group-hover:bg-red-500/30'"
+                ></div>
+              </div>
+
+              <div class="flex-1 flex flex-col justify-center min-w-[200px]">
+                <div class="flex justify-between items-start mb-4 group">
+                  <div class="font-bold tracking-widest uppercase text-sm flex items-center gap-2" :class="catalog.expiresAt > currentTime ? 'text-red-400' : 'text-gray-500'">
+                    <Star class="w-4 h-4 fill-current" :class="catalog.expiresAt > currentTime ? 'animate-pulse' : ''" /> {{ catalog.discountRate * 100 }}% Bundle Discount
+                  </div>
+                  <!-- Countdown Timer or Expired Message -->
+                  <div v-if="catalog.expiresAt > currentTime" class="bg-red-500/10 border border-red-500/50 rounded-lg px-3 py-1 flex items-center gap-2 text-white font-mono font-bold text-lg shadow-[0_0_15px_rgba(239,68,68,0.3)]">
+                    <Clock class="w-4 h-4 text-red-400 animate-pulse" />
+                    {{ formatTimer(catalog.expiresAt) }}
+                  </div>
+                  <div v-else class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 flex items-center gap-2 text-gray-400 font-bold text-xs sm:text-sm">
+                    This bundle offer has ended.
+                  </div>
+                </div>
+
+                <h3 class="text-2xl sm:text-2xl font-extrabold text-white mb-4 leading-tight" :class="catalog.expiresAt <= currentTime ? 'text-gray-400' : ''">{{ catalog.title }}</h3>
+                <p 
+                  class="mb-2 leading-relaxed line-clamp-2 min-h-[3.5rem]"
+                  :class="catalog.expiresAt > currentTime ? 'text-gray-300' : 'text-gray-500'"
+                >
+                  {{ bundleMarketing[catalog.id]?.desc || 'A premium selection of top-quality tackle.' }}
+                </p>
+                <div class="mb-6">
+                  <template v-if="catalog.expiresAt > currentTime">
+                    <div class="grid grid-cols-2 gap-1 items-center">
+                      
+                      <!-- Old Price -->
+                      <span class="text-gray-400 line-through text-sm">
+                        ₱{{ getBundlePricing(catalog).oldPrice.toFixed(2) }}
+                      </span>
+
+                      <!-- Discounted Price -->
+                      <span class="text-2xl font-extrabold text-white">
+                        ₱{{ getBundlePricing(catalog).discountedPrice.toFixed(2) }}
+                      </span>
+
+                      <!-- Saved Amount -->
+                      <span class="text-green-400 text-sm font-semibold">
+                        You save ₱{{ getBundlePricing(catalog).savedAmount.toFixed(2) }}
+                      </span>
+
+                    </div>
+                  </template>
+
+                  <template v-else>
+                    <span class="text-gray-500 text-sm">Pricing unavailable</span>
+                  </template>
+                </div>
+                
+                <button v-if="catalog.expiresAt > currentTime" @click="addBundleToCart(catalog.id, catalog.items)" 
+                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                        :class="bundleMarketing[catalog.id]?.btnClass || 'bg-red-500 hover:bg-red-400'">
+                  <ShoppingBag class="w-5 h-5 mr-2 shrink-0" /> Add Flash Bundle
+                </button>
+                <button v-else disabled
+                        class="w-full text-gray-500 font-bold py-4 px-6 rounded-xl bg-gray-800/50 border border-gray-700 flex items-center justify-center text-lg cursor-not-allowed">
+                  Offer Expired
+                </button>
+              </div>
+            
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-3 w-full max-w-[320px] mx-auto mt-auto pt-5">
+                <div v-for="(id, idx) in catalog.items" :key="idx" class="w-full aspect-square bg-white/10 rounded-2xl p-2 border border-white/20 relative group/item hover:-translate-y-2 transition-transform duration-300 cursor-pointer shadow-lg backdrop-blur-sm flex items-center justify-center shrink-0">
+                  <template v-if="bundleProducts[id]">
+                    <img :src="bundleProducts[id].image" :alt="bundleProducts[id].name" class="w-full h-full object-contain filter brightness-110">
+                  </template>
+                  <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] font-bold py-1 px-3 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                    <template v-if="bundleProducts[id]">
+                    {{ bundleProducts[id].name }}
+                    </template>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+          <button class="swiper-button-prev-bundledend absolute top-3/4 left-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronLeft class="w-8 h-8" />
+          </button>
+          <button class="swiper-button-next-bundledend absolute top-3/4 right-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronRight class="w-8 h-8" />
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+    <!-- <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- HEADER -->
+      
       <div class="text-center mb-10 sm:mb-14 reveal reveal-fade-up px-4">
         <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
           Ultimate Fishing Bundle
@@ -523,7 +848,7 @@ onUnmounted(() => {
         <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
       </div>
 
-      <!-- TILT CONTAINER (IMPORTANT FIX) -->
+      
       <swiper
         :modules="swiperModules"
         :slidesPerView="1"
@@ -544,17 +869,17 @@ onUnmounted(() => {
                   text-white shadow-xl
                   will-change-transform transform-gpu">
 
-            <!-- Glow -->
+            
             <div class="absolute inset-0 bg-gradient-to-r 
                         from-coral-500/20 via-transparent to-blue-500/20"></div>
 
-            <!-- CONTENT -->
+            
             <div class="relative flex flex-col lg:flex-row 
                         items-start lg:items-center 
                         justify-between gap-6 sm:gap-8 lg:gap-10 
                         p-5 sm:p-8 md:p-10">
 
-              <!-- LEFT -->
+              
               <div class="w-full lg:max-w-xl">
 
                 <span class="inline-block mb-3 sm:mb-4 
@@ -564,16 +889,16 @@ onUnmounted(() => {
                 </span>
 
                 <h3 class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight">
-                  <!-- Complete Fishing Setup -->
+                  
                   {{ bundle.title }}
                 </h3>
 
                 <p class="text-gray-300 mt-2 sm:mt-3 text-sm sm:text-base">
-                  <!-- Reel + Rod + Braided Line + Mono Line + Jigs — everything you need in one kit. -->
+                  
                   {{ bundle.subtitle }}
                 </p>
 
-                <!-- PRICE -->
+                
                 <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
 
                   <span class="text-gray-400 line-through text-sm sm:text-lg">
@@ -593,7 +918,7 @@ onUnmounted(() => {
 
                 </div>
 
-                <!-- CTA -->
+                
                 <button
                   @click="bundle.items.forEach(item => cartStore.addItem(item, 1))"
                   class="mt-5 sm:mt-6 w-full sm:w-auto 
@@ -607,7 +932,7 @@ onUnmounted(() => {
 
               </div>
 
-              <!-- RIGHT (PRODUCTS - NO OVERFLOW) -->
+              
               <div class="w-full lg:w-auto flex justify-center lg:justify-end shrink-0">
 
                 <div class="grid grid-cols-3 sm:grid-cols-5 lg:flex gap-3 sm:gap-4">
@@ -615,7 +940,7 @@ onUnmounted(() => {
                   <div v-for="(item, i) in bundle.items" :key="i"
                       class="relative group flex flex-col items-center">
 
-                    <!-- ICON -->
+                    
                     <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 
                                 bg-white rounded-lg sm:rounded-xl shadow-md 
                                 flex items-center justify-center p-2
@@ -626,7 +951,7 @@ onUnmounted(() => {
 
                     </div>
 
-                    <!-- LABEL (desktop only) -->
+                    
                     <span class="hidden lg:block absolute bottom-full mb-2 left-1/2 
                                 -translate-x-1/2 whitespace-nowrap text-xs 
                                 text-white bg-black/80 px-2 py-1 rounded 
@@ -642,19 +967,23 @@ onUnmounted(() => {
 
             </div>
 
-            <!-- SHINE -->
+            
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
               <div class="absolute -left-1/2 top-0 w-1/2 h-full 
                           bg-white/10 skew-x-12 animate-shine"></div>
             </div>
 
           </div>
-          <!-- tilt banner subcontainer -->
         </swiper-slide>
       </swiper>
-      <!-- tilt container -->
       </div>
-    </section>
+    </section> -->
+
+
+
+
+
+
 
 
 
@@ -696,6 +1025,11 @@ onUnmounted(() => {
       </div>
 
     </section>
+
+
+
+
+
 
 
     <!-- Partners Carousel -->

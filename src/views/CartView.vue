@@ -9,7 +9,7 @@ const isEmpty = computed(() => cartStore.items.length === 0)
 </script>
 
 <template>
-  <div class="cart-page pt-35 min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="cart-page min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-5xl mx-auto">
       <h1 class="text-3xl font-extrabold text-gray-900 mb-8 tracking-tight">Shopping Cart</h1>
 
@@ -27,54 +27,49 @@ const isEmpty = computed(() => cartStore.items.length === 0)
       <div v-else class="flex flex-col lg:flex-row gap-8">
         <!-- Main Cart items -->
         <div class="lg:w-2/3 space-y-4">
-          <div v-for="item in cartStore.items" :key="item.id" class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 relative group transition-all hover:shadow-md">
-            <button @click="cartStore.removeItem(item.id, item.bundleId)" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 bg-gray-50 rounded-full group-hover:bg-red-50 group-hover:text-red-500">
+          <div v-for="item in cartStore.items" :key="item.cartItemId" class="bg-white p-4 sm:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 relative group transition-all hover:shadow-md">
+            <button @click="cartStore.removeItem(item.cartItemId)" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition-colors p-2 bg-gray-50 rounded-full group-hover:bg-red-50 group-hover:text-red-500">
               <Trash2 class="w-5 h-5" />
             </button>
             <div class="w-full sm:w-32 h-32 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-100">
               <img :src="item.image" :alt="item.name" class="h-full object-contain mix-blend-multiply">
-              <div v-if="item.bundleId"
-                class="absolute top-2 left-2 bg-blue-500 text-white text-[10px] px-2 py-1 rounded-full">
-                Part of {{ item.bundleName }}
-              </div>
-              <div v-else
-                class="text-[10px] text-gray-400">
-                Individual Item
-              </div>
             </div>
             <div class="flex-1 w-full text-center sm:text-left pt-2 sm:pt-0">
-              <div class="text-xs font-bold text-coral-500 uppercase tracking-widest mb-1">{{ item.category }}</div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2 truncate pr-8">{{ item.name }}</h3>
-              <div class="flex flex-col gap-1 mt-1">
-  
-                <div v-if="cartStore.bundleDiscount > 0 && item.bundleId"
-                    class="inline-flex items-center text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md w-fit">
-                  🎁 Bundle Item (Discount Applied)
-                </div>
-
-                <div v-if="item.bundleId"
-                    class="text-[10px] text-gray-400 uppercase tracking-widest">
-                  Fishing Starter Kit
-                </div>
-
+              <div class="flex items-center justify-center sm:justify-start gap-3 mb-1">
+                <div class="text-xs font-bold text-coral-500 uppercase tracking-widest">{{ item.category }}</div>
+                <div v-if="item.tag === 'Bundled Item'" class="text-[10px] font-bold text-white bg-blue-500 px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">{{ item.bundleLabel }}</div>
+                <div v-else class="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Individual</div>
               </div>
-              <p class="text-2xl font-extrabold text-gray-900 mb-4">₱{{ item.price.toFixed(2) }}</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 truncate pr-8">{{ item.name }}</h3>
+              <p class="text-2xl font-extrabold text-gray-900 mb-4">${{ item.price.toFixed(2) }}</p>
               
               <div class="flex items-center justify-center sm:justify-start">
                 <div class="flex items-center border border-gray-200 rounded-lg p-1 bg-white inline-flex w-32 justify-between">
-                  <button @click="cartStore.updateQuantity(item.id, item.quantity - 1, item.bundleId)" class="p-2 text-gray-500 hover:text-black transition-colors bg-gray-50 rounded-md"><Minus class="w-4 h-4" /></button>
+                  <button @click="item.tag === 'Bundled Item' && item.quantity === 1 ? null : cartStore.updateQuantity(item.cartItemId, item.quantity - 1)" class="p-2 text-gray-500 hover:text-black transition-colors bg-gray-50 rounded-md" :class="{'opacity-50 cursor-not-allowed': item.tag === 'Bundled Item' && item.quantity === 1}"><Minus class="w-4 h-4" /></button>
                   <span class="font-extrabold text-gray-900 px-2">{{ item.quantity }}</span>
-                  <button @click="cartStore.updateQuantity(item.id, item.quantity + 1, item.bundleId)" class="p-2 text-gray-500 hover:text-black transition-colors bg-gray-50 rounded-md"><Plus class="w-4 h-4" /></button>
+                  <button v-if="item.tag === 'Individual'" @click="cartStore.updateQuantity(item.cartItemId, item.quantity + 1)" class="p-2 text-gray-500 hover:text-black transition-colors bg-gray-50 rounded-md"><Plus class="w-4 h-4" /></button>
+                  <button v-else @click="cartStore.addItem(item, 1)" class="p-2 text-gray-500 hover:text-black transition-colors bg-gray-50 rounded-md"><Plus class="w-4 h-4" /></button>
                 </div>
               </div>
             </div>
-          
-
           </div>
-          <div v-for="(bundle, id) in cartStore.groupedBundles" :key="id"
-              class="text-xs text-gray-500">
-            {{ bundle.name }}:
-            {{ bundle.items.reduce((s, i) => s + i.quantity, 0) }} items
+
+          <!-- Active Bundle Discounts -->
+          <div v-if="cartStore.activeBundleDiscounts.length > 0" class="mt-8 flex flex-col gap-3">
+             <div v-for="(discount, idx) in cartStore.activeBundleDiscounts" :key="idx" class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-4 sm:p-5 flex items-center justify-between shadow-sm">
+                <div class="flex items-center gap-4">
+                   <div class="bg-blue-500 text-white p-2.5 rounded-xl shadow-md">
+                      <Star class="w-5 h-5 fill-current" />
+                   </div>
+                   <div>
+                      <div class="font-bold text-blue-900 text-lg">{{ discount.label }}</div>
+                      <div class="text-sm font-medium text-blue-700/80">Bundle discount automatically applied</div>
+                   </div>
+                </div>
+                <div class="font-extrabold text-blue-600 text-xl bg-white px-4 py-2 rounded-xl shadow-sm border border-blue-100">
+                   -${{ discount.amount.toFixed(2) }}
+                </div>
+             </div>
           </div>
         </div>
 
@@ -83,50 +78,23 @@ const isEmpty = computed(() => cartStore.items.length === 0)
           <div class="bg-white rounded-2xl border border-gray-100 shadow-xl p-6 lg:p-8 sticky top-24">
             <h3 class="text-xl font-bold text-gray-900 mb-6">Order Summary</h3>
             <div class="space-y-4 mb-6">
-
               <div class="flex justify-between text-gray-600">
                 <span>Subtotal ({{ cartStore.totalItemsCount }} items)</span>
-                <span class="font-bold text-gray-900">
-                  ₱{{ cartStore.subtotal.toFixed(2) }}
-                </span>
+                <span class="font-bold text-gray-900">${{ cartStore.subtotal.toFixed(2) }}</span>
               </div>
-
               <div class="flex justify-between text-gray-600">
                 <span>Shipping</span>
-                <span class="text-green-600 font-sm">Enter shipping address</span>
+                <span class="text-green-600 font-bold">Free</span>
               </div>
-
-              <!-- Bundle Discount -->
-              <div v-if="cartStore.bundleDiscount > 0"
-                  class="flex justify-between text-blue-600">
-                <span>🎁 Bundle Discount</span>
-                <span>-₱{{ cartStore.bundleDiscount.toFixed(2) }}</span>
+              <div v-if="cartStore.activeBundleDiscounts.length > 0" class="flex justify-between text-blue-600 pt-2 border-t border-gray-50">
+                <span class="font-medium">Bundle Discounts</span>
+                <span class="font-bold">-${{ cartStore.activeBundleDiscounts.reduce((a,b)=>a+b.amount,0).toFixed(2) }}</span>
               </div>
-
-              <!-- Promo Code -->
-              <div v-if="cartStore.promoCode"
-                  class="flex justify-between text-green-600 bg-green-50 border border-green-100 px-4 py-3 rounded-lg">
-                
-                <div class="flex flex-col">
-                  <span class="font-bold">
-                    Promo ({{ cartStore.promoCode }})
-                  </span>
-                  <span class="text-xs text-green-500">
-                    {{ (cartStore.discountRate * 100).toFixed(0) }}% off applied
-                  </span>
-                </div>
-
-                <span class="font-bold">
-                  -₱{{ cartStore.discountAmount.toFixed(2) }}
-                </span>
-              </div>
-
             </div>
-
             <div class="border-t border-gray-100 pt-4 mb-8">
               <div class="flex justify-between items-center">
                 <span class="text-lg font-bold text-gray-900">Total</span>
-                <span class="text-3xl font-extrabold text-coral-500">₱{{ cartStore.total.toFixed(2) }}</span>
+                <span class="text-3xl font-extrabold text-coral-500">${{ cartStore.total.toFixed(2) }}</span>
               </div>
             </div>
             <router-link to="/checkout" class="w-full bg-coral-500 hover:bg-coral-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-coral-500/30 transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95 text-lg">
