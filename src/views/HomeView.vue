@@ -1031,24 +1031,38 @@ onUnmounted(() => {
       <div class="absolute inset-0 bg-black/40"></div>
 
       <!-- Content (LEFT-BOTTOM) -->
-      <div class="absolute bottom-0 left-0 w-full px-4 py-4 md:py-8 sm:px-6 lg:px-8 z-10 reveal reveal-fade-up">
+      <div class="absolute bottom-0 left-0 w-full px-4 py-4 md:py-8 lg:py-25 sm:px-6 lg:px-8 z-10 reveal reveal-fade-up">
         
         <div class="max-w-7xl mx-auto">
 
-          <p class="text-gray-200 text-sm sm:text-base md:text-lg mb-3">
+          <p class="text-white text-sm sm:text-base md:text-lg mb-3">
             Premium gear built to handle the ocean’s toughest battles.
           </p>
 
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-5 leading-tight">
-            CAST HARDER. FIGHT STRONGER.
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+            <span class=" text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+              CAST HARDER.
+            </span>
+            <span class=" text-coral-400 
+                        drop-shadow-[0_0_20px_rgba(255,127,80,0.6)]
+                        [text-shadow:0_2px_10px_rgba(0,0,0,0.7)]">
+              FIGHT STRONGER.
+            </span>
           </h2>
 
           <router-link 
             to="/shop"
-            class="inline-flex items-center px-6 sm:px-8 py-3 bg-coral-500 hover:bg-coral-600 text-white font-semibold rounded-full transition shadow-lg"
-          >
+            class="inline-flex items-center gap-3 px-8 py-3 lg:py-4 
+                  bg-coral-500 hover:bg-coral-600 
+                  text-white font-bold rounded-full 
+                  transition-all duration-300 
+                  shadow-[0_0_30px_rgba(255,127,80,0.4)] 
+                  hover:shadow-[0_0_50px_rgba(255,127,80,0.7)]
+                  hover:scale-105 active:scale-95"
+            >
             Shop All
-          </router-link>
+          <ArrowRight class="w-5 h-5 transition-transform group-hover:translate-x-1" />
+        </router-link>
 
         </div>
 
@@ -1058,24 +1072,14 @@ onUnmounted(() => {
 
 
 
-
-
-
-
-    
-
-
-
-
-    
-
-    
-
     <!-- Customer Reviews -->
     <section class="py-5 lg:py-[50px] bg-gray-50 overflow-hidden ">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-5 reveal reveal-fade-up">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">What Anglers Say</h2>
+          <p class="text-gray-500 my-3">
+            Trusted by 1,000+ anglers
+          </p>
           <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full"></div>
         </div>
         
