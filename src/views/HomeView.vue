@@ -1080,7 +1080,7 @@ onUnmounted(() => {
           <p class="text-gray-500 my-3">
             Trusted by 1,000+ anglers
           </p>
-          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full"></div>
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
         </div>
         
         <div class="relative max-w-7xl mx-auto px-0 md:px-24 lg:px-20 reveal reveal-fade-up" style="transition-delay: 200ms;">
