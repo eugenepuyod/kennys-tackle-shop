@@ -657,7 +657,7 @@ onUnmounted(() => {
               </div>
             </swiper-slide>
           </swiper>
-          <button class="swiper-button-prev-bundledexclusive absolute top-3/5 left-0 -translate-y-1/2 -mt-8 
+          <button class="swiper-button-prev-bundledexclusive absolute top-4/6 left-0 -translate-y-1/2 -mt-8 
             bg-black/80 backdrop-blur-md border border-white/10 
             shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
             w-16 h-16 rounded-full flex items-center justify-center 
@@ -667,7 +667,7 @@ onUnmounted(() => {
             hover:scale-110 active:scale-95">
             <ChevronLeft class="w-8 h-8" />
           </button>
-          <button class="swiper-button-next-bundledexclusive absolute top-3/5 right-0 -translate-y-1/2 -mt-8 
+          <button class="swiper-button-next-bundledexclusive absolute top-4/6 right-0 -translate-y-1/2 -mt-8 
             bg-black/80 backdrop-blur-md border border-white/10 
             shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
             w-16 h-16 rounded-full flex items-center justify-center 
