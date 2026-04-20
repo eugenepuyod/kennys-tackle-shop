@@ -123,7 +123,7 @@ onUnmounted(() => {
                   :key="link.name" 
                   :to="link.path"
                   class="font-medium relative group px-2 py-1 transition-colors"
-                  :class="$route.path === link.path ? 'text-coral-500' : 'text-white/80 hover:text-coral-500'"
+                  :class="$route.path === link.path ? 'text-coral-500' : 'text-white hover:text-coral-500'"
                 >
                   {{ link.name }}
                   <span class="absolute bottom-0 left-0 h-0.5 bg-coral-500 transition-all duration-300" :class="$route.path === link.path ? 'w-full' : 'w-0 group-hover:w-full'"></span>
