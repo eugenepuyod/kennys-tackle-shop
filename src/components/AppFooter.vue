@@ -26,36 +26,38 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-7 pb-20 pt-10 bg-gray-100">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-      <div 
-        v-for="(service, idx) in services" 
-        :key="service.id"
-        class="col-span-1 flex items-first p-1 reveal reveal-slide-left"
-        :style="{ transitionDelay: `${idx * 150}ms` }"
-        >
-        <component 
-          :is="service.icon" 
-          class="w-8 h-8 text-coral-500 mr-3 shrink-0" 
-        />
+  <section class="w-full bg-gray-100">
+    <div class="max-w-7xl mx-auto px-7 pb-20 pt-10 ">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
         <div 
-          :class="[
-            'px-1',
-            idx !== services.length - 1 ? 'border-r border-gray-200' : ''
-          ]"
-        >
-          <h3 class="text-gray-900 text-lg font-medium">{{ service.title}}</h3>
-          <p class="text-sm text-gray-500 font-light py-3">{{ service.description }}</p>
-          <router-link 
-            :to="service.links"
-            class="inline-block bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap"
+          v-for="(service, idx) in services" 
+          :key="service.id"
+          class="col-span-1 flex items-first p-1 reveal reveal-slide-left"
+          :style="{ transitionDelay: `${idx * 150}ms` }"
           >
-            Learn More
-          </router-link>
+          <component 
+            :is="service.icon" 
+            class="w-8 h-8 text-coral-500 mr-3 shrink-0" 
+          />
+          <div 
+            :class="[
+              'px-1',
+              idx !== services.length - 1 ? 'border-r border-gray-200' : ''
+            ]"
+          >
+            <h3 class="text-gray-900 text-lg font-medium">{{ service.title}}</h3>
+            <p class="text-sm text-gray-500 font-light py-3">{{ service.description }}</p>
+            <router-link 
+              :to="service.links"
+              class="inline-block bg-coral-500 hover:bg-coral-600 text-white font-bold py-2 px-5 rounded-xl shadow-lg shadow-coral-500/30 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap"
+            >
+              Learn More
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <footer class="relative text-white pt-16 pb-8 border-t-[8px] border-coral-500 bg-gray-900 overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src="/images/deep_ocean_footer.png" alt="Ocean Background" class="w-full h-full object-cover opacity-80" />

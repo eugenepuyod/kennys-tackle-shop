@@ -236,7 +236,7 @@ onUnmounted(() => {
 <template>
   <div class="home-page overflow-hidden">
     <!-- Hero Banner -->
-    <section class="h-[770px] sm:h-[680px] md:h-[650px] relative overflow-hidden">
+    <section class="h-[770px] sm:h-[680px] md:h-[650px] lg:h-[900px] relative overflow-hidden">
       <swiper 
         :modules="swiperModules"
         :effect="'fade'"
@@ -659,7 +659,7 @@ onUnmounted(() => {
 
 
     <!-- FULL IMAGE SECTION (LEFT-BOTTOM CONTENT) -->
-    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden reveal reveal-fade-up">
+    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[800px] overflow-hidden reveal reveal-fade-up">
 
       <!-- Background Image -->
       <img 
