@@ -982,7 +982,37 @@ onUnmounted(() => {
 
 
 
-
+    <!-- Partners Carousel -->
+    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
+        
+        <div class="mt-8 relative group">
+          <swiper 
+            :modules="swiperModules"
+            :slidesPerView="2"
+            :spaceBetween="30"
+            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 5 } }"
+            :autoplay="{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }"
+            :speed="2000"
+            :loop="true"
+            :freeMode="true"
+            :allowTouchMove="false"
+            class="brands-swiper pb-4"
+          >
+            <swiper-slide 
+              v-for="(partner, i) in partners" 
+              :key="i" 
+              class="flex items-center justify-center py-4"
+            >
+              <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
+                <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+    </section>
 
 
 
@@ -1032,75 +1062,17 @@ onUnmounted(() => {
 
 
 
-    <!-- Partners Carousel -->
-    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
-        
-        <div class="mt-8 relative group">
-          <swiper 
-            :modules="swiperModules"
-            :slidesPerView="2"
-            :spaceBetween="30"
-            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 5 } }"
-            :autoplay="{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }"
-            :speed="2000"
-            :loop="true"
-            :freeMode="true"
-            :allowTouchMove="false"
-            class="brands-swiper pb-4"
-          >
-            <swiper-slide 
-              v-for="(partner, i) in partners" 
-              :key="i" 
-              class="flex items-center justify-center py-4"
-            >
-              <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
-                <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-      </div>
-    </section>
+    
 
 
 
 
     
 
-    <!-- Animated Counters -->
-    <section ref="counterSection" class="mb-10 py-20 bg-gray-900 relative reveal reveal-fade-up">
-      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Users class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.clients }}{{ counters.clients === 1000 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Happy Clients</div>
-          </div>
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Star class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.reviews }}{{ counters.reviews === 500 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">5-Star Reviews</div>
-          </div>
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Award class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.brands }}{{ counters.brands === 50 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Premium Brands</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <!-- Customer Reviews -->
-    <section class="py-5 bg-gray-50 overflow-hidden">
+    <section class="py-5 lg:py-[50px] bg-gray-50 overflow-hidden ">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-5 reveal reveal-fade-up">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">What Anglers Say</h2>
@@ -1142,6 +1114,38 @@ onUnmounted(() => {
           <button class="swiper-button-next-custom absolute top-1/2 right-0 -translate-y-1/2 -mt-8 bg-white border border-gray-100 shadow-xl w-16 h-16 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:shadow-2xl transition-all z-10 focus:outline-none ring-offset-2 hover:ring-2 hover:ring-coral-500/20">
             <ChevronRight class="w-8 h-8" />
           </button>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Animated Counters -->
+    <section ref="counterSection" class="mb-10 py-20 bg-gray-900 relative reveal reveal-fade-up">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Users class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.clients }}{{ counters.clients === 1000 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Happy Clients</div>
+          </div>
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Star class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.reviews }}{{ counters.reviews === 500 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">5-Star Reviews</div>
+          </div>
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Award class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.brands }}{{ counters.brands === 50 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Premium Brands</div>
+          </div>
         </div>
       </div>
     </section>
