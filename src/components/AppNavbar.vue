@@ -74,17 +74,17 @@ onUnmounted(() => {
 
             <div class="flex items-center p-1">
               <Tag class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-              <span class="text-[12px] font-normal text-gray-400">Lowest Prices</span>
+              <span class="text-[12px] font-normal text-white">Lowest Prices</span>
             </div>
 
             <div class="flex items-center p-1 sm:justify-center">
               <ShieldCheck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-              <span class="text-[12px] font-normal text-gray-400">1 Year Warranty</span>
+              <span class="text-[12px] font-normal text-white">1 Year Warranty</span>
             </div>
 
             <div class="flex items-center p-1 col-span-2 md:col-span-1 sm:justify-end">
               <Truck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-              <span class="text-[12px] font-normal text-gray-400">Free Shipping over ₱3,000.00</span>
+              <span class="text-[12px] font-normal text-white">Free Shipping over ₱3,000.00</span>
             </div>
 
           </div>
@@ -138,22 +138,22 @@ onUnmounted(() => {
 
         <!-- Right Icons -->
         <div class="flex items-center space-x-6">
-          <router-link to="/login" class="text-white/80 hover:text-coral-500 relative group transition-colors">
+          <router-link to="/login" class="text-white hover:text-coral-500 relative group transition-colors">
             <User class="w-6 h-6" />
           </router-link>
 
-          <router-link to="/cart" class="text-white/80 hover:text-coral-500 relative group transition-colors">
+          <router-link to="/cart" class="text-white hover:text-coral-500 relative group transition-colors">
             <ShoppingCart class="w-6 h-6" />
             <span 
               v-if="cartStore.totalItemsCount > 0"
-              class="absolute -top-2 -right-2 bg-coral-500 text-white/80 text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center animate-bounce shadow-md"
+              class="absolute -top-2 -right-2 bg-coral-500 text-white text-[10px] font-bold rounded-full min-w-[20px] h-5 px-1 flex items-center justify-center animate-bounce shadow-md"
             >
               {{ cartStore.totalItemsCount }}
             </span>
           </router-link>
 
           <!-- Mobile Menu Button -->
-          <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="lg:hidden text-white/80 hover:text-coral-500 focus:outline-none transition-colors">
+          <button @click="isMobileMenuOpen = !isMobileMenuOpen" class="lg:hidden text-white hover:text-coral-500 focus:outline-none transition-colors">
             <Menu v-if="!isMobileMenuOpen" class="w-6 h-6" />
             <X v-else class="w-6 h-6" />
           </button>
