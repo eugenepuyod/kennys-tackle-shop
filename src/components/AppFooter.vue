@@ -75,7 +75,7 @@ onMounted(() => {
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       
       <!-- Newsletter Section -->
-      <div class="bg-slate-800/80 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 reveal reveal-slide-left">
+      <div class="bg-slate-800/50 backdrop-blur-md rounded-3xl p-8 sm:p-12 mb-16 border border-white/10 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 reveal reveal-slide-left">
         <div class="md:w-1/2">
           <h3 class="text-3xl font-extrabold text-white mb-3 tracking-tight">Join the Inner Circle</h3>
           <p class="text-gray-300 text-lg font-light">Subscribe to get exclusive deals, new arrivals, and pro fishing tips delivered straight to your inbox.</p>
