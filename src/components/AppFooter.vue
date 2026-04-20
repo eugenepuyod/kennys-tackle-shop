@@ -85,7 +85,7 @@ onMounted(() => {
             <input
               type="email"
               placeholder="Your email address..."
-              class="flex-1 min-w-0 w-full sm:w-auto px-6 py-4 bg-gray-900/50 border border-gray-600 rounded-xl focus:ring-2 focus:ring-coral-500 focus:border-coral-500 outline-none transition-all text-white placeholder-gray-400"
+              class="flex-1 min-w-0 w-full sm:w-auto px-6 py-4 bg-gray-900/50 border border-gray-600 rounded-xl focus:ring-1 focus:ring-coral-500/20 focus:border-coral-500 outline-none transition-all text-white placeholder-gray-400"
             >
 
             <button

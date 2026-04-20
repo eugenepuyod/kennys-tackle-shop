@@ -560,7 +560,7 @@ onUnmounted(() => {
 
 
     <!-- Bundle Discount Catalogs -->
-    <section class="py-20 bg-gray-900 text-white overflow-hidden relative">
+    <section class="py-20 bg-gray-900 text-white overflow-hidden relative ">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-gray-900 to-black pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -582,11 +582,16 @@ onUnmounted(() => {
             :speed="1009"
             :autoplay="false"
             :loop="true"
-            class="w-full"
+            class="bg-gray-900 w-full"
           >
             <swiper-slide v-for="catalog in displayCatalogs" 
               :key="catalog.id"
-              class="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8 shadow-2xl transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full"
+              class="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8 
+                shadow-[0_10px_30px_rgba(0,0,0,0.35)] 
+                hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] 
+                ring-1 ring-white/10
+                transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full
+              "
               :class="bundleMarketing[catalog.id]?.shadowClass || ''"
             >
               <div 
