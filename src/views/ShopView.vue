@@ -59,6 +59,32 @@ const paginatedProducts = computed(() => {
   return filteredProducts.value.slice(start, end)
 })
 
+
+// Smart pagination
+const isMobile = window.innerWidth < 640
+
+const visiblePages = computed(() => {
+  const total = totalPages.value
+  const current = currentPage.value
+  const delta = isMobile ? 0 : 1
+
+  const pages = []
+
+  for (let i = 1; i <= total; i++) {
+    if (
+      i === 1 ||
+      i === total ||
+      (i >= current - delta && i <= current + delta)
+    ) {
+      pages.push(i)
+    } else if (pages[pages.length - 1] !== '...') {
+      pages.push('...')
+    }
+  }
+
+  return pages
+})
+
 watch(
   () => route.query,
   (query) => {
@@ -359,7 +385,7 @@ const addToCart = () => {
 
         <!-- Pagination -->
         <div v-if="totalPages > 1" class="mt-12 flex justify-center">
-          <div class="flex space-x-2">
+          <div class="flex flex-wrap justify-center gap-2">
             <button 
               @click="currentPage > 1 && currentPage--"
               :disabled="currentPage === 1"
@@ -367,14 +393,23 @@ const addToCart = () => {
             >
               <ChevronLeft class="w-5 h-5" />
             </button>
-            <button 
-              v-for="page in totalPages" 
-              :key="page"
-              @click="currentPage = page"
-              :class="['w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all', currentPage === page ? 'bg-coral-500 text-white shadow-md' : 'text-gray-700 hover:bg-gray-100 border border-gray-200']"
+            <button
+              v-for="(page, index) in visiblePages"
+              :key="index"
+              @click="page !== '...' && (currentPage = page)"
+              :disabled="page === '...'"
+              :class="[
+                'w-8 h-8 sm:w-10 sm:h-10 text-sm sm:text-base rounded-full flex items-center justify-center font-semibold transition-all',
+                page === currentPage
+                  ? 'bg-coral-500 text-white shadow-md'
+                  : page === '...'
+                  ? 'cursor-default text-gray-400'
+                  : 'text-gray-700 hover:bg-gray-100 border border-gray-200'
+              ]"
             >
               {{ page }}
             </button>
+            
             <button 
               @click="currentPage < totalPages && currentPage++"
               :disabled="currentPage === totalPages"
@@ -384,6 +419,7 @@ const addToCart = () => {
             </button>
           </div>
         </div>
+
       </div>
     </div>
 

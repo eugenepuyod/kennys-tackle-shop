@@ -60,7 +60,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 text-white shadow-sm z-50 opacity-[97%]">
+  <header class="fixed top-0 left-0 w-full bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-900/90 to-black/90  backdrop-blur-[1px] text-white shadow-sm z-50">
+    
     <div 
       :class="[
         'overflow-hidden transition-all duration-300',
@@ -68,7 +69,7 @@ onUnmounted(() => {
       ]"
     >
       
-      <div class="pb-[1px] bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900">
+      <div class="pb-[1px] bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-950/90 to-black/90  backdrop-blur-[1px]">
         <div class="max-w-7xl mx-auto py-1">
           <div class="grid grid-cols-2 sm:grid-cols-3 gap-0 sm:gap-1 py-1 px-4 sm:px-6 lg:px-8">
 
@@ -92,7 +93,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div class="pb-[1px] bg-gradient-to-r from-slate-901 via-blue-900 to-indigo-800 opacity-90"></div>
+    <div class="pb-[1px] bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-950/90 to-black/90  backdrop-blur-[1px]"></div>
     
     <div class="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-[60px] lg:h-[72px]">

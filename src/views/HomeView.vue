@@ -295,16 +295,34 @@ onUnmounted(() => {
     </section>
 
     <!-- Promo Catalog -->
-    <section class="py-12 bg-blue-500 text-white reveal reveal-fade-up">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row items-center justify-center gap-6">
-        <h2 class="text-2xl font-bold">Hot Deal! Get 10% Off Your First Order</h2>
-        <div class="flex items-center gap-4 bg-white/10 rounded-full p-2 pr-6 border border-white/20 shadow-lg">
-          <span class="bg-coral-500 text-white font-mono font-bold px-4 py-2 rounded-full cursor-all-scroll select-all shadow-inner">KENNY10</span>
-          <span class="text-sm font-medium">Use code at checkout</span>
+    <section class="text-white absolute z-30 w-full">
+      <div class="relative max-w-7xl py-5 mt-[-140px] mx-auto px-4 sm:px-6 lg:px-8 
+        text-center flex flex-col sm:flex-row items-center justify-center gap-6 
+        border border-blue-500/20 rounded-xl overflow-hidden">
+
+        <!-- Background Image -->
+        <!-- <img 
+          src="/images/featured-bg.jpg" 
+          class="absolute inset-0 w-full h-full object-cover object-[center_45%] z-0"
+        > -->
+
+        <!-- Overlay (lighter!) -->
+        <div class="absolute inset-0 z-10 bg-gradient-to-r from-[#0b1b2b]/70 via-indigo-900/40 to-black/20"></div>
+
+        <!-- Content -->
+        <div class="relative z-20 flex justify-items-center items-center gap-4">
+          <h2 class="text-2xl font-bold">Hot Deal! Get 10% Off Your First Order</h2>
+          
+          <div class="flex items-center gap-4 bg-white/10 rounded-full p-2 pr-6 border border-white/20 shadow-lg">
+            <span class="bg-coral-500 text-white font-mono font-bold px-4 py-2 rounded-full cursor-all-scroll select-all shadow-inner">
+              KENNY10
+            </span>
+            <span class="text-sm font-medium">Use code at checkout</span>
+          </div>
         </div>
+
       </div>
     </section>
-
 
 
     
@@ -317,19 +335,32 @@ onUnmounted(() => {
 
 
     <!-- Categories -->
-    <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section class="relative py-20 min-h-[600px] hidden">
+
+      <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20"></div>
+      <img 
+        src="/images/featured-bg.jpg" 
+        alt="Fishing Banner"
+        class="absolute inset-0 w-full h-full object-cover object-[center_45%] z-0"
+      >
+
+      <!-- Dark Overlay -->
+      <div class="absolute flex inset-0 z-10 bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-900/60 to-black/90  backdrop-blur-[1px]"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
 
       <!-- Header -->
-      <div class="text-center mb-14 reveal reveal-fade-up">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-          Top Categories
-        </h2>
-        <p class="text-gray-500 mt-3">
-          Premium gear for every angler
-        </p>
-        <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
-      </div>
+      <div class="text-center mb-16 relative z-20">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
+            Top Categories
+          </h2>
+
+          <p class="text-white/90 max-w-2xl mx-auto text-lg">
+            Premium gear for every angler
+          </p>
+
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
+        </div>
 
       <!-- Grid -->
       <swiper
@@ -449,25 +480,33 @@ onUnmounted(() => {
 
 
     <!-- Featured Products -->
-    <section class="py-10 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-end mb-12 reveal reveal-fade-up">
-          <div>
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
-              Featured Gear
-            </h2>
-            <p class="text-gray-500 mt-3">
-              Handpicked high-performance fishing equipment trusted by serious anglers.
-            </p>
-            <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mt-4 rounded-full"></div>
-          </div>
-          
-          <router-link to="/shop" class="hidden sm:flex text-coral-500 hover:text-coral-600 font-medium items-center group">
-            View All Products <ArrowRight class="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </router-link>
+    <section class="relative py-20 min-h-[600px]">
+      <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20 z-30"></div>
+      <img 
+        src="/images/featured-bg.jpg" 
+        alt="Fishing Banner"
+        class="absolute inset-0 w-full h-full object-cover object-[center_45%] z-0"
+      >
+
+      <!-- Dark Overlay -->
+      <div class="absolute flex inset-0 z-10 bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-950/95 to-black/90  backdrop-blur-[1px]"></div>
+      <div class="z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div class="text-center mb-16 relative z-20">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
+            Featured Gear
+          </h2>
+
+          <p class="text-white/90 max-w-2xl mx-auto text-lg">
+            Handpicked high-performance fishing equipment trusted by serious anglers.
+          </p>
+
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
         </div>
+
+
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-30">
           <div 
             v-for="(product, idx) in features" 
             :key="product.id"
@@ -485,15 +524,15 @@ onUnmounted(() => {
                 >
                   {{ product.tagName }}
                 </div>
-                <button @click.prevent="toggleWishlist(product.id)" class="absolute top-4 right-4 text-gray-400 hover:text-coral-500 bg-white rounded-full p-2.5 shadow-sm z-10 transition-colors">
+                <button @click.prevent="toggleWishlist(product.id)" class="absolute top-4 right-4 text-gray-400 hover:text-coral-500 bg-white rounded-full p-2.5 shadow-sm z-30 transition-colors">
                   <Heart class="w-5 h-5" :class="{'fill-coral-500 text-coral-500': wishlist.has(product.id)}" />
                 </button>
               </div>
-              <div class="p-6 flex flex-col flex-1 relative bg-white">
+              <div class="p-6 flex flex-col flex-1 relative bg-gray-50">
                 <div class="flex justify-between items-start gap-4 mb-2">
                   <div class="flex-1">
-                    <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1">{{ product.category }}</div>
-                    <h3 class="text-lg font-bold text-gray-900 leading-tight line-clamp-2 pr-2">{{ product.name }}</h3>
+                    <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1 hidden">{{ product.category }}</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight line-clamp-2 pr-2">{{ product.name }}</h3>
                   </div>
                   <span class="text-lg font-extrabold text-gray-900 shrink-0">₱{{ product.price.toFixed(2) }}</span>
                 </div>
@@ -528,22 +567,25 @@ onUnmounted(() => {
                 
                 <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-auto">{{ product.shortDesc }}</p>
                 
-                <div class="flex flex-wrap gap-1.5 pt-0 mt-2">
+                <div class="flex flex-wrap gap-1.5 pt-0 mt-2 hidden">
                   <span v-for="tag in product.tags" :key="tag" class="text-[9px] font-bold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md uppercase tracking-wider">{{ tag }}</span>
                 </div>
 
-                <div class="w-full py-5 md:hidden
-                ">
-                  <button @click.prevent="cartStore.addItem(product, 1)" class="w-full bg-coral-500 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl flex items-center justify-center transition-colors shadow-lg text-sm">
+                <div class="w-full">
+                  <button @click.prevent="cartStore.addItem(product, 1)" 
+                    class="w-full bg-coral-500 text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                    >
+                    
                     <ShoppingBag class="w-4 h-4 mr-2" /> Add to Cart
                   </button>
                 </div>
                 
-                <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-full opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 bg-white/95 backdrop-blur-sm z-20 hidden md:block">
+                <!-- <div class="absolute bottom-0 left-0 w-full p-4 transform translate-y-full opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100 transition-all duration-300 bg-white/95 backdrop-blur-sm z-20 hidden md:block">
                   <button @click.prevent="cartStore.addItem(product, 1)" class="w-full bg-coral-500 hover:bg-slate-900 text-white font-bold py-3.5 rounded-xl flex items-center justify-center transition-colors shadow-lg text-sm">
                     <ShoppingBag class="w-4 h-4 mr-2" /> Add to Cart
                   </button>
-                </div>
+                </div> -->
+
               </div>
             </router-link>
           </div>
@@ -559,8 +601,10 @@ onUnmounted(() => {
 
 
 
+
+
     <!-- Bundle Discount Catalogs -->
-    <section class="py-20 bg-gray-900 text-white overflow-hidden relative ">
+    <!-- <section class="py-20 bg-gray-900 text-white overflow-hidden relative ">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-gray-900 to-black pointer-events-none"></div>
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -574,9 +618,9 @@ onUnmounted(() => {
           <swiper 
             :modules="swiperModules"
             :breakpoints="{
-              0: { slidesPerView: 1, spaceBetween: 8 },     // mobile
-              768: { slidesPerView: 2, spaceBetween: 20 },    // tablet
-              1024: { slidesPerView: 3, spaceBetween: 25 },    // up
+              0: { slidesPerView: 1, spaceBetween: 8 },   
+              768: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 25 },
             }"
             :navigation="{ prevEl: '.swiper-button-prev-bundledexclusive', nextEl: '.swiper-button-next-bundledexclusive' }"
             :speed="1009"
@@ -621,17 +665,17 @@ onUnmounted(() => {
                   
                     <div class="grid grid-cols-2 gap-1 items-center">
                       
-                      <!-- Old Price -->
+                      
                       <span class="text-gray-400 line-through text-sm">
                         ₱{{ getBundlePricing(catalog).oldPrice.toFixed(2) }}
                       </span>
 
-                      <!-- Discounted Price -->
+                      
                       <span class="text-2xl font-extrabold text-white">
                         ₱{{ getBundlePricing(catalog).discountedPrice.toFixed(2) }}
                       </span>
 
-                      <!-- Saved Amount -->
+                      
                       <span class="text-green-400 text-sm font-semibold">
                         You save ₱{{ getBundlePricing(catalog).savedAmount.toFixed(2) }}
                       </span>
@@ -684,12 +728,180 @@ onUnmounted(() => {
           </button>
         </div>
       </div>
+    </section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Bundle Discount Catalogs -->
+    <section class="py-12 bg-gray-900 text-white overflow-hidden relative ">
+      <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20 z-30"></div>
+      
+      <!-- <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-gray-900 to-black pointer-events-none"></div> -->
+       <!-- Background Image -->
+      <img 
+        src="/images/exclusive-bg.jpg" 
+        alt="Fishing Banner"
+        class="absolute inset-0 w-full h-full object-cover object-[center_45%]"
+      >
+
+      <!-- Dark Overlay -->
+      <div class="absolute flex inset-0 bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-900/60 to-black/90  backdrop-blur-[1px]"></div>
+      
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">Exclusive Bundles</h2>
+          <p class="text-white max-w-2xl mx-auto text-lg">Save big with our carefully curated premium setups. Grab a bundle and hit the water.</p>
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center">
+          <swiper 
+            :modules="swiperModules"
+            :breakpoints="{
+              0: { slidesPerView: 1, spaceBetween: 8 },     // mobile
+              768: { slidesPerView: 2, spaceBetween: 20 },    // tablet
+              1024: { slidesPerView: 3, spaceBetween: 25 },    // up
+            }"
+            :navigation="{ prevEl: '.swiper-button-prev-bundledexclusive', nextEl: '.swiper-button-next-bundledexclusive' }"
+            :speed="1009"
+            :autoplay="false"
+            :loop="true"
+            class="w-full"
+          >
+            <swiper-slide v-for="catalog in displayCatalogs" 
+              :key="catalog.id"
+              class="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8 
+                shadow-[0_10px_30px_rgba(0,0,0,0.35)] 
+                hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] 
+                ring-1 ring-white/10
+                transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full
+              "
+              :class="bundleMarketing[catalog.id]?.shadowClass || ''"
+            >
+              <div 
+                class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -z-10 transition-colors"
+                :class="bundleMarketing[catalog.id]?.bgClass || 'bg-red-500/20 group-hover:bg-red-500/30'"
+              >
+              </div>
+              
+              
+              <div class="flex-1 flex flex-col justify-center min-w-[200px]">
+                <div class="flex justify-between items-start mb-4 group">
+                  <div class="text-coral-500 font-bold tracking-widest uppercase mb-2 text-sm flex items-center gap-2">
+                    <Star class="w-4 h-4 fill-current" /> {{ catalog.discountRate * 100 }}% Bundle Discount
+                  </div>
+                </div>
+
+                <h3 class="text-2xl sm:text-2xl text-gray-400 font-extrabold text-white mb-4 leading-tight">
+                {{ catalog.title }}
+                </h3>
+                <p 
+                  class="mb-2 text-gray-300 leading-relaxed line-clamp-2 min-h-[3.5rem]"
+
+                >
+                  {{ bundleMarketing[catalog.id]?.desc || 'A premium selection of top-quality tackle.' }}
+                </p>
+                <div class="my-3">
+                  
+                    <div class="grid grid-cols-2 gap-1 items-center">
+                      
+                      <!-- Old Price -->
+                      <span class="text-gray-400 line-through text-sm">
+                        ₱{{ getBundlePricing(catalog).oldPrice.toFixed(2) }}
+                      </span>
+
+                      <!-- Saved Amount -->
+                      <span class="text-green-400 text-sm font-semibold">
+                        You save ₱{{ getBundlePricing(catalog).savedAmount.toFixed(2) }}
+                      </span>
+
+                      <!-- Discounted Price -->
+                      <span class="text-4xl col-span-2 font-extrabold text-center text-white">
+                        ₱{{ getBundlePricing(catalog).discountedPrice.toFixed(2) }}
+                      </span>
+
+                      
+
+                    </div>
+                </div>
+                
+                <button @click="addBundleToCart(catalog.id, catalog.items)" 
+                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                        :class="bundleMarketing[catalog.id]?.btnClass || 'bg-red-500 hover:bg-red-400'">
+                  <ShoppingBag class="w-5 h-5 mr-2 shrink-0" /> Add to Bundle
+                </button>
+                
+              </div>
+            
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-3 w-full max-w-[320px] mx-auto mt-auto pt-5">
+                <div v-for="(id, idx) in catalog.items" :key="idx" class="w-full aspect-square bg-white/10 rounded-2xl p-2 border border-white/20 relative group/item hover:-translate-y-2 transition-transform duration-300 cursor-pointer shadow-lg backdrop-blur-sm flex items-center justify-center shrink-0">
+                  <template v-if="bundleProducts[id]">
+                    <img :src="bundleProducts[id].image" :alt="bundleProducts[id].name" class="w-full h-full object-contain filter brightness-110">
+                  </template>
+                  <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] font-bold py-1 px-3 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                    <template v-if="bundleProducts[id]">
+                    {{ bundleProducts[id].name }}
+                    </template>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+          <button class="swiper-button-prev-bundledexclusive absolute top-4/6 left-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-white
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronLeft class="w-8 h-8" />
+          </button>
+          <button class="swiper-button-next-bundledexclusive absolute top-4/6 right-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-white
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronRight class="w-8 h-8" />
+          </button>
+        </div>
+      </div>
     </section>
+
+
+
+
 
 
     <!-- Flash Sale Timer Bundles -->
     <section v-if="timedCatalogs.length > 0" class="py-20 bg-gray-900 text-white overflow-hidden relative border-t border-white/5 reveal reveal-fade-up hidden">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900 via-gray-900 to-black pointer-events-none"></div>
+       
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center mb-16">
@@ -836,6 +1048,11 @@ onUnmounted(() => {
 
 
 
+
+
+
+
+    
 
 
     <!-- <section class="py-16 bg-gray-50">
@@ -988,11 +1205,13 @@ onUnmounted(() => {
 
 
     <!-- Partners Carousel -->
-    <section class="py-15 lg:py-20 bg-white border-t border-gray-100 reveal reveal-fade-up overflow-hidden">
+    <section class="py-15 lg:py-4 bg-gray-900 relative reveal reveal-fade-up bg-gradient-to-r from-[#0b1b2b]/95 via-blue-900/40 to-black/20">
+      <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20"></div>
+      <div class="absolute inset-0 opacity-10 translate-y-[10px]"
+        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;">
+      </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h3 class="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-10">Trusted Brands We Carry</h3>
-        
-        <div class="mt-8 relative group">
+        <div class="relative group">
           <swiper 
             :modules="swiperModules"
             :slidesPerView="2"
@@ -1008,7 +1227,7 @@ onUnmounted(() => {
             <swiper-slide 
               v-for="(partner, i) in partners" 
               :key="i" 
-              class="flex items-center justify-center py-4"
+              class="py-4"
             >
               <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
                 <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
@@ -1023,57 +1242,91 @@ onUnmounted(() => {
 
 
     <!-- FULL IMAGE SECTION (LEFT-BOTTOM CONTENT) -->
-    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[800px] overflow-hidden reveal reveal-fade-up">
+    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[680px] overflow-hidden reveal reveal-fade-up">
 
       <!-- Background Image -->
       <img 
-        src="/images/all-products.jpg" 
+        src="/images/all-products-3.png" 
         alt="Fishing Banner"
-        class="absolute inset-0 w-full h-full object-cover object-[center_17%]"
+        class="absolute inset-0 w-full h-full object-cover object-[center_48%]"
       >
 
       <!-- Dark Overlay -->
-      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute flex inset-0 bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-900/40 to-black/20  backdrop-blur-[1px]"></div>
 
       <!-- Content (LEFT-BOTTOM) -->
-      <div class="absolute bottom-0 left-0 w-full px-4 py-4 md:py-8 lg:py-25 sm:px-6 lg:px-8 z-10 reveal reveal-fade-up">
-        
-        <div class="max-w-7xl mx-auto">
-
-          <p class="text-white text-sm sm:text-base md:text-lg mb-3">
-            Premium gear built to handle the ocean’s toughest battles.
-          </p>
-
+      <div class="absolute inset-0 flex items-center justify-start px-4 sm:px-6 lg:px-8 z-10 reveal reveal-fade-up">
+  
+        <div class="max-w-7xl mx-auto w-full">
           <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-            <span class=" text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            <span class="block text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
               CAST HARDER.
             </span>
-            <span class=" text-coral-400 
+            <span class="block text-white
                         drop-shadow-[0_0_20px_rgba(255,127,80,0.6)]
                         [text-shadow:0_2px_10px_rgba(0,0,0,0.7)]">
-              FIGHT STRONGER.
+              FIGHT <span class="text-coral-400">STRONGER.</span>
             </span>
           </h2>
 
+          <p class="text-white text-sm sm:text-base md:text-lg mb-10">
+            Premium gear built to handle the ocean’s toughest battles.
+          </p>
+
           <router-link 
             to="/shop"
-            class="inline-flex items-center gap-3 px-8 py-3 lg:py-4 
+            class="inline-flex items-center gap-3 px-8 py-4 lg:py-5 lg:px-7 
                   bg-coral-500 hover:bg-coral-600 
                   text-white font-bold rounded-full 
                   transition-all duration-300 
                   shadow-[0_0_30px_rgba(255,127,80,0.4)] 
                   hover:shadow-[0_0_50px_rgba(255,127,80,0.7)]
                   hover:scale-105 active:scale-95"
-            >
-            Shop All
-          <ArrowRight class="w-5 h-5 transition-transform group-hover:translate-x-1" />
-        </router-link>
-
+          >
+            Shop Now
+            <ArrowRight class="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </router-link>
         </div>
 
       </div>
 
     </section>
+
+
+
+    <!-- Animated Counters -->
+    <section ref="counterSection" class="mb-10 py-7 bg-gray-900 relative reveal reveal-fade-up bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-950/90 to-black/20">
+      <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20"></div>
+      <div class="absolute inset-0 opacity-10 translate-y-[10px]"
+        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;">
+      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Users class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.clients }}{{ counters.clients === 1000 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Happy Clients</div>
+          </div>
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Star class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.reviews }}{{ counters.reviews === 500 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">5-Star Reviews</div>
+          </div>
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
+            <Award class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+              {{ counters.brands }}{{ counters.brands === 50 ? '+' : '' }}
+            </div>
+            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Premium Brands</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
 
 
@@ -1129,35 +1382,7 @@ onUnmounted(() => {
 
 
 
-    <!-- Animated Counters -->
-    <section ref="counterSection" class="mb-10 py-20 bg-gray-900 relative reveal reveal-fade-up">
-      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;"></div>
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Users class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.clients }}{{ counters.clients === 1000 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Happy Clients</div>
-          </div>
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Star class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.reviews }}{{ counters.reviews === 500 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">5-Star Reviews</div>
-          </div>
-          <div class="pt-8 sm:pt-0 flex flex-col items-center">
-            <Award class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform" />
-            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
-              {{ counters.brands }}{{ counters.brands === 50 ? '+' : '' }}
-            </div>
-            <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Premium Brands</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     
   </div>
