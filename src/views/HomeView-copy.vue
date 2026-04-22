@@ -170,6 +170,54 @@ const getBundlePricing = (catalog) => {
   };
 };
 
+// onMounted(async () => {
+//   await nextTick()
+  
+//   observer = new IntersectionObserver(startCounting, { threshold: 0.5 })
+//   if (counterSection.value) observer.observe(counterSection.value)
+
+  
+//   scrollObserver = new IntersectionObserver((entries) => {
+//     entries.forEach(entry => {
+//       if (entry.isIntersecting) {
+//         entry.target.classList.add('is-visible')
+        
+//         scrollObserver.unobserve(entry.target)
+//       }
+//     })
+//   }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' })
+
+  
+//   document.querySelectorAll('.reveal').forEach((el) => {
+//     scrollObserver.observe(el)
+//   })
+  
+//   window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  
+//   tiltCards.value.forEach(el => {
+//     VanillaTilt.init(el, {
+//       max: 10,
+//       speed: 400,
+//       glare: true,
+//       "max-glare": 0.2,
+//       scale: 1.03
+//     });
+//   });
+
+  
+//   tiltBanner.value.forEach(el => {
+//     VanillaTilt.init(el, {
+//       max: 6,
+//       speed: 400,
+//       glare: true,
+//       "max-glare": 0.15,
+//       scale: 1.02
+//     })
+//   })
+// })
+
+
 onMounted(() => {
   timerUIInterval = setInterval(() => { currentTime.value = Date.now() }, 1000)
   
@@ -245,8 +293,7 @@ onUnmounted(() => {
         </swiper-slide>
       </swiper>
 
-      // Hot deals section
-      <div class="text-white z-30 absolute bottom-5 left-0 md:inset-0 md:translate-y-4/5  w-full">
+      <div class="text-white z-50 absolute bottom-5 left-0 w-full">
         <div class="px-4">
           <div class="relative max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 
             text-center flex flex-col sm:flex-row items-center justify-center gap-6 
@@ -274,8 +321,11 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+
     </section>
     
+
+
 
     <!-- Featured Products -->
     <section class="relative py-12 min-h-[600px]">
@@ -304,7 +354,7 @@ onUnmounted(() => {
 
 
         
-        <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-30 items-stretch">
+        <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-30">
           <div 
             v-for="(product, idx) in features" 
             :key="product.id"
@@ -313,7 +363,7 @@ onUnmounted(() => {
           >
             <router-link 
               :to="`/product/${product.id}`"
-              class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col min-h-[300px] h-full hover:-translate-y-2"
+              class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col min-h-[300px] hover:-translate-y-2"
             >
               <div class="relative h-[190px] md:h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
                 <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
@@ -327,19 +377,12 @@ onUnmounted(() => {
                 </button>
               </div>
               <div class="p-6 flex flex-col flex-1 relative bg-gray-50">
-                <div class="grid grid-cols-2 gap-4 items-start mb-2">
-                  <div class="col-span-2">
-                    <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1 hidden">
-                      {{ product.category }}
-                    </div>
-                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight line-clamp-2 pr-2">
-                      {{ product.name }}
-                    </h3>
+                <div class="flex justify-between items-start gap-4 mb-2">
+                  <div class="flex-1">
+                    <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1 hidden">{{ product.category }}</div>
+                    <h3 class="text-lg font-extrabold text-gray-900 leading-tight line-clamp-2 pr-2">{{ product.name }}</h3>
                   </div>
-
-                  <span class="col-span-2 text-lg font-extrabold text-gray-900">
-                    ₱{{ product.price.toFixed(2) }}
-                  </span>
+                  <span class="text-lg font-extrabold text-gray-900 shrink-0">₱{{ product.price.toFixed(2) }}</span>
                 </div>
                 
                 <div class="flex items-center mb-3">
@@ -551,6 +594,161 @@ onUnmounted(() => {
   </section>
 
 
+
+
+
+
+
+
+    <!-- Bundle Discount Catalogs -->
+    <!-- <section class="py-20 bg-gray-900 text-white overflow-hidden relative ">
+      <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900 via-gray-900 to-black pointer-events-none"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">Exclusive Bundles</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto text-lg">Save big with our carefully curated premium setups. Grab a bundle and hit the water.</p>
+          <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
+        </div>
+
+        <div class="flex flex-wrap justify-center">
+          <swiper 
+            :modules="swiperModules"
+            :breakpoints="{
+              0: { slidesPerView: 1, spaceBetween: 8 },   
+              768: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 25 },
+            }"
+            :navigation="{ prevEl: '.swiper-button-prev-bundledexclusive', nextEl: '.swiper-button-next-bundledexclusive' }"
+            :speed="1009"
+            :autoplay="false"
+            :loop="true"
+            class="bg-gray-900 w-full"
+          >
+            <swiper-slide v-for="catalog in displayCatalogs" 
+              :key="catalog.id"
+              class="bg-white/5 backdrop-blur-md rounded-3xl border border-white/10 p-8 
+                shadow-[0_10px_30px_rgba(0,0,0,0.35)] 
+                hover:shadow-[0_20px_60px_rgba(0,0,0,0.6)] 
+                ring-1 ring-white/10
+                transition-all duration-500 group flex flex-col gap-8 relative overflow-hidden h-full
+              "
+              :class="bundleMarketing[catalog.id]?.shadowClass || ''"
+            >
+              <div 
+                class="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl -z-10 transition-colors"
+                :class="bundleMarketing[catalog.id]?.bgClass || 'bg-red-500/20 group-hover:bg-red-500/30'"
+              >
+              </div>
+              
+              
+              <div class="flex-1 flex flex-col justify-center min-w-[200px]">
+                <div class="flex justify-between items-start mb-4 group">
+                  <div class="text-coral-500 font-bold tracking-widest uppercase mb-2 text-sm flex items-center gap-2">
+                    <Star class="w-4 h-4 fill-current" /> {{ catalog.discountRate * 100 }}% Bundle Discount
+                  </div>
+                </div>
+
+                <h3 class="text-2xl sm:text-2xl text-gray-400 font-extrabold text-white mb-4 leading-tight">
+                {{ catalog.title }}
+                </h3>
+                <p 
+                  class="mb-2 text-gray-300 leading-relaxed line-clamp-2 min-h-[3.5rem]"
+
+                >
+                  {{ bundleMarketing[catalog.id]?.desc || 'A premium selection of top-quality tackle.' }}
+                </p>
+                <div class="mb-6">
+                  
+                    <div class="grid grid-cols-2 gap-1 items-center">
+                      
+                      
+                      <span class="text-gray-400 line-through text-sm">
+                        ₱{{ getBundlePricing(catalog).oldPrice.toFixed(2) }}
+                      </span>
+
+                      
+                      <span class="text-2xl font-extrabold text-white">
+                        ₱{{ getBundlePricing(catalog).discountedPrice.toFixed(2) }}
+                      </span>
+
+                      
+                      <span class="text-green-400 text-sm font-semibold">
+                        You save ₱{{ getBundlePricing(catalog).savedAmount.toFixed(2) }}
+                      </span>
+
+                    </div>
+                </div>
+                
+                <button @click="addBundleToCart(catalog.id, catalog.items)" 
+                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                        :class="bundleMarketing[catalog.id]?.btnClass || 'bg-red-500 hover:bg-red-400'">
+                  <ShoppingBag class="w-5 h-5 mr-2 shrink-0" /> Add Flash Bundle
+                </button>
+                
+              </div>
+            
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-3 w-full max-w-[320px] mx-auto mt-auto pt-5">
+                <div v-for="(id, idx) in catalog.items" :key="idx" class="w-full aspect-square bg-white/10 rounded-2xl p-2 border border-white/20 relative group/item hover:-translate-y-2 transition-transform duration-300 cursor-pointer shadow-lg backdrop-blur-sm flex items-center justify-center shrink-0">
+                  <template v-if="bundleProducts[id]">
+                    <img :src="bundleProducts[id].image" :alt="bundleProducts[id].name" class="w-full h-full object-contain filter brightness-110">
+                  </template>
+                  <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] font-bold py-1 px-3 rounded-lg shadow-xl opacity-0 group-hover/item:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-20">
+                    <template v-if="bundleProducts[id]">
+                    {{ bundleProducts[id].name }}
+                    </template>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                  </div>
+                </div>
+              </div>
+            </swiper-slide>
+          </swiper>
+          <button class="swiper-button-prev-bundledexclusive absolute top-4/6 left-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronLeft class="w-8 h-8" />
+          </button>
+          <button class="swiper-button-next-bundledexclusive absolute top-4/6 right-0 -translate-y-1/2 -mt-8 
+            bg-black/80 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-white hover:text-red-400 
+            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronRight class="w-8 h-8" />
+          </button>
+        </div>
+      </div>
+    </section> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- Bundle Discount Catalogs -->
     <section class="py-12 bg-gray-900 text-white overflow-hidden relative ">
       <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20 z-30"></div>
@@ -583,6 +781,7 @@ onUnmounted(() => {
               1024: { slidesPerView: 3, spaceBetween: 25 },    // up
             }"
             :navigation="{ prevEl: '.swiper-button-prev-bundledexclusive', nextEl: '.swiper-button-next-bundledexclusive' }"
+            :speed="1009"
             :autoplay="false"
             :loop="true"
             class="w-full"
@@ -691,6 +890,11 @@ onUnmounted(() => {
       </div>
     </section>
 
+
+
+
+
+
     <!-- Flash Sale Timer Bundles -->
     <section v-if="timedCatalogs.length > 0" class="py-20 bg-gray-900 text-white overflow-hidden relative border-t border-white/5 reveal reveal-fade-up hidden">
       <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-red-900 via-gray-900 to-black pointer-events-none"></div>
@@ -715,6 +919,7 @@ onUnmounted(() => {
               1024: { slidesPerView: 3, spaceBetween: 25 },    // up
             }"
             :navigation="{ prevEl: '.swiper-button-prev-bundledend', nextEl: '.swiper-button-next-bundledend' }"
+            :speed="1500"
             :autoplay="false"
             :loop="true"
             class="w-full"
@@ -838,19 +1043,177 @@ onUnmounted(() => {
     </section>
 
 
+
+
+
+
+
+
+    
+
+
+    <!-- <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center mb-10 sm:mb-14 reveal reveal-fade-up px-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 tracking-tight">
+          Ultimate Fishing Bundle
+        </h2>
+
+        <p class="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto">
+          Get the full setup and save more when you buy everything together in one exclusive deal.
+        </p>
+
+        <div class="w-20 sm:w-24 h-1 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      
+      <swiper
+        :modules="swiperModules"
+        :slidesPerView="1"
+        :autoplay="false"
+        :loop="true"
+        :navigation="true"
+        class="pb-10"
+      >
+        <swiper-slide 
+          v-for="bundle in bundles" 
+          :key="bundle.id"
+          class="p-2"
+        >
+          <div ref="tiltBanner"
+            class="relative w-full mx-auto max-w-4xl lg:max-w-5xl
+                  rounded-2xl sm:rounded-3xl overflow-hidden
+                  bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 
+                  text-white shadow-xl
+                  will-change-transform transform-gpu">
+
+            
+            <div class="absolute inset-0 bg-gradient-to-r 
+                        from-coral-500/20 via-transparent to-blue-500/20"></div>
+
+            
+            <div class="relative flex flex-col lg:flex-row 
+                        items-start lg:items-center 
+                        justify-between gap-6 sm:gap-8 lg:gap-10 
+                        p-5 sm:p-8 md:p-10">
+
+              
+              <div class="w-full lg:max-w-xl">
+
+                <span class="inline-block mb-3 sm:mb-4 
+                            bg-gradient-to-r from-orange-500 to-orange-600 
+                            text-[11px] sm:text-xs px-3 sm:px-4 py-1 rounded-full font-semibold">
+                  🎣 Bundle Deal
+                </span>
+
+                <h3 class="text-xl sm:text-2xl md:text-4xl font-bold leading-tight">
+                  
+                  {{ bundle.title }}
+                </h3>
+
+                <p class="text-gray-300 mt-2 sm:mt-3 text-sm sm:text-base">
+                  
+                  {{ bundle.subtitle }}
+                </p>
+
+                
+                <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-5 sm:mt-6">
+
+                  <span class="text-gray-400 line-through text-sm sm:text-lg">
+                    ₱{{ bundle.original }}
+                  </span>
+
+                  <span class="text-2xl sm:text-3xl font-bold text-white">
+                    ₱{{ bundle.price }}
+                  </span>
+
+                  <span class="text-green-400 text-sm sm:text-base font-semibold">
+                    Save ₱{{ (bundle.original - bundle.price).toLocaleString('en-PH', {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2
+                    }) }}
+                  </span>
+
+                </div>
+
+                
+                <button
+                  @click="bundle.items.forEach(item => cartStore.addItem(item, 1))"
+                  class="mt-5 sm:mt-6 w-full sm:w-auto 
+                        px-6 sm:px-8 py-3 rounded-xl 
+                        bg-gradient-to-r from-coral-500 to-orange-500 
+                        hover:from-orange-600 hover:to-coral-600
+                        text-white font-semibold shadow-lg 
+                        active:scale-95 transition-all duration-300">
+                  🛒 Add Bundle to Cart
+                </button>
+
+              </div>
+
+              
+              <div class="w-full lg:w-auto flex justify-center lg:justify-end shrink-0">
+
+                <div class="grid grid-cols-3 sm:grid-cols-5 lg:flex gap-3 sm:gap-4">
+
+                  <div v-for="(item, i) in bundle.items" :key="i"
+                      class="relative group flex flex-col items-center">
+
+                    
+                    <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 
+                                bg-white rounded-lg sm:rounded-xl shadow-md 
+                                flex items-center justify-center p-2
+                                transition-transform duration-300 
+                                active:scale-95 group-hover:scale-105">
+
+                      <img :src="item.image" class="max-h-full object-contain" />
+
+                    </div>
+
+                    
+                    <span class="hidden lg:block absolute bottom-full mb-2 left-1/2 
+                                -translate-x-1/2 whitespace-nowrap text-xs 
+                                text-white bg-black/80 px-2 py-1 rounded 
+                                opacity-0 group-hover:opacity-100 transition">
+                      {{ item.name }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+              <div class="absolute -left-1/2 top-0 w-1/2 h-full 
+                          bg-white/10 skew-x-12 animate-shine"></div>
+            </div>
+
+          </div>
+        </swiper-slide>
+      </swiper>
+      </div>
+    </section> -->
+
+
+
+
     <!-- Partners Carousel -->
     <section class=" bg-gray-900 relative reveal reveal-fade-up bg-gradient-to-r from-[#0b1b2b]/95 via-blue-900/40 to-black/20">
       <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20"></div>
       <div class="absolute inset-0 opacity-10 translate-y-[10px]"
         style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 32px 32px;">
       </div>
-      <div class="mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="relative group">
           <swiper 
             :modules="swiperModules"
             :slidesPerView="2"
             :spaceBetween="30"
-            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 6 } }"
+            :breakpoints="{ 640: { slidesPerView: 3 }, 768: { slidesPerView: 4 }, 1024: { slidesPerView: 5 } }"
             :autoplay="{ delay: 0, disableOnInteraction: false, pauseOnMouseEnter: true }"
             :speed="2000"
             :loop="true"
@@ -863,8 +1226,8 @@ onUnmounted(() => {
               :key="i" 
               class="py-4"
             >
-              <div class="w-40 mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
-                <img :src="partner.logo" :alt="partner.name" class="w-full min-h-[70px] object-contain px-4">
+              <div class="w-40 mx-auto mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
+                <img :src="partner.logo" :alt="partner.name" class="w-full h-auto object-contain px-4">
               </div>
             </swiper-slide>
           </swiper>
@@ -876,13 +1239,13 @@ onUnmounted(() => {
 
 
     <!-- FULL IMAGE SECTION (LEFT-BOTTOM CONTENT) -->
-    <section class="relative mt-[-3px] w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[680px] overflow-hidden reveal reveal-fade-up">
+    <section class="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[680px] overflow-hidden reveal reveal-fade-up">
 
       <!-- Background Image -->
       <img 
-        src="/images/kenny-team.png" 
+        src="/images/all-products-3.png" 
         alt="Fishing Banner"
-        class="absolute inset-0 w-full h-full object-cover object-[center_20%]"
+        class="absolute inset-0 w-full h-full object-cover object-[center_48%]"
       >
 
       <!-- Dark Overlay -->
@@ -936,23 +1299,23 @@ onUnmounted(() => {
       </div>
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-800">
-          <div class="pb-8 md:pb-4 sm:pt-0 flex flex-col items-center">
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
             <Users class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
-            <div class="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
               {{ counters.clients }}{{ counters.clients === 1000 ? '+' : '' }}
             </div>
             <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Happy Clients</div>
           </div>
-          <div class="pb-8 md:pb-4 sm:pt-0 flex flex-col items-center">
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
             <Star class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
-            <div class="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
               {{ counters.reviews }}{{ counters.reviews === 500 ? '+' : '' }}
             </div>
             <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">5-Star Reviews</div>
           </div>
-          <div class="pb-8 md:pb-4 sm:pt-0 flex flex-col items-center">
+          <div class="pt-8 sm:pt-0 flex flex-col items-center">
             <Award class="w-12 h-12 text-coral-500 mb-4 opacity-80 group-hover:scale-110 transition-transform hidden" />
-            <div class="text-4xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
+            <div class="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tighter">
               {{ counters.brands }}{{ counters.brands === 50 ? '+' : '' }}
             </div>
             <div class="text-coral-400 font-medium tracking-widest uppercase text-sm">Premium Brands</div>
@@ -1014,6 +1377,11 @@ onUnmounted(() => {
       </div>
     </section>
 
+
+
+    
+
+    
   </div>
 </template>
 
@@ -1101,7 +1469,6 @@ onUnmounted(() => {
 /* Swiper Brands Marquee */
 .brands-swiper .swiper-wrapper {
   transition-timing-function: linear !important;
-  display: grid !important;
 }
 
 :deep(.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal){

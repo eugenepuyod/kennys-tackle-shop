@@ -42,7 +42,7 @@ onMounted(() => {
           <div 
             :class="[
               'px-1',
-              idx !== services.length - 1 ? 'border-r border-gray-200' : ''
+              idx !== services.length - 1 ? 'lg:border-r lg:border-gray-200' : '',
             ]"
           >
             <h3 class="text-gray-900 text-lg font-medium">{{ service.title}}</h3>
