@@ -79,7 +79,7 @@ const reviews = [
 const partners = [
   { name: 'Shimano', logo: '/images/shimano-logo.png' },
   { name: 'Daiwa', logo: '/images/daiwa-logo.png' },
-  { name: 'Penn', logo: '/images/penn-logo.png' },
+  { name: 'Penn', logo: '/images/penn-logo-2.png' },
   { name: 'Okuma', logo: '/images/okuma-logo.png' },
   { name: 'Mustad', logo: '/images/mustad-logo.png' },
   { name: 'Rapala', logo: '/images/rapala-logo.png' },

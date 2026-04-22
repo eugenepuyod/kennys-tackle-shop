@@ -103,12 +103,14 @@ onUnmounted(() => {
             <!-- <span class="text-2xl font-bold text-gray-900 tracking-tight">Kenny's Tackle<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">Shop</span></span> -->
             <div class="flex items-center gap-2 sm:gap-3">
               <div class="relative">
-                <div class="w-13 h-13 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden">
+                <!-- <div class="w-13 h-13 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-900/30 border border-cyan-400/20 flex items-center justify-center shadow-lg overflow-hidden"> -->
+                <div class="w-13 h-13 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center shadow-lg overflow-hidden">
                   
                   
                   <div class="absolute bottom-0 w-full h-6 bg-cyan-400/90 blur-md"></div>
 
-                  <img src="/images/kennys-logo.png" class="w-11 h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 object-contain relative z-10" />
+                  <!-- <img src="/images/kennys-logo.png" class="w-11 h-11 md:w-12 md:h-12 lg:w-13 lg:h-13 object-contain relative z-10" /> -->
+                   <img src="/images/kennys-logo.png" class="w-13 h-13 md:w-14 md:h-14 lg:w-30 lg:h-30 object-contain relative z-10" />
                 </div>
               </div>
               <!-- <span class="font-semibold text-gray-800 tracking-wide hidden sm:block">
