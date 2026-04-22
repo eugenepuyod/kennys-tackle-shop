@@ -97,7 +97,7 @@ const addToCart = () => {
 </script>
 
 <template>
-  <div class="product-page pt-35 bg-white min-h-screen">
+  <div class="product-page pt-12 lg:pt-20 bg-white min-h-screen">
     <div v-if="product" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <!-- Breadcrumb -->
       <nav class="flex text-sm text-gray-500 mb-8" aria-label="Breadcrumb">

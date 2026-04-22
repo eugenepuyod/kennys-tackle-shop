@@ -66,6 +66,8 @@ onMounted(() => {
       <img src="/images/deep_ocean_footer.png"
           class="w-full h-full object-cover opacity-80" />
       <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a]/80 via-[#1e3a8a]/60 to-[#1e3a8a]/40"></div>
+       <!-- Dark Overlay -->
+      <!-- <div class="absolute flex inset-0 bg-gradient-to-r from-[#0f172a]/80 via-indigo-900/30 to-black/50  backdrop-blur-[1px]"></div> -->
     </div>
 
     <div class="footer-bubbles pointer-events-none">
