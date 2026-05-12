@@ -66,6 +66,7 @@ const features = [
   { id: 102, name: 'Daiwa Saltiga', rating: 3.5, totalRating: 47, stock: 22, brand: 'Daiwa', price: 1100.00, category: 'Fishing Reels', tags: ['Saltwater', 'Heavy Duty'], image: '/images/daiwa-saltiga-g-2023-jigging-reel.webp', shortDesc: 'Unmatched durability and drag power.', inStock: true, moreImage: ['/images/daiwa-saltiga-g-2023-jigging-reel.webp', '/images/daiwa-saltiga-2.webp','/images/daiwa-saltiga-3.webp','/images/daiwa-saltiga-4.webp','/images/daiwa-saltiga-5.webp','/images/daiwa-saltiga-6.webp',], tagName: "New" },
   { id: 103, name: 'Okuma Makaira', rating: 4.5, totalRating: 30, stock: 10, brand: 'Okuma', price: 1100.00, category: 'Trolling Reels', tags: ['Trolling', 'Heavy'], image: '/images/okuma-makaira-trolling-reel.webp', shortDesc: 'World-class 2-speed offshore reel.', inStock: true, moreImage: ['/images/okuma-makaira-trolling-reel.webp', '/images/okuma-makaira-trolling-reel-2.webp','/images/okuma-makaira-trolling-reel-3.webp','/images/okuma-makaira-trolling-reel-4.webp','/images/okuma-makaira-trolling-reel-5.webp','/images/okuma-makaira-trolling-reel-6.webp',], tagName: "BestSeller" },
   { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Fishing Reels', tags: ['Saltwater', 'Durable'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true, tagName: "New" },
+  { id: 104, name: 'Penn Authority', rating: 5, totalRating: 128, stock: 10, brand: 'Penn', price: 550.00, category: 'Fishing Reels', tags: ['Saltwater', 'Durable'], image: '/images/penn-authority-spinning-reel.webp', shortDesc: 'IPX8 sealed body against extreme elements..', inStock: true, tagName: "New" },
 ]
 
 const reviews = [
@@ -288,7 +289,7 @@ onUnmounted(() => {
 
       <!-- Dark Overlay -->
       <div class="absolute flex inset-0 z-10 bg-gradient-to-r from-[#0b1b2b]/95 via-indigo-950/95 to-black/90  backdrop-blur-[1px]"></div>
-      <div class="z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center mb-16 relative z-20">
           <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
@@ -302,21 +303,46 @@ onUnmounted(() => {
           <div class="w-24 h-1.5 bg-gradient-to-r from-coral-500 to-blue-500 mx-auto rounded-full mt-6"></div>
         </div>
 
+        <swiper
+          :modules="swiperModules"
+          :breakpoints="{
+            0: { slidesPerView: 1, spaceBetween: 8 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 20 },
+            1280: { slidesPerView: 4, spaceBetween: 20 },
+          }"
+          
+          :navigation="{
+            prevEl: '.swiper-button-prev-featuredGear',
+            nextEl: '.swiper-button-next-featuredGear'
+          }"
+          :autoplay="false"
+          :loop="true"
+          :speed="400"
+          class="relative z-30 overflow-visible"
+          id="swiperFeaturedGear"
+        > 
 
-        
-        <div class="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 z-30 items-stretch">
-          <div 
-            v-for="(product, idx) in features" 
+
+          <swiper-slide
+            v-for="(product, idx) in features"
             :key="product.id"
-            class="reveal reveal reveal-slide-left"
-            :style="{ transitionDelay: `${idx * 150}ms` }"
+            class="h-auto"
+            
           >
-            <router-link 
+
+
+            <router-link
               :to="`/product/${product.id}`"
-              class="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col min-h-[300px] h-full hover:-translate-y-2"
+              class="group relative bg-white rounded-2xl border border-gray-100 shadow-md overflow-hidden flex flex-col min-h-[300px] h-full transform-gpu will-change-transform"
             >
               <div class="relative h-[190px] md:h-[250px] w-full overflow-hidden bg-white flex items-center justify-center p-6 border-b border-gray-50 shrink-0">
-                <img :src="product.image" :alt="product.name" class="h-full object-contain mix-blend-multiply transition-transform duration-500 group-hover:scale-110">
+                <img 
+                  :src="product.image" 
+                  :alt="product.name" 
+                  loading="lazy"
+                  decoding="async"
+                  class="h-full object-contain transition-transform duration-500 ">
                 <div 
                 class="absolute top-4 left-4 bg-coral-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest shadow-sm"
                 >
@@ -370,7 +396,7 @@ onUnmounted(() => {
                     </span>
                 </div>
                 
-                <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-auto pb-4">{{ product.shortDesc }}</p>
+                <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-auto pb-4  lg:min-h-[62px]">{{ product.shortDesc }}</p>
                 
                 <div class="flex flex-wrap gap-1.5 pt-0 mt-2 hidden">
                   <span v-for="tag in product.tags" :key="tag" class="text-[9px] font-bold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md uppercase tracking-wider">{{ tag }}</span>
@@ -378,7 +404,7 @@ onUnmounted(() => {
 
                 <div class="w-full">
                   <button @click.prevent="cartStore.addItem(product, 1)" 
-                    class="w-full bg-coral-500 text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                    class="w-full bg-coral-500 text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-lg"
                     >
                     
                     <ShoppingBag class="w-4 h-4 mr-2" /> Add to Cart
@@ -393,8 +419,33 @@ onUnmounted(() => {
 
               </div>
             </router-link>
-          </div>
-        </div>
+          </swiper-slide>
+        </swiper>
+        <button class="swiper-button-prev-featuredGear absolute top-4/6 left-0 -translate-y-1/2 -mt-8 
+            bg-white/90 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-coral-500 hover:text-coral-500
+            hover:shadow-coral-500/50
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronLeft class="w-8 h-8" />
+          </button>
+          <button class="swiper-button-next-featuredGear absolute top-4/6 right-0 -translate-y-1/2 -mt-8 
+            bg-white/90 backdrop-blur-md border border-white/10 
+            shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
+            w-16 h-16 rounded-full flex items-center justify-center 
+            text-coral-500 hover:text-coral-500
+            hover:shadow-coral-500/50
+            transition-all duration-300 z-10 focus:outline-none 
+            hover:scale-110 active:scale-95">
+            <ChevronRight class="w-8 h-8" />
+          </button>
+
+
+
+
+
         <div class="mt-10 text-center sm:hidden reveal reveal-fade-up">
           <router-link to="/shop" class="inline-flex text-coral-500 hover:text-coral-600 font-medium items-center group">
             View All Products <ArrowRight class="ml-1 w-5 h-5" />
@@ -409,7 +460,7 @@ onUnmounted(() => {
 
 
     <!-- Categories -->
-    <section class="relative py-20 min-h-[600px] hidden">
+    <section class="relative py-20 min-h-[600px]">
 
       <div class="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-blue-950/20 via-white/50 to-black/20"></div>
       <img 
@@ -465,7 +516,7 @@ onUnmounted(() => {
             <router-link 
               :to="'/shop?tag=' + encodeURIComponent(cat.name)"
               class="group relative h-80 rounded-2xl overflow-hidden block 
-                    shadow-md hover:shadow-2xl transition-all duration-500 
+                    shadow-md hover:shadow-2xl transition-transform duration-300
                     transform hover:-translate-y-2 active:scale-95"
             >
 
@@ -645,7 +696,7 @@ onUnmounted(() => {
                 </div>
                 
                 <button @click="addBundleToCart(catalog.id, catalog.items)" 
-                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-[0_0_20px_rgba(239,68,68,0.4)]"
+                        class="w-full text-white font-bold py-3 px-2 sm:py-4 sm:px-6 rounded-xl shadow-lg transition-all hover:scale-105 active:scale-95 flex items-center justify-center text-lg shadow-lg"
                         :class="bundleMarketing[catalog.id]?.btnClass || 'bg-red-500 hover:bg-red-400'">
                   <ShoppingBag class="w-5 h-5 mr-2 shrink-0" /> Add to Bundle
                 </button>
@@ -671,8 +722,8 @@ onUnmounted(() => {
             bg-black/80 backdrop-blur-md border border-white/10 
             shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
             w-16 h-16 rounded-full flex items-center justify-center 
-            text-white hover:text-white
-            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            text-white hover:text-coral-500
+            hover:shadow-coral-500/50
             transition-all duration-300 z-10 focus:outline-none 
             hover:scale-110 active:scale-95">
             <ChevronLeft class="w-8 h-8" />
@@ -681,8 +732,8 @@ onUnmounted(() => {
             bg-black/80 backdrop-blur-md border border-white/10 
             shadow-[0_8px_25px_rgba(0,0,0,0.6)] 
             w-16 h-16 rounded-full flex items-center justify-center 
-            text-white hover:text-white
-            hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] 
+            text-white hover:text-coral-500
+            hover:shadow-coral-500/50
             transition-all duration-300 z-10 focus:outline-none 
             hover:scale-110 active:scale-95">
             <ChevronRight class="w-8 h-8" />
@@ -863,7 +914,7 @@ onUnmounted(() => {
               :key="i" 
               class="py-4"
             >
-              <div class="w-40 mix-blend-multiply flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
+              <div class="w-40 flex items-center justify-center filter grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all cursor-pointer">
                 <img :src="partner.logo" :alt="partner.name" class="w-full min-h-[70px] object-contain px-4">
               </div>
             </swiper-slide>
@@ -1004,10 +1055,10 @@ onUnmounted(() => {
               <p class="text-coral-500 text-sm font-medium">{{ review.role }}</p>
             </swiper-slide>
           </swiper>
-          <button class="swiper-button-prev-custom absolute top-1/2 left-0 -translate-y-1/2 -mt-8 bg-white border border-gray-100 shadow-xl w-16 h-16 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:shadow-2xl transition-all z-10 focus:outline-none ring-offset-2 hover:ring-2 hover:ring-coral-500/20">
+          <button class="swiper-button-prev-custom absolute top-1/2 left-0 -translate-y-1/2 -mt-8 bg-white border border-gray-100 shadow-xl w-16 h-16 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:shadow-2xl transition-all z-10 focus:outline-none ring-offset-2 hover:ring-2 hover:ring-coral-500/50">
             <ChevronLeft class="w-8 h-8" />
           </button>
-          <button class="swiper-button-next-custom absolute top-1/2 right-0 -translate-y-1/2 -mt-8 bg-white border border-gray-100 shadow-xl w-16 h-16 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:shadow-2xl transition-all z-10 focus:outline-none ring-offset-2 hover:ring-2 hover:ring-coral-500/20">
+          <button class="swiper-button-next-custom absolute top-1/2 right-0 -translate-y-1/2 -mt-8 bg-white border border-gray-100 shadow-xl w-16 h-16 rounded-full flex items-center justify-center text-gray-400 hover:text-coral-500 hover:shadow-2xl transition-all z-10 focus:outline-none ring-offset-2 hover:ring-2 hover:ring-coral-500/50">
             <ChevronRight class="w-8 h-8" />
           </button>
         </div>
@@ -1124,6 +1175,9 @@ onUnmounted(() => {
 
 .tilt-card {
   transform-style: preserve-3d;
+}
+#swiperFeaturedGear{
+  padding-top: 15px;
 }
 
 @keyframes shine {

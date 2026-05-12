@@ -55,8 +55,8 @@ const placeOrder = () => {
   setTimeout(() => {
     isProcessing.value = false
     orderComplete.value = true
-    // cartStore.clearCart()
-    cartStore.resetCart()
+    cartStore.clearCart()
+    // cartStore.resetCart()
   }, 2000)
 }
 </script>

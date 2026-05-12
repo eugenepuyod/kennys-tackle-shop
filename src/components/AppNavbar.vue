@@ -85,7 +85,7 @@ onUnmounted(() => {
 
             <div class="flex items-center p-1 col-span-2 md:col-span-1 sm:justify-end">
               <Truck class="w-4 h-4 text-coral-500 mr-3 shrink-0" />
-              <span class="text-[12px] font-normal text-white">Free Shipping over ₱3,000.00</span>
+              <span class="text-[12px] font-normal text-white">Free Shipping over ₱30,000.00</span>
             </div>
 
           </div>
