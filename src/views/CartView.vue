@@ -40,8 +40,8 @@ const isEmpty = computed(() => cartStore.items.length === 0)
                 <div v-if="item.tag === 'Bundled Item'" class="text-[10px] font-bold text-white bg-blue-500 px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">{{ item.bundleLabel }}</div>
                 <div v-else class="text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded shadow-sm uppercase tracking-wider">Individual</div>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 mb-2 truncate pr-8">{{ item.name }}</h3>
-              <p class="text-2xl font-extrabold text-gray-900 mb-4">${{ item.price.toFixed(2) }}</p>
+              <h3 class="text-xl font-bold text-gray-900 mb-2 truncate pr-8">{{ item.name }} {{ item.size }}</h3>
+              <p class="text-2xl font-extrabold text-gray-900 mb-4">₱{{ item.price.toFixed(2) }}</p>
               
               <div class="flex items-center justify-center sm:justify-start">
                 <div class="flex items-center border border-gray-200 rounded-lg p-1 bg-white inline-flex w-32 justify-between">
@@ -67,7 +67,7 @@ const isEmpty = computed(() => cartStore.items.length === 0)
                    </div>
                 </div>
                 <div class="font-extrabold text-blue-600 text-xl bg-white px-4 py-2 rounded-xl shadow-sm border border-blue-100">
-                   -${{ discount.amount.toFixed(2) }}
+                   -₱{{ discount.amount.toFixed(2) }}
                 </div>
              </div>
           </div>
@@ -80,7 +80,7 @@ const isEmpty = computed(() => cartStore.items.length === 0)
             <div class="space-y-4 mb-6">
               <div class="flex justify-between text-gray-600">
                 <span>Subtotal ({{ cartStore.totalItemsCount }} items)</span>
-                <span class="font-bold text-gray-900">${{ cartStore.subtotal.toFixed(2) }}</span>
+                <span class="font-bold text-gray-900">₱{{ cartStore.subtotal.toFixed(2) }}</span>
               </div>
               <div class="flex justify-between text-gray-600">
                 <span>Shipping</span>
@@ -88,13 +88,13 @@ const isEmpty = computed(() => cartStore.items.length === 0)
               </div>
               <div v-if="cartStore.activeBundleDiscounts.length > 0" class="flex justify-between text-blue-600 pt-2 border-t border-gray-50">
                 <span class="font-medium">Bundle Discounts</span>
-                <span class="font-bold">-${{ cartStore.activeBundleDiscounts.reduce((a,b)=>a+b.amount,0).toFixed(2) }}</span>
+                <span class="font-bold">-₱{{ cartStore.activeBundleDiscounts.reduce((a,b)=>a+b.amount,0).toFixed(2) }}</span>
               </div>
             </div>
             <div class="border-t border-gray-100 pt-4 mb-8">
               <div class="flex justify-between items-center">
                 <span class="text-lg font-bold text-gray-900">Total</span>
-                <span class="text-3xl font-extrabold text-coral-500">${{ cartStore.total.toFixed(2) }}</span>
+                <span class="text-3xl font-extrabold text-coral-500">₱{{ cartStore.total.toFixed(2) }}</span>
               </div>
             </div>
             <router-link to="/checkout" class="w-full bg-coral-500 hover:bg-coral-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-coral-500/30 transition-all flex items-center justify-center hover:scale-[1.02] active:scale-95 text-lg">

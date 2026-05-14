@@ -116,7 +116,13 @@ const toggleTag = (tag) => {
 }
 
 const openQuickView = (product) => {
-  quickViewProduct.value = product
+  quickViewProduct.value = {
+    ...product,
+    selectedSize:
+      product.selectedSize ||
+      product.sizes?.[0]?.size
+  }
+
   quickViewQty.value = 1
 }
 
@@ -124,10 +130,30 @@ const closeQuickView = () => {
   quickViewProduct.value = null
 }
 
+// const addToCart = () => {
+//   cartStore.addItem(quickViewProduct.value, quickViewQty.value)
+//   closeQuickView()
+// }
+
+
 const addToCart = () => {
-  cartStore.addItem(quickViewProduct.value, quickViewQty.value)
+  const selectedVariant = quickViewProduct.value.sizes.find(
+    s => s.size === quickViewProduct.value.selectedSize
+  )
+
+  const cartProduct = {
+    ...quickViewProduct.value,
+    id:selectedVariant.id,
+    size: selectedVariant.size,
+    price: selectedVariant.price
+  }
+
+  cartStore.addItem(cartProduct, quickViewQty.value)
+
   closeQuickView()
 }
+
+
 </script>
 
 <template>
@@ -312,7 +338,16 @@ const addToCart = () => {
                   <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1">{{ product.category }}</div>
                   <h3 class="text-lg font-bold text-gray-900 leading-tight line-clamp-2 pr-2">{{ product.name }}</h3>
                 </div>
-                <span class="text-lg font-extrabold text-gray-900 shrink-0">₱{{ product.price.toFixed(2) }}</span>
+                <!-- <span class="text-lg font-extrabold text-gray-900 shrink-0">₱{{ product.price.toFixed(2) }}</span> -->
+                 <span class="text-lg font-extrabold text-gray-900 shrink-0">
+                  ₱{{
+                    product.sizes
+                      ?.find(s => s.size === product.selectedSize)
+                      ?.price?.toFixed(2)
+                  }}
+                </span>
+
+
               </div>
               
               <div class="flex items-center mb-3">
@@ -368,7 +403,16 @@ const addToCart = () => {
               <h3 class="font-bold text-gray-900 text-xl mb-1">{{ product.name }}</h3>
               <p class="text-gray-500 text-sm hidden sm:block">{{ product.shortDesc }}</p>
               <div class="absolute right-6 top-1/2 -translate-y-1/2 text-right">
-                <div class="text-2xl font-extrabold text-gray-900 mb-2">₱{{ product.price.toFixed(2) }}</div>
+                <div class="text-2xl font-extrabold text-gray-900 mb-2">
+                
+                  <!-- ₱{{ product.price.toFixed(2) }} -->
+                  ₱{{
+                    product.sizes
+                      ?.find(s => s.size === product.selectedSize)
+                      ?.price?.toFixed(2)
+                  }}
+                
+                </div>
                 <div v-if="!product.inStock" class="text-xs font-bold text-red-600 bg-red-50 border border-red-100 px-2.5 py-1 rounded-md inline-block">Out of Stock</div>
               </div>
             </div>
@@ -504,7 +548,21 @@ const addToCart = () => {
                 <div class="text-[10px] font-bold text-coral-500 uppercase tracking-widest mb-1">{{ quickViewProduct.category }}</div>
                 <h3 class="text-lg font-bold text-gray-900 leading-tight line-clamp-2 pr-2">{{ quickViewProduct.name }}</h3>
             </div>
-            <span class="text-2xl font-extrabold text-gray-900 shrink-0">₱{{ quickViewProduct.price.toFixed(2) }}</span>
+
+
+
+
+            <span class="text-2xl font-extrabold text-gray-900 shrink-0">
+              ₱{{
+                quickViewProduct.sizes
+                  ?.find(s => s.size === quickViewProduct.selectedSize)
+                  ?.price.toFixed(2)
+              }}
+            </span>
+
+
+
+
           </div>
           
           <div class="flex items-center mb-3">
@@ -536,6 +594,40 @@ const addToCart = () => {
           </div>
           
           <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed mb-auto">{{ quickViewProduct.shortDesc }}</p>
+
+
+          <!-- Size Dropdown -->
+          <div
+            v-if="quickViewProduct.sizes"
+            class="mt-5 relative"
+          >
+            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+              Model
+            </label>
+
+            <select
+              v-model="quickViewProduct.selectedSize"
+              class="w-full appearance-none border-2 border-gray-200 rounded-xl px-4 py-3 bg-white text-gray-900 font-semibold focus:outline-none 
+              "
+            >
+              <option
+                v-for="variant in quickViewProduct.sizes"
+                :key="variant.size"
+                :value="variant.size"
+              >
+                {{ variant.size }}
+              </option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-3 top-7 flex items-center text-gray-500"
+            >
+              ▼
+            </div>
+          </div>
+
+
+
+
           
           <div class="flex flex-wrap gap-1.5 pt-4 mt-2">
             <span v-for="tag in quickViewProduct.tags" :key="tag" class="text-[9px] font-bold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-md uppercase tracking-wider">{{ tag }}</span>

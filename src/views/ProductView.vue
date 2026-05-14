@@ -87,11 +87,32 @@ const hideZoom = () => {
   zoomStyle.value = { display: 'none' }
 }
 
+// const addToCart = () => {
+//   if (product.value) {
+//     cartStore.addItem(product.value, quantity.value)
+//     router.push('/cart')
+//   }
+// }
+
+
 const addToCart = () => {
-  if (product.value) {
-    cartStore.addItem(product.value, quantity.value)
-    router.push('/cart')
+  if (!product.value) return
+
+  const selectedVariant = product.value.sizes.find(
+    s => s.size === product.value.selectedSize
+  )
+
+  const cartProduct = {
+    ...product.value,
+
+    id: selectedVariant.id,
+    size: selectedVariant.size,
+    price: selectedVariant.price
   }
+
+  cartStore.addItem(cartProduct, quantity.value)
+
+  router.push('/cart')
 }
 
 </script>
@@ -202,9 +223,46 @@ const addToCart = () => {
             </span>
           </div>
           
-          <div class="text-4xl font-extrabold text-gray-900 mb-8">₱{{ product.price.toFixed(2) }}</div>
+          <div class="text-4xl font-extrabold text-gray-900 mb-8">
+            <!-- ₱{{ product.price.toFixed(2) }} -->
+             ₱{{
+              product.sizes
+                ?.find(s => s.size === product.selectedSize)
+                ?.price?.toFixed(2)
+            }}
+          </div>
           
           <p class="text-lg text-gray-600 leading-relaxed mb-8">{{ product.shortDesc }}</p>
+
+          <!-- Size Dropdown -->
+          <div
+            v-if="product.sizes"
+            class="mt-5 mb-5 relative"
+          >
+            <label class="block text-sm font-bold text-gray-700 mb-2 uppercase tracking-wide">
+              Model
+            </label>
+
+            <select
+              v-model="product.selectedSize"
+              class="w-full appearance-none border-2 border-gray-200 rounded-xl px-4 py-3 bg-white text-gray-900 font-semibold focus:outline-none 
+              "
+            >
+              <option
+                v-for="variant in product.sizes"
+                :key="variant.size"
+                :value="variant.size"
+              >
+                {{ variant.size }}
+              </option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-3 top-7 flex items-center text-gray-500"
+            >
+              ▼
+            </div>
+          </div>
+
           
           <div class="mb-8">
             <div class="font-semibold text-gray-900 mb-4 tracking-wide uppercase text-sm">Features / Tags</div>
